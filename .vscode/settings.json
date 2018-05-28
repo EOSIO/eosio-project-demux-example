@@ -1,0 +1,23 @@
+{
+    "files.associations": {
+        "__split_buffer": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "iterator": "cpp",
+        "map": "cpp",
+        "queue": "cpp",
+        "set": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "vector": "cpp",
+        "algorithm": "cpp",
+        "iosfwd": "cpp",
+        "__bit_reference": "cpp",
+        "bitset": "cpp",
+        "initializer_list": "cpp",
+        "slist": "cpp",
+        "__tree": "cpp",
+        "list": "cpp",
+        "__string": "cpp"
+    }
+}

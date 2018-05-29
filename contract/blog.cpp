@@ -55,25 +55,6 @@ public:
   }
 
   //@abi action
-  void modifypost(const uint64_t pkey, const account_name account, const string &title, const string &content, const string &tag)
-  {
-    post_index posts(_self, _self);
-
-    auto iterator = posts.find(pkey);
-    eosio_assert(iterator != posts.end(), "Post for pkey could not be found");
-
-    // check if authorized to update post
-    require_auth(iterator->author);
-
-    posts.modify(iterator, 0, [&](auto &post) {
-      post.author = account;
-      post.title = title;
-      post.content = content;
-      post.tag = tag;
-    });
-  }
-
-  //@abi action
   void likepost(const uint64_t pkey)
   {
     // do not require_auth since want to allow anyone to call

@@ -1,5 +1,7 @@
 # eos-blog-dapp
 
+Instructions written for EOSIO Dawn 4.2
+
 ## Prerequisites
 
 You have completed the steps in [
@@ -28,7 +30,7 @@ Setting Up A Local Environment](https://github.com/EOSIO/eos/wiki/Local-Environm
 4.  Create accounts for blog smart contract
     * Remember that accounts have no relation with keys in wallets, aside from when you sign transactions to make calls to your contract with keys
     ```bash
-    # cleos create account eosio <account> <public owner-key> <public active-key>
+    # cleos create account eosio <Account> <Owner Public Key> <Active Public Key>
     cleos create account eosio blog <Owner Public Key> <Active Public Key>
     ```
 5.  Compile contract to webassembly with eosiocpp

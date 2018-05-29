@@ -15,12 +15,12 @@ public:
   // mark with @abi action so that eosiocpp will add this as an action to the ABI
 
   //@abi action
-  void createpost(const account_name account, const string &title, const string &content, const string &tag)
+  void createpost(const account_name author, const string &title, const string &content, const string &tag)
   {
     // check if authorized for account to create a blog post
     // if you are not authorized then this action will be aborted
     // and the transaction will by rolled back - any modifications will be reset
-    require_auth(account);
+    require_auth(author);
 
     // post_index is our multi_index
     // multi_index is how you store persistant data across actions in EOSIO
@@ -30,9 +30,9 @@ public:
     // add a record to our multi_index posts
     // const_iterator emplace( unit64_t payer, Lambda&& constructor )
     // TODO change payer
-    posts.emplace(account, [&](auto &post) {
+    posts.emplace(0, [&](auto &post) {
       post.pkey = posts.available_primary_key();
-      post.author = account;
+      post.author = author;
       post.title = title;
       post.content = content;
       post.tag = tag;
@@ -52,6 +52,25 @@ public:
     require_auth(iterator->author);
 
     posts.erase(iterator);
+  }
+
+  //@abi action
+  void modifypost(const uint64_t pkey, const account_name author, const string &title, const string &content, const string &tag)
+  {
+    post_index posts(_self, _self);
+
+    auto iterator = posts.find(pkey);
+    eosio_assert(iterator != posts.end(), "Post for pkey could not be found");
+
+    // check if authorized to update post
+    require_auth(iterator->author);
+
+    posts.modify(iterator, 0, [&](auto &post) {
+      post.author = author;
+      post.title = title;
+      post.content = content;
+      post.tag = tag;
+    });
   }
 
   //@abi action

@@ -1,6 +1,6 @@
 # eos-blog-dapp
 
-Instructions written for EOSIO Dawn 4.2
+Instructions and implementation written for EOSIO Dawn 4.2
 
 ## Prerequisites
 

@@ -21,16 +21,12 @@ class App extends Component {
       loading: false,
       posts: []
     };
-    this.eosClient = Eos.Localnet(EOS_CONFIG.clientConfig);
+    this.eos = Eos.Localnet(EOS_CONFIG.clientConfig);
     this.loadPosts();
   }
 
-  onSubmit = () => {
-    console.log('Sd');
-  };
-
-  loadPosts() {
-    this.eosClient
+  loadPosts = () => {
+    this.eos
       .getTableRows(true, 'blog', 'blog', 'post')
       .then(data => {
         console.log(data);
@@ -39,23 +35,90 @@ class App extends Component {
       .catch(e => {
         console.error(e);
       });
-  }
+  };
 
-  createPost(description) {
+  createPost = post => {
     this.setState({ loading: true });
-  }
 
-  deletePost(id, e) {}
+    const newPost = {
+      title: post.title,
+      content: post.content,
+      tag: post.tag
+    };
+
+    this.setState({ posts: [newPost, this.state.posts.concat()] });
+
+    this.eos.contract('blog').then(blog => {
+      blog
+        .createpost('blog', newPost.title, newPost.content, newPost.tag, {
+          authorization: 'blog'
+        })
+        .then(res => {
+          console.log(res);
+          this.setState({ loading: false });
+        })
+        .catch(err => {
+          this.setState({ loading: false });
+          console.log(err);
+        });
+    });
+
+    // this.eos
+    //   .transaction({
+    //     actions: [
+    //       {
+    //         account: 'blog',
+    //         name: 'createpost',
+    //         authorization: [
+    //           {
+    //             actor: 'blog',
+    //             permission: 'active'
+    //           }
+    //         ],
+    //         data: {
+    //           author: 'blog',
+    //           title: newPost.title,
+    //           content: newPost.content,
+    //           tag: newPost.tag
+    //         }
+    //       }
+    //     ]
+    //   })
+    //   .then(res => {
+    //     console.log(res);
+    //     this.setState({ loading: false });
+    //   })
+    //   .catch(err => {
+    //     this.setState({ loading: false });
+    //     console.log(err);
+    //   });
+  };
+
+  deletePost = (pkey, e) => {
+    console.log(pkey);
+  };
+
+  editPost = (pkey, e) => {
+    console.log(pkey);
+  };
+
+  likePost = (pkey, e) => {
+    console.log(pkey);
+  };
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Blogs</h1>
-        </header>
-        <div className="App-intro">
-          <Posts posts={this.state.posts} deletePost={this.deletePost} />
-          <CreatePost createPost={this.createPost} />
+        <div className="pure-g">
+          <div className="pure-u-1">
+            <Posts
+              posts={this.state.posts}
+              deletePost={this.deletePost}
+              editPost={this.editPost}
+              likePost={this.likePost}
+            />
+            <CreatePost createPost={this.createPost} />
+          </div>
         </div>
       </div>
     );

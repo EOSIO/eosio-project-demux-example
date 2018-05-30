@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { Form, Icon, Input, Button } from 'antd';
+const FormItem = Form.Item;
+const { TextArea } = Input;
 
 class CreatePost extends Component {
   constructor(props) {
@@ -26,27 +29,39 @@ class CreatePost extends Component {
 
   render() {
     return (
-      <form onSubmit={this.createPost}>
-        <input
-          type="text"
-          name="title"
-          value={this.state.title}
-          placeholder="Title"
-          onChange={this.handleOnChange}
-        />
-
-        <textarea name="content" value={this.state.content} onChange={this.handleOnChange} />
-
-        <input
-          type="text"
-          name="tag"
-          value={this.state.tag}
-          placeholder="tag"
-          onChange={this.handleOnChange}
-        />
-
-        <button type="submit">Create Post</button>
-      </form>
+      <div className="pure-g Post">
+        <div className="pure-u-8-24" />
+        <div className="pure-u-8-24">
+          <Form onSubmit={this.createPost} className="CreatPost">
+            <FormItem>
+              <Input
+                onChange={this.handleOnChange}
+                prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="Title"
+              />
+            </FormItem>
+            <FormItem>
+              <TextArea onChange={this.handleOnChange} rows={4} placeholder="Content" />
+            </FormItem>
+            <FormItem>
+              <Input
+                onChange={this.handleOnChange}
+                prefix={<Icon type="tag" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="Tag"
+              />
+            </FormItem>
+            <Button
+              onClick={this.props.createPost}
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+            >
+              Create Post
+            </Button>
+          </Form>
+        </div>
+        <div className="pure-u-8-24" />
+      </div>
     );
   }
 }

@@ -35,16 +35,23 @@ class CreatePost extends Component {
           <Form onSubmit={this.createPost} className="CreatPost">
             <FormItem>
               <Input
+                name="title"
                 onChange={this.handleOnChange}
                 prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 placeholder="Title"
               />
             </FormItem>
             <FormItem>
-              <TextArea onChange={this.handleOnChange} rows={4} placeholder="Content" />
+              <TextArea
+                name="content"
+                onChange={this.handleOnChange}
+                rows={4}
+                placeholder="Content"
+              />
             </FormItem>
             <FormItem>
               <Input
+                name="tag"
                 onChange={this.handleOnChange}
                 prefix={<Icon type="tag" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 placeholder="Tag"

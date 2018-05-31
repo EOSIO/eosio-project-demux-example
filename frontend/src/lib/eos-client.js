@@ -1,9 +1,8 @@
 import Eos from 'eosjs';
 
 const EOS_CONFIG = {
-  keyProvider: ['5HxaM7YutkBRx3z3HdgM9T4QHnVi2bJnjYyABi5HMsLzTMq6WW5'], // Your private key
-  httpEndpoint: 'http://127.0.0.1:8888', // EOS http endpoint
-  chainId: '706a7ddd808de9fc2b8879904f3b392256c83104c1d544b38302cc07d9fca477'
+  keyProvider: ['<Private Key>'], // Your private key
+  httpEndpoint: 'http://127.0.0.1:8888' // EOS http endpoint
 };
 
 export default class EOSClient {

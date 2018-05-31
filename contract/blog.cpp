@@ -55,7 +55,7 @@ public:
   }
 
   //@abi action
-  void modifypost(const uint64_t pkey, const account_name author, const string &title, const string &content, const string &tag)
+  void editpost(const uint64_t pkey, const string &title, const string &content, const string &tag)
   {
     post_index posts(_self, _self);
 
@@ -66,7 +66,6 @@ public:
     require_auth(iterator->author);
 
     posts.modify(iterator, iterator->author, [&](auto &post) {
-      post.author = author;
       post.title = title;
       post.content = content;
       post.tag = tag;
@@ -125,4 +124,4 @@ private:
   //     post_index;
 };
 
-EOSIO_ABI(blog, (createpost)(deletepost)(likepost)(modifypost))
+EOSIO_ABI(blog, (createpost)(deletepost)(likepost)(editpost))

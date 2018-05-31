@@ -58,7 +58,7 @@ class CreatePost extends Component {
               />
             </FormItem>
             <Button
-              onClick={this.props.createPost}
+              onClick={this.createPost}
               type="primary"
               htmlType="submit"
               className="login-form-button"

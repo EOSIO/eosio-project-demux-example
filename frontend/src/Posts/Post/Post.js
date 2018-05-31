@@ -21,7 +21,7 @@ const Post = ({ post, deletePost, editPost, likePost }) => {
             />,
             <Icon
               onClick={e => {
-                editPost(post.pkey, e);
+                editPost(post, e);
               }}
               type="edit"
               style={{ color: '#13c2c2' }}
@@ -37,6 +37,7 @@ const Post = ({ post, deletePost, editPost, likePost }) => {
         >
           <p>{post.author}</p>
           <p>{post.content}</p>
+          <p>Likes: {post.likes}</p>
           <Tag color="geekblue">{'#' + post.tag}</Tag>
         </Card>
       </div>

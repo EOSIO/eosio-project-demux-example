@@ -50,7 +50,7 @@ class App extends Component {
 
   deletePost = (pkey, e) => {
     this.setState(prevState => ({
-      posts: prevState.data.filter((post, index) => post.pkey !== pkey)
+      posts: prevState.posts.filter((post, index) => post.pkey !== pkey)
     }));
 
     this.eos

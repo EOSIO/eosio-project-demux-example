@@ -19,7 +19,7 @@ class CreatePost extends Component {
 
   createPost = e => {
     e.preventDefault();
-    this.props.createPost(this.state);
+    this.props.createPost({ ...this.state, likes: 0 });
     this.setState({
       title: '',
       content: '',
@@ -37,6 +37,7 @@ class CreatePost extends Component {
               <Input
                 name="title"
                 onChange={this.handleOnChange}
+                value={this.state.title}
                 prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 placeholder="Title"
               />
@@ -45,6 +46,7 @@ class CreatePost extends Component {
               <TextArea
                 name="content"
                 onChange={this.handleOnChange}
+                value={this.state.content}
                 rows={4}
                 placeholder="Content"
               />
@@ -53,6 +55,7 @@ class CreatePost extends Component {
               <Input
                 name="tag"
                 onChange={this.handleOnChange}
+                value={this.state.tag}
                 prefix={<Icon type="tag" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 placeholder="Tag"
               />

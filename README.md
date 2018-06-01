@@ -9,6 +9,8 @@ Setting Up A Local Environment](https://github.com/EOSIO/eos/wiki/Local-Environm
 
 ## Getting Started
 
+### Contract Deployment
+
 1.  Create a wallet
     * Save the password. You will need it to unlock your wallet
     ```bash
@@ -57,4 +59,26 @@ Setting Up A Local Environment](https://github.com/EOSIO/eos/wiki/Local-Environm
     ```bash
     # cleos get table <Contract> <Scope> <Table>
     cleos get table blog blog post
+    ```
+
+### Frontend Config
+
+1.  Update the [frontend/src/lib/eos-client.js](https://github.com/TaraTritt/eos-blog-dapp/blob/master/frontend/src/lib/eos-client.js) with your Eos node configuration
+    ```javascript
+    const EOS_CONFIG = {
+      chainId: '<Chain Id>',
+      keyProvider: ['<Active Private Key>'],
+      broadcast: true,
+      sign: true
+    };
+    ```
+    * You can get the chainId via the command:
+    ```bash
+    cleos get info
+    ```
+    * You should have set the active key when you created the account in step 4 above
+2.  Start the react app
+    ```bash
+    cd frontend
+    npm start
     ```

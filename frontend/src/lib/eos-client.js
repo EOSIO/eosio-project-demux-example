@@ -1,8 +1,8 @@
 import Eos from 'eosjs';
 
 const EOS_CONFIG = {
-  chainId: '<Active Private Key>',
-  keyProvider: ['<Chain Id>'],
+  chainId: '<Chain Id>',
+  keyProvider: ['<Active Private Key>'],
   broadcast: true,
   sign: true
 };

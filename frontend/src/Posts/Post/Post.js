@@ -14,7 +14,8 @@ class Post extends Component {
       post: {
         title: this.props.post.title,
         content: this.props.post.content,
-        tag: this.props.post.tag
+        tag: this.props.post.tag,
+        likes: this.props.post.likes
       }
     };
   }
@@ -58,7 +59,10 @@ class Post extends Component {
                   <Icon
                     onClick={e => {
                       this.setState(prevState => ({
-                        liked: !prevState.liked
+                        liked: !prevState.liked,
+                        post: Object.assign(prevState.post, {
+                          likes: prevState.liked ? prevState.post.likes : prevState.post.likes + 1
+                        })
                       }));
                       this.props.likePost(this.props.post.pkey, e);
                     }}
@@ -69,7 +73,7 @@ class Post extends Component {
               >
                 <p>By: {this.props.post.author}</p>
                 <p>{this.state.post.content}</p>
-                <p>Likes: {this.props.post.likes}</p>
+                <p>Likes: {this.state.post.likes}</p>
                 <Tag color="geekblue">{'#' + this.state.post.tag}</Tag>
               </Card>
             </div>

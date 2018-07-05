@@ -14,6 +14,8 @@ git checkout tags/v1.0.7
 
 ## Getting Started
 
+cleos, keosd, and nodeos executables can be found in the `eos/build/programs` folder after successfully building the project
+
 ### Contract Deployment
 
 1.  Create a wallet

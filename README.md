@@ -1,11 +1,16 @@
 # eos-blog-dapp
 
-Instructions and implementation written for EOSIO Dawn 4.2
+Instructions and implementation written and tested for EOSIO v1.0.7
 
 ## Prerequisites
 
 You have completed the steps in [
 Setting Up A Local Environment](https://github.com/EOSIO/eos/wiki/Local-Environment) from the EOSIO documentation with keosd & nodeos running.
+
+Make sure to checkout the tag v1.0.7
+```bash
+    git checkout tags/v1.0.7
+```
 
 ## Getting Started
 

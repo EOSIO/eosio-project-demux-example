@@ -9,7 +9,7 @@ Setting Up A Local Environment](https://github.com/EOSIO/eos/wiki/Local-Environm
 
 Make sure to checkout the tag v1.0.7
 ```bash
-    git checkout tags/v1.0.7
+git checkout tags/v1.0.7
 ```
 
 ## Getting Started

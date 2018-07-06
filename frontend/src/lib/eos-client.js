@@ -12,7 +12,7 @@ export default class EOSClient {
     this.contractName = contractName;
     this.contractSender = contractSender;
 
-    this.eos = Eos.Localnet(EOS_CONFIG);
+    this.eos = Eos(EOS_CONFIG);
   }
 
   getTableRows = table => {

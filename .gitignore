@@ -2,3 +2,4 @@ ignore.txt
 *.wasm
 *.wast
 *.abi
+.DS_Store

@@ -9,6 +9,7 @@ You have completed the steps in [Building EOSIO](https://developers.eos.io/eosio
 Make sure to checkout the tag v1.0.7
 ```bash
 git checkout tags/v1.0.7
+git submodule update --init --recursive
 ```
 
 Before creating an account to deploy the contract you have to create a default wallet for the eosio account and import the eosio private key.

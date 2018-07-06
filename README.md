@@ -105,18 +105,14 @@ When running cleos if you get an error that it is unable to connect to keosd, ex
 
 ### Frontend Config
 
-1.  Update the [frontend/src/lib/eos-client.js](https://github.com/TaraTritt/eos-blog-dapp/blob/master/frontend/src/lib/eos-client.js) with your Eos node configuration
+1.  Update the [frontend/src/lib/eos-client.js](https://github.com/TaraTritt/eos-blog-dapp/blob/master/frontend/src/lib/eos-client.js) with your EOS node configuration
     ```javascript
-    const EOS_CONFIG = {
-      chainId: '<Chain Id>',
-      keyProvider: ['<Active Private Key>'],
-      broadcast: true,
-      sign: true
-    };
+    const rpc = new eosjs.Rpc.JsonRpc('<HTTP Endpoint>');
+    const signatureProvider = new eosjs.SignatureProvider(['<Active Private Key>']);
     ```
-    * You can get the chainId via the command:
-    ```bash
-    cleos get info
+    * If you're connecting to your local running nodeos daemon:
+    ```javascript
+    const rpc = new eosjs.Rpc.JsonRpc('http://localhost:8888');
     ```
     * You should have set the active key when you created the account in step 4 above
 2.  Start the react app

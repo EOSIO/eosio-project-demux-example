@@ -1,26 +1,24 @@
-import Eos from 'eosjs';
+import eosjs from 'eosjs2'
 
-const EOS_CONFIG = {
-  chainId: '<Chain Id>',
-  keyProvider: ['<Active Private Key>'],
-  broadcast: true,
-  sign: true
-};
+const rpc = new eosjs.Rpc.JsonRpc('<HTTP Endpoint>');
+const signatureProvider = new eosjs.SignatureProvider(['<Active Private Key>']);
 
 export default class EOSClient {
   constructor(contractName, contractSender) {
     this.contractName = contractName;
     this.contractSender = contractSender;
 
-    this.eos = Eos(EOS_CONFIG);
+    this.eos = new eosjs.Api({ rpc, signatureProvider })
   }
 
   getTableRows = table => {
-    return this.eos.getTableRows(true, this.contractName, this.contractSender, table);
+    return rpc.get_table_rows({json: true, code: this.contractSender, scope: this.contractName, table});
   };
 
   transaction = (action, data) => {
-    return this.eos.transaction({
+    return this.eos.pushTransaction({
+      blocksBehind: 3,
+      expireSeconds: 30,
       actions: [
         {
           account: this.contractName,

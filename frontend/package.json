@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.5.4",
+    "demux": "git+ssh://git@github.com:EOSIO/demux-js.git",
     "eosjs2": "0.0.4",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",

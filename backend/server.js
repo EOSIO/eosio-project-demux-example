@@ -1,7 +1,9 @@
-import express from "express"
+const express = require("express");
+const demux = require("./demux");
+const app = express();
 
-const app = express()
+demux.watch();
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get("/", (req, res) => res.send("Hello World!"));
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(4000, () => console.log("Example app listening on port 4000!"));

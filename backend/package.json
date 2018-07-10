@@ -4,19 +4,26 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node ./server.js --exec babel-node"
+    "start": "nodemon ./server.js"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "demux": "git+ssh://git@github.com:EOSIO/demux-js.git",
+    "express": "^4.16.3",
+    "request-promise-native": "^1.0.5"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0"
+    "babel-register": "^6.26.0",
+    "nodemon": "^1.17.5"
   },
   "babel": {
-    "plugins": ["transform-async-to-generator"],
-    "presets": ["env"]
+    "plugins": [
+      "transform-async-to-generator"
+    ],
+    "presets": [
+      "env"
+    ]
   }
 }

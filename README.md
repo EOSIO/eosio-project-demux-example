@@ -1,4 +1,4 @@
-# eos-blog-dapp
+# eosio-hackathon-starter
 
 Instructions and implementation written and tested for EOSIO v1.0.7
 

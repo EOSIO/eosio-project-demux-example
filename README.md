@@ -1,8 +1,8 @@
 # eosio-hackathon-starter
 
 There are two ways to use the app:
-* Setup nodeos locally and deploy a locally compiled contract
-* Interact with the Jungle Testnet deployed instance
+* [Interact with the Jungle Testnet deployed instance](https://github.com/EOSIO/eosio-hackathon-starter#jungle-testnet)
+* [Setup nodeos locally and deploy a locally compiled contract](https://github.com/EOSIO/eosio-hackathon-starter#local)
 
 ## Jungle Testnet
 

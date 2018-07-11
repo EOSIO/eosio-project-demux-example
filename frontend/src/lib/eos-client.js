@@ -1,7 +1,7 @@
 import eosjs from 'eosjs2'
 
-const rpc = new eosjs.Rpc.JsonRpc('<HTTP Endpoint>');
-const signatureProvider = new eosjs.SignatureProvider(['<Active Private Key>']);
+const rpc = new eosjs.Rpc.JsonRpc(process.env.REACT_APP_EOS_ENV === 'local' ? process.env.REACT_APP_EOS_LOCAL_HTTP_URL : process.env.REACT_APP_EOS_TEST_HTTP_URL);
+const signatureProvider = new eosjs.SignatureProvider([process.env.REACT_APP_EOS_PRIVATE_KEY]);
 
 export default class EOSClient {
   constructor(contractName, contractSender) {
@@ -15,7 +15,7 @@ export default class EOSClient {
     return rpc.get_table_rows({json: true, code: this.contractSender, scope: this.contractName, table});
   };
 
-  transaction = (action, data) => {
+  transaction = (actor, action, data) => {
     return this.eos.pushTransaction({
       blocksBehind: 3,
       expireSeconds: 30,
@@ -25,7 +25,7 @@ export default class EOSClient {
           name: action,
           authorization: [
             {
-              actor: this.contractSender,
+              actor: actor,
               permission: 'active'
             }
           ],

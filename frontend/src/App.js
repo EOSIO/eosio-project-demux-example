@@ -12,7 +12,8 @@ class App extends Component {
       loading: false,
       posts: []
     };
-    this.eos = new EOSClient('blog', 'blog');
+    const contractAccount = process.env.REACT_APP_EOS_ENV === 'local' ? process.env.REACT_APP_EOS_LOCAL_CONTRACT_ACCOUNT : process.env.REACT_APP_EOS_TEST_CONTRACT_ACCOUNT;
+    this.eos = new EOSClient(contractAccount, contractAccount);
     this.loadPosts();
   }
 
@@ -34,8 +35,10 @@ class App extends Component {
     this.setState({ posts: [...this.state.posts, post] });
 
     this.eos
-      .transaction('createpost', {
-        author: 'blog',
+      .transaction(
+        process.env.REACT_APP_EOS_ACCOUNT,
+        'createpost', {
+        author: process.env.REACT_APP_EOS_CONTRACT_ACCOUNT,
         ...post
       })
       .then(res => {
@@ -54,9 +57,11 @@ class App extends Component {
     }));
 
     this.eos
-      .transaction('deletepost', {
-        pkey
-      })
+      .transaction(process.env.REACT_APP_EOS_ACCOUNT,
+        'deletepost', 
+        {
+          pkey
+        })
       .then(res => {
         console.log(res);
         this.setState({ loading: false });
@@ -69,9 +74,11 @@ class App extends Component {
 
   editPost = (post, e) => {
     this.eos
-      .transaction('editpost', {
-        ...post
-      })
+      .transaction(process.env.REACT_APP_EOS_ACCOUNT,
+        'editpost', 
+        {
+          ...post
+        })
       .then(res => {
         console.log(res);
         this.setState({ loading: false });
@@ -84,9 +91,11 @@ class App extends Component {
 
   likePost = (pkey, e) => {
     this.eos
-      .transaction('likepost', {
-        pkey
-      })
+      .transaction(
+        process.env.REACT_APP_EOS_ACCOUNT, 
+        'likepost', {
+          pkey
+        })
       .then(res => {
         console.log(res);
         this.setState({ loading: false });

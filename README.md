@@ -1,8 +1,8 @@
 # eosio-hackathon-starter
 
 There are two ways to use the app:
-* [Interact with the Jungle Testnet deployed instance](https://github.com/EOSIO/eosio-hackathon-starter#jungle-testnet)
-* [Setup nodeos locally and deploy a locally compiled contract](https://github.com/EOSIO/eosio-hackathon-starter#local)
+* [Interact with the Jungle Testnet deployed smart contract instance](https://github.com/EOSIO/eosio-hackathon-starter#jungle-testnet)
+* [Setup nodeos locally and compile then deploy the smart contract](https://github.com/EOSIO/eosio-hackathon-starter#local)
 
 ## Jungle Testnet
 
@@ -11,7 +11,7 @@ Follow the instructions on [EOS Jungle Testnet](https://github.com/CryptoLions/E
 
 
 ### Frontend Config
-1.  Update the root [.env]() with your account name, generated private key, and update `REACT_APP_EOS_ENV=test` like below
+1.  Update the root [.env](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/frontend/.env) with your account name, generated private key, and update `REACT_APP_EOS_ENV=test` like below
     ```bash
     REACT_APP_EOS_ENV=test
     REACT_APP_EOS_ACCOUNT=
@@ -139,7 +139,7 @@ When running cleos if you get an error that it is unable to connect to keosd, ex
 
 #### Frontend Config
 
-1.  Update the root [.env]() with your generated private key, and update `REACT_APP_EOS_ENV=local` & `REACT_APP_EOS_ACCOUNT=blog` like below 
+1.  Update the root [.env](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/frontend/.env) with your generated private key, and update `REACT_APP_EOS_ENV=local` & `REACT_APP_EOS_ACCOUNT=blog` like below 
     ```bash
     REACT_APP_EOS_ENV=local
     REACT_APP_EOS_ACCOUNT=blog

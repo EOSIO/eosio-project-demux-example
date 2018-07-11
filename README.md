@@ -1,8 +1,42 @@
 # eosio-hackathon-starter
 
+There are two ways to use the app:
+* Setup nodeos locally and deploy a locally compiled contract
+* Interact with the Jungle Testnet deployed instance
+
+## Jungle Testnet
+
+Follow the instructions on [EOS Jungle Testnet](https://github.com/CryptoLions/EOS-Jungle-Testnet) to install EOS, create a key pair, then register your account.
+    * You do not need to run nodeos to create a key pair, so you can safely ignore those instructions if you want
+
+
+### Frontend Config
+1.  Update the root [.env]() with your account name, generated private key, and update `REACT_APP_EOS_ENV=test` like below
+    ```bash
+    REACT_APP_EOS_ENV=test
+    REACT_APP_EOS_ACCOUNT=
+    REACT_APP_EOS_PRIVATE_KEY=
+
+    REACT_APP_EOS_LOCAL_CONTRACT_ACCOUNT=blog
+    REACT_APP_EOS_TEST_CONTRACT_ACCOUNT=testblogeos
+
+    REACT_APP_EOS_LOCAL_HTTP_URL=http://localhost:8888
+    REACT_APP_EOS_TEST_HTTP_URL=http://jungle.cryptolions.io:38888
+    ```
+
+2.  Start the react app
+    ```bash
+    cd frontend
+    npm start
+    ```
+3. You should be able to view a view sample blog posts, but your account does not have the neccessary authorization to create, edit, or delete posts. However, there is not required auth for the like action, so you can like posts, which will use the private key you set in the .env to sign the transaction to like the post
+
+
+## Local
+
 Instructions and implementation written and tested for EOSIO v1.0.7
 
-## Prerequisites
+### Prerequisites
 
 You have completed the steps in [Building EOSIO](https://developers.eos.io/eosio-nodeos/docs/getting-the-code) from the EOSIO Developer Portal with keosd & nodeos running.
 
@@ -14,7 +48,7 @@ git submodule update --init --recursive
 
 Before creating an account to deploy the contract you have to create a default wallet for the eosio account and import the eosio private key.
 
-### Default wallet & eosio account
+#### Default wallet & eosio account
 
 1.  Create the default wallet
     * Be sure to save this password somewhere safe. This password is used to unlock (decrypt) your wallet file.
@@ -31,7 +65,7 @@ Before creating an account to deploy the contract you have to create a default w
     cleos wallet import 
     ```
 
-## Getting Started
+### Getting Started
 
 * cleos, keosd, and nodeos executables can be found in the `eos/build/programs` folder after successfully building the project
 * eosiocpp executable can be found in the `eos/build/tools` folder 
@@ -103,18 +137,20 @@ When running cleos if you get an error that it is unable to connect to keosd, ex
     cleos get table blog blog post
     ```
 
-### Frontend Config
+#### Frontend Config
 
-1.  Update the [frontend/src/lib/eos-client.js](https://github.com/TaraTritt/eos-blog-dapp/blob/master/frontend/src/lib/eos-client.js) with your EOS node configuration
-    ```javascript
-    const rpc = new eosjs.Rpc.JsonRpc('<HTTP Endpoint>');
-    const signatureProvider = new eosjs.SignatureProvider(['<Active Private Key>']);
+1.  Update the root [.env]() with your generated private key, and update `REACT_APP_EOS_ENV=local` & `REACT_APP_EOS_ACCOUNT=blog` like below 
+    ```bash
+    REACT_APP_EOS_ENV=local
+    REACT_APP_EOS_ACCOUNT=blog
+    REACT_APP_EOS_PRIVATE_KEY=
+
+    REACT_APP_EOS_LOCAL_CONTRACT_ACCOUNT=blog
+    REACT_APP_EOS_TEST_CONTRACT_ACCOUNT=testblogeos
+
+    REACT_APP_EOS_LOCAL_HTTP_URL=http://localhost:8888
+    REACT_APP_EOS_TEST_HTTP_URL=http://jungle.cryptolions.io:38888
     ```
-    * If you're connecting to your local running nodeos daemon:
-    ```javascript
-    const rpc = new eosjs.Rpc.JsonRpc('http://localhost:8888');
-    ```
-    * You should have set the active key when you created the account in step 4 above
 2.  Start the react app
     * If you get a CORS error when running the app, modify the nodeos config.ini
         * Mac OS: ~/Library/Application Support/eosio/nodeos/config

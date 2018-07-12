@@ -1,5 +1,4 @@
 # eosio-hackathon-starter
-<<<<<<< HEAD
 
 There are two ways to use the app:
 * [Interact with the Jungle Testnet deployed smart contract instance](https://github.com/EOSIO/eosio-hackathon-starter#jungle-testnet)
@@ -34,8 +33,6 @@ Follow the instructions on [EOS Jungle Testnet](https://github.com/CryptoLions/E
 
 
 ## Local
-=======
->>>>>>> Initial ricardian contract files
 
 Instructions and implementation written and tested for EOSIO v1.0.7
 

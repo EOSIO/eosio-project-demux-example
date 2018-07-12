@@ -4,10 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node ./server.js --exec babel-node"
+    "start": "nodemon ./server.js"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "demux": "git+ssh://git@github.com:EOSIO/demux-js.git",
+    "express": "^4.16.3",
+    "request-promise-native": "^1.0.5"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

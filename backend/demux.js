@@ -10,7 +10,7 @@ const MyActionHandler = require("./demux/MyActionHandler")
 
 // Import Updaters and Effects, which are arrays of objects:
 // [ { actionType:string, (updater|effect):function }, ... ] 
-const updaters = require("./demux/updaters")
+const updaters = require("./demux/updaters/updaters")
 const effects = require("./demux/effects")
 
 const actionHandler = new MyActionHandler(
@@ -19,8 +19,8 @@ const actionHandler = new MyActionHandler(
 )
 
 const actionReader = new NodeosActionReader(
-  "http://localhost:8888", // Locally hosted node needed for reasonable indexing speed
-    39750 // First actions relevant to this dapp happen at this block
+  process.env.EOS_LOCAL_HTTP_URL, // Locally hosted node needed for reasonable indexing speed
+  39750 // First actions relevant to this dapp happen at this block
 )
 
 const actionWatcher = new BaseActionWatcher(

@@ -1,5 +1,5 @@
 function updatePosts({ state, payload, blockInfo, context }) {
-  console.log(payload.data);
+  console.log(payload)
 }
 
 const updaters = [

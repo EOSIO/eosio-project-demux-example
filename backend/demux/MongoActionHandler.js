@@ -4,7 +4,7 @@ const {
 
 const mongoose = require("mongoose");
 
-var mongoDB = "mongodb://127.0.0.1/my_database";
+var mongoDB = process.env.MONGODB_URL;
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 

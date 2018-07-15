@@ -1,10 +1,13 @@
 function updatePosts({ state, payload, blockInfo, context }) {
-  console.log(payload)
+  console.log(state);
+  console.log(payload);
 }
+
+const account = process.env.EOS_ENV === "local" ? process.env.EOS_LOCAL_CONTRACT_ACCOUNT : process.env.EOS_TEST_CONTRACT_ACCOUNT
 
 const updaters = [
   {
-    actionType: "blog::likepost", //account::action name
+    actionType: `${account}::likepost`, //account::action name
     updater: updatePosts
   }
 ];

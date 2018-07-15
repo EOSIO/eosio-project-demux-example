@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const demux = require("./demux");
 const app = express();

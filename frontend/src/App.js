@@ -38,7 +38,7 @@ class App extends Component {
       .transaction(
         process.env.REACT_APP_EOS_ACCOUNT,
         'createpost', {
-        author: process.env.REACT_APP_EOS_CONTRACT_ACCOUNT,
+        author: process.env.REACT_APP_EOS_ACCOUNT,
         ...post
       })
       .then(res => {

@@ -1,22 +1,19 @@
 const {
   readers: {
-    eos: { NodeosActionReader } // Let's read from an EOS node
+    eos: { NodeosActionReader }
   },
-  watchers: { BaseActionWatcher } // Don't need anything special, so let's use the base Action Watcher
+  watchers: { BaseActionWatcher }
 } = require("demux")
 
-// Assuming you've already created a subclass of AbstractActionHandler
-const MongoActionHandler = require("./MongoActionHandler")
+const MongooseActionHandler = require("./MongooseActionHandler")
 
-// Import Updaters and Effects, which are arrays of objects:
-// [ { actionType:string, (updater|effect):function }, ... ]
 const updaters = require("./updaters")
 const effects = require("./effects")
 
-const actionHandler = new MongoActionHandler(updaters, effects)
+const actionHandler = new MongooseActionHandler(updaters, effects, process.env.MONGODB_URL)
 
 const actionReader = new NodeosActionReader(
-  process.env.EOS_ENV === "local" ? process.env.EOS_LOCAL_HTTP_URL : process.env.EOS_TEST_HTTP_URL, // Locally hosted node needed for reasonable indexing speed
+  process.env.EOS_ENV === "local" ? process.env.EOS_LOCAL_HTTP_URL : process.env.EOS_TEST_HTTP_URL,
   6024400 // First actions relevant to this dapp happen at this block
 );
 

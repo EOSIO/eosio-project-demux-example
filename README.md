@@ -11,11 +11,12 @@ Follow the instructions on [EOS Jungle Testnet](https://github.com/CryptoLions/E
 
 
 ### Frontend Config
-1.  Update the root [.env](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/frontend/.env) with your account name, generated private key, and update `REACT_APP_EOS_ENV=test` like below
+1.  Update the root [.env](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/frontend/.env) with your account name, generated private key, chain ID, and update `REACT_APP_EOS_ENV=test` like below
     ```bash
     REACT_APP_EOS_ENV=test
     REACT_APP_EOS_ACCOUNT=
     REACT_APP_EOS_PRIVATE_KEY=
+    REACT_APP_EOS_CHAIN_ID=
 
     REACT_APP_EOS_LOCAL_CONTRACT_ACCOUNT=blog
     REACT_APP_EOS_TEST_CONTRACT_ACCOUNT=testblogeos
@@ -23,7 +24,10 @@ Follow the instructions on [EOS Jungle Testnet](https://github.com/CryptoLions/E
     REACT_APP_EOS_LOCAL_HTTP_URL=http://localhost:8888
     REACT_APP_EOS_TEST_HTTP_URL=http://jungle.cryptolions.io:38888
     ```
-
+    * You can get the chainId via the command:
+    ```bash
+    cleos get info
+    ```
 2.  Start the react app
     ```bash
     cd frontend
@@ -139,17 +143,22 @@ When running cleos if you get an error that it is unable to connect to keosd, ex
 
 #### Frontend Config
 
-1.  Update the root [.env](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/frontend/.env) with your generated private key, and update `REACT_APP_EOS_ENV=local` & `REACT_APP_EOS_ACCOUNT=blog` like below 
+1.  Update the root [.env](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/frontend/.env) with your generated private key, chain ID, and update `REACT_APP_EOS_ENV=local` & `REACT_APP_EOS_ACCOUNT=blog` like below 
     ```bash
     REACT_APP_EOS_ENV=local
     REACT_APP_EOS_ACCOUNT=blog
     REACT_APP_EOS_PRIVATE_KEY=
+    REACT_APP_EOS_CHAIN_ID=
 
     REACT_APP_EOS_LOCAL_CONTRACT_ACCOUNT=blog
     REACT_APP_EOS_TEST_CONTRACT_ACCOUNT=testblogeos
 
     REACT_APP_EOS_LOCAL_HTTP_URL=http://localhost:8888
     REACT_APP_EOS_TEST_HTTP_URL=http://jungle.cryptolions.io:38888
+    ```
+    * You can get the chainId via the command:
+    ```bash
+    cleos get info
     ```
 2.  Start the react app
     * If you get a CORS error when running the app, modify the nodeos config.ini

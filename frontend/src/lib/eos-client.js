@@ -1,6 +1,7 @@
 import Eos from 'eosjs';
 
 const EOS_CONFIG = {
+  httpEndpoint: process.env.REACT_APP_EOS_ENV === 'local' ? process.env.REACT_APP_EOS_LOCAL_HTTP_URL : process.env.REACT_APP_EOS_TEST_HTTP_URL,
   chainId: process.env.REACT_APP_EOS_CHAIN_ID,
   keyProvider: [process.env.REACT_APP_EOS_PRIVATE_KEY],
   broadcast: true,
@@ -20,7 +21,7 @@ export default class EOSClient {
     return this.eos.getTableRows(true, this.contractName, this.contractSender, table);
   };
 
-  transaction = (action, data) => {
+  transaction = (actor, action, data) => {
     return this.eos.transaction({
       actions: [
         {

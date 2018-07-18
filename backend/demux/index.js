@@ -14,7 +14,7 @@ const actionHandler = new MongooseActionHandler(updaters, effects, process.env.M
 
 const actionReader = new NodeosActionReader(
   process.env.EOS_ENV === "local" ? process.env.EOS_LOCAL_HTTP_URL : process.env.EOS_TEST_HTTP_URL,
-  6024400 // First actions relevant to this dapp happen at this block
+  6310996 // First actions relevant to this dapp happen at this block
 );
 
 const actionWatcher = new BaseActionWatcher(

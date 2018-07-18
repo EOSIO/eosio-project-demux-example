@@ -29,24 +29,19 @@ public:
 
     // add a record to our multi_index posts
     // const_iterator emplace( unit64_t payer, Lambda&& constructor )
-    // TODO change payer
     posts.emplace(author, [&](auto &post) {
-      post.pkey = posts.available_primary_key();
+      post._id = posts.available_primary_key();
       post.author = author;
-      post.title = title;
-      post.content = content;
-      post.tag = tag;
-      post.likes = 0;
     });
   }
 
   //@abi action
-  void deletepost(const uint64_t pkey)
+  void deletepost(const uint64_t _id)
   {
     post_index posts(_self, _self);
 
-    auto iterator = posts.find(pkey);
-    eosio_assert(iterator != posts.end(), "Post for pkey could not be found");
+    auto iterator = posts.find(_id);
+    eosio_assert(iterator != posts.end(), "Post for _id could not be found");
 
     // check if authorized to delete post
     require_auth(iterator->author);
@@ -55,39 +50,27 @@ public:
   }
 
   //@abi action
-  void editpost(const uint64_t pkey, const string &title, const string &content, const string &tag)
+  void editpost(const uint64_t _id, const string &title, const string &content, const string &tag)
   {
     post_index posts(_self, _self);
 
-    auto iterator = posts.find(pkey);
-    eosio_assert(iterator != posts.end(), "Post for pkey could not be found");
+    auto iterator = posts.find(_id);
+    eosio_assert(iterator != posts.end(), "Post for _id could not be found");
 
     // check if authorized to update post
     require_auth(iterator->author);
-
-    posts.modify(iterator, iterator->author, [&](auto &post) {
-      post.title = title;
-      post.content = content;
-      post.tag = tag;
-    });
   }
 
   //@abi action
-  void likepost(const uint64_t pkey)
+  void likepost(const uint64_t _id)
   {
     // do not require_auth since want to allow anyone to call
 
     post_index posts(_self, _self);
 
     // verify already exist
-    auto iterator = posts.find(pkey);
-    eosio_assert(iterator != posts.end(), "Post for pkey not found");
-
-    posts.modify(iterator, 0, [&](auto &post) {
-      print("Liking: ",
-            post.title.c_str(), " By: ", post.author, "\n");
-      post.likes++;
-    });
+    auto iterator = posts.find(_id);
+    eosio_assert(iterator != posts.end(), "Post for _id not found");
   }
 
 private:
@@ -96,32 +79,21 @@ private:
   //@abi table post i64
   struct post
   {
-    uint64_t pkey;
+    uint64_t _id;
     uint64_t author;
-    string title;
-    string content;
-    string tag;
-    uint64_t likes = 0;
 
-    auto primary_key() const { return pkey; }
+    auto primary_key() const { return _id; }
 
     uint64_t get_author() const { return author; }
-    string get_tag() const { return tag; }
 
     // call macro
-    EOSLIB_SERIALIZE(post, (pkey)(author)(title)(content)(tag)(likes))
+    EOSLIB_SERIALIZE(post, (_id)(author))
   };
 
   // typedef multi_index<N(table_name), object_template_to_use, other_indices> multi_index_name;
   typedef multi_index<N(post), post,
                       indexed_by<N(byauthor), const_mem_fun<post, uint64_t, &post::get_author>>>
       post_index;
-
-  // TODO add another index for tag
-  // typedef multi_index<N(post), post,
-  //                     indexed_by<N(byauthor), const_mem_fun<post, uint64_t, &post::get_author>>,
-  //                     indexed_by<N(bytag), const_mem_fun<post, string, &post::get_tag>>>
-  //     post_index;
 };
 
 EOSIO_ABI(blog, (createpost)(deletepost)(likepost)(editpost))

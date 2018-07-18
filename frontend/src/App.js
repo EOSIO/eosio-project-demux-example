@@ -44,16 +44,16 @@ class App extends Component {
       });
   };
 
-  deletePost = (pkey, e) => {
+  deletePost = (_id, e) => {
     this.setState(prevState => ({
-      posts: prevState.posts.filter((post, index) => post.pkey !== pkey)
+      posts: prevState.posts.filter((post, index) => post._id !== _id)
     }));
 
     this.eos
       .transaction(process.env.REACT_APP_EOS_ACCOUNT,
         'deletepost', 
         {
-          pkey
+          _id
         })
       .then(res => {
         console.log(res);
@@ -82,12 +82,12 @@ class App extends Component {
       });
   };
 
-  likePost = (pkey, e) => {
+  likePost = (_id, e) => {
     this.eos
       .transaction(
         process.env.REACT_APP_EOS_ACCOUNT, 
         'likepost', {
-          pkey
+          _id
         })
       .then(res => {
         console.log(res);

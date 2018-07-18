@@ -43,7 +43,7 @@ class Post extends Component {
                   <Icon
                     type="delete"
                     onClick={e => {
-                      this.props.deletePost(this.props.post.pkey, e);
+                      this.props.deletePost(this.props.post._id, e);
                     }}
                     style={{ color: '#f5222d' }}
                   />,
@@ -64,7 +64,7 @@ class Post extends Component {
                           likes: prevState.liked ? prevState.post.likes : prevState.post.likes + 1
                         })
                       }));
-                      this.props.likePost(this.props.post.pkey, e);
+                      this.props.likePost(this.props.post._id, e);
                     }}
                     type={this.state.liked ? 'heart' : 'heart-o'}
                     style={{ color: '#eb2f96' }}

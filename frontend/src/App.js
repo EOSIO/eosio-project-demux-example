@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from 'axios'
 import EOSClient from './lib/eos-client';
 import CreatePost from './CreatePost/CreatePost';
 import Posts from './Posts/Posts';
@@ -17,16 +17,9 @@ class App extends Component {
     this.loadPosts();
   }
 
-  loadPosts = () => {
-    this.eos
-      .getTableRows('post')
-      .then(data => {
-        console.log(data);
-        this.setState({ posts: data.rows });
-      })
-      .catch(e => {
-        console.error(e);
-      });
+  loadPosts = async () => {
+    let response = await axios.get(process.env.REACT_APP_API_URL + "/posts");
+    this.setState({ posts: response.data })
   };
 
   createPost = post => {

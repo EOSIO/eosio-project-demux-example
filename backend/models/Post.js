@@ -7,7 +7,10 @@ var PostSchema = new Schema({
     title: String,
     content: String,
     tag: String,
-    likes: Number,
+    likes:  {
+        type: Number,
+        default: 0
+    }
 });
 
 module.exports = mongoose.model('Post', PostSchema);

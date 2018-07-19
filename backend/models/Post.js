@@ -2,16 +2,23 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const PostSchema = new Schema({
-    _id: String,
-    author: String,
-    title: String,
-    content: String,
-    tag: String,
-    likes:  {
-        type: Number,
-        default: 0
-    }
-});
+let Post = null
 
-module.exports = mongoose.model('Post', PostSchema);
+try {
+    const PostSchema = new Schema({
+        _id: String,
+        author: String,
+        title: String,
+        content: String,
+        tag: String,
+        likes:  {
+            type: Number,
+            default: 0
+        }
+    });
+    Post = mongoose.model('Post', PostSchema);
+} catch (e) {
+    Post = mongoose.model('Post');
+}
+
+module.exports = Post;

@@ -1,8 +1,6 @@
-const Post = require("../../../models/post");
-
 function deletePost({ state, payload, blockInfo, context }) {
   console.log(payload.data)
-  Post.findByIdAndDelete(
+  state.Post.findByIdAndDelete(
     payload.data._id
   )
 }

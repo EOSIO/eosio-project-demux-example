@@ -4,7 +4,7 @@ const {
 const mongoose = require("mongoose");
 
 class ObjectActionHandler extends AbstractActionHandler {
-  constructor(updaters, effects, uri) {
+  constructor(updaters, effects, uri, models) {
     mongoose.connect(uri);
 
     // CONNECTION EVENTS
@@ -34,14 +34,14 @@ class ObjectActionHandler extends AbstractActionHandler {
         process.exit(0); 
       }); 
     }); 
-
     super(updaters, effects)
+    this.models = models
   }
 
   async handleWithState(handle) {
     // do not need to use the mongoose.connection object if using mongoose.Model
     // mongoose.model objects will use the default connection pool which we setup in the constructor above
-    await handle(mongoose.connection);
+    await handle(this.models);
   }
 }
 

@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var PostSchema = new Schema({
-    _id: Number,
+    _id: String,
     author: String,
     title: String,
     content: String,

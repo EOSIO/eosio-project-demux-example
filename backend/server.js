@@ -1,7 +1,6 @@
 require("dotenv").config();
-const express = require("express");
-var cors = require('cors');
-var app = express();
+var app = require('express')();
+const cors = require('cors');
 const demux = require("./demux");
 const Post = require("./models/post");
 
@@ -15,4 +14,10 @@ app.get("/posts", (req, res) => {
 
 demux.watch();
 
-app.listen(process.env.PORT, () => console.log("Example app listening on port 4000!"));
+const server = app.listen(process.env.PORT, () => console.log("Example app listening on port 4000!"));
+
+const io = require('socket.io')(server);
+
+io.on('connection', function (socket) {
+    socket.emit('news', { hello: 'world' });
+});

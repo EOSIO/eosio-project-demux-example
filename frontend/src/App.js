@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import io from 'socket.io-client';
 import EOSClient from './lib/eos-client';
 import CreatePost from './CreatePost/CreatePost';
 import Posts from './Posts/Posts';
@@ -14,7 +15,15 @@ class App extends Component {
     };
     const contractAccount = process.env.REACT_APP_EOS_ENV === 'local' ? process.env.REACT_APP_EOS_LOCAL_CONTRACT_ACCOUNT : process.env.REACT_APP_EOS_TEST_CONTRACT_ACCOUNT;
     this.eos = new EOSClient(contractAccount, contractAccount);
+  }
+
+  componentDidMount() {
     this.loadPosts();
+    const socket = io(process.env.REACT_APP_WS_URL);
+    socket.on('news', function (data) {
+      console.log(data);
+      socket.emit('my other event', { my: 'data' });
+    });
   }
 
   loadPosts = async () => {

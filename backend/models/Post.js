@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var PostSchema = new Schema({
+const PostSchema = new Schema({
     _id: String,
     author: String,
     title: String,

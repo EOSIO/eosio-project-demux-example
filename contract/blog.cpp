@@ -15,7 +15,7 @@ public:
   // mark with @abi action so that eosiocpp will add this as an action to the ABI
 
   //@abi action
-  void createpost(const account_name author, const string &title, const string &content, const string &tag)
+  void createpost(const string &_id, const account_name author, const string &title, const string &content, const string &tag)
   {
     // check if authorized for account to create a blog post
     // if you are not authorized then this action will be aborted
@@ -30,7 +30,7 @@ public:
     // add a record to our multi_index posts
     // const_iterator emplace( unit64_t payer, Lambda&& constructor )
     posts.emplace(author, [&](auto &post) {
-      post._id = posts.available_primary_key();
+      post._id = N(_id);
       post.author = author;
     });
   }
@@ -82,7 +82,7 @@ private:
     uint64_t _id;
     uint64_t author;
 
-    auto primary_key() const { return _id; }
+    uint64_t primary_key() const { return _id; }
 
     uint64_t get_author() const { return author; }
 
@@ -91,7 +91,7 @@ private:
   };
 
   // typedef multi_index<N(table_name), object_template_to_use, other_indices> multi_index_name;
-  typedef multi_index<N(post), post,
+  typedef multi_index<N(posts), post,
                       indexed_by<N(byauthor), const_mem_fun<post, uint64_t, &post::get_author>>>
       post_index;
 };

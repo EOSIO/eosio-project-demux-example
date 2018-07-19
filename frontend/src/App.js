@@ -24,6 +24,10 @@ class App extends Component {
       console.log(data);
       socket.emit('my other event', { my: 'data' });
     });
+
+    socket.on('createpost', function (data) {
+      console.log(data);
+    });
   }
 
   loadPosts = async () => {

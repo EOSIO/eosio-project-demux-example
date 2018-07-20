@@ -15,8 +15,38 @@ class App extends Component {
       createOpen: false,
       loading: false,
       posts: [],
-      postsFiltered: [],
-      filters: [],
+      postsFiltered: [
+        {
+          pkey: '0',
+          title: 'fdsfsd',
+          content: 'fdsfds fsdf sdf fsd fsd fsdf fsd',
+          likes: '3',
+          author: 'Jane Doe'
+        },
+        {
+          pkey: '1',
+          title: 'fdsf',
+          content: 'fdsfds fsdf sdf fsdgdfg gfdgdf gdfg',
+          likes: '3',
+          author: 'Jane Doe'
+        },
+        {
+          pkey: '2',
+          title: 'dfdfd',
+          content: 'fdsfds fsdf sfdg fsdf fsd',
+          likes: '3',
+          author: 'Jane Doe'
+        },
+        {
+          pkey: '3',
+          title: 'dsfsd',
+          content: 'fdsfds gddfg sdf fgdfgd fsd fsgfddf fsd',
+          likes: '3',
+          author: 'Jane Doe'
+        }
+      ],
+      filters: [
+      ],
       returnedAmount: 25,
     };
     const contractAccount = process.env.REACT_APP_EOS_ENV === 'local' ? process.env.REACT_APP_EOS_LOCAL_CONTRACT_ACCOUNT : process.env.REACT_APP_EOS_TEST_CONTRACT_ACCOUNT;

@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+
+import pencil from '../assets/img/pencil.svg';
+import back from '../assets/img/back.svg';
+
 import { Card, Form, Icon, Input } from 'antd';
 const FormItem = Form.Item;
 const { TextArea } = Input;
@@ -23,6 +27,14 @@ class EditPost extends Component {
 
   render() {
     return (
+      <div>
+
+        <div onClick={e => {
+          this.props.savePost(this.state.post, e);
+        }}>
+          <img className="float-left margin-right-15" src={pencil} alt="Update"/>
+        </div>
+
         <Card
           actions={[
             <Icon
@@ -67,6 +79,7 @@ class EditPost extends Component {
             />
           </FormItem>
         </Card>
+      </div>
     );
   }
 }

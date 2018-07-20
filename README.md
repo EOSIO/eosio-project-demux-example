@@ -49,28 +49,25 @@ Make sure to also set the [alias for cleos](https://developers.eos.io/eosio-node
     * This folder is mounted onto the docker container, which will allow you to compile your contract using the eosiocpp executable in the container
     ```bash
     # eosiocpp -o <Target> <Smart Contract File>
-    eosiocpp -o mnt/dev/data/contracts/blog/blog.wast mnt/dev/data/contracts/blog/blog.cpp
+    eosiocpp -o /mnt/dev/data/contracts/blog/blog.wast /mnt/dev/data/contracts/blog/blog.cpp
     ```
     * Notice the directories are referencing the paths on the docker container to the mounted directory (/tmp/eosio) from your local filesystem
 6.  Generate ABI file
     ```bash
     # eosiocpp -g <Target> <Smart Contract File>
-    eosiocpp -g mnt/dev/data/contracts/blog/blog.abi mnt/dev/data/contracts/blog/blog.cpp
+    eosiocpp -g /mnt/dev/data/contracts/blog/blog.abi /mnt/dev/data/contracts/blog/blog.cpp
     ```
 7.  Deploy contract
     ```bash
     # cleos set contract <Account> <Path to contract folder> <Path to .wast file> <Path to .abi file>
-    cleos set contract blog mnt/dev/data/contracts/blog/ mnt/dev/data/contracts/blog/blog.wast mnt/dev/data/contracts/blog/contract/blog.abi
+    cleos set contract blog /tmp/eosio/data/contracts/blog/ /tmp/eosio/data/contracts/blog/blog.wast /tmp/eosio/data/contracts/blog/blog.abi
     ```
-8.  Create a blog post
+
+#### Backend Config
+1.  Start the server
     ```bash
-    # cleos push action <Account> <Action name> '<Data>' -p <Account>@active
-    cleos push action blog createpost '["blog", "Sample Blog Title", "Sample blog content blah blah", "misc"]' -p blog@active
-    ```
-9.  Check that the blog post was added to the table
-    ```bash
-    # cleos get table <Contract> <Scope> <Table>
-    cleos get table blog blog post
+    cd backend
+    npm start
     ```
 
 #### Frontend Config

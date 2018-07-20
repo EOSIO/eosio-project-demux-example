@@ -1,9 +1,8 @@
 const io = require("../../../io")
 
 function createPost({ state, payload, blockInfo, context }) {
-  console.log(payload)
   const Post = state.Post;
-  const post = new Post({...payload.data, _id: payload.transactionId+payload.actionIndex})
+  const post = new Post({...payload.data})
   post.save(err => {
     if(err) console.log(err)
   })

@@ -13,16 +13,50 @@ class App extends Component {
       loading: false,
       posts: []
     };
-    const contractAccount = process.env.REACT_APP_EOS_ENV === 'local' ? process.env.REACT_APP_EOS_LOCAL_CONTRACT_ACCOUNT : process.env.REACT_APP_EOS_TEST_CONTRACT_ACCOUNT;
+    const contractAccount = process.env.REACT_APP_EOS_CONTRACT_ACCOUNT;
     this.eos = new EOSClient(contractAccount, contractAccount);
     this.io = new IOClient();
   }
 
   async componentDidMount() {
     this.loadPosts();
-    this.io.onMessage('createpost', (data) => {
-      console.log(data);
+    this.io.onMessage('createpost', (post) => {
+      this.handleUpdatePostMessage(post)
     });
+    this.io.onMessage('editpost', (post) => {
+      this.handleUpdatePostMessage(post)
+    });
+    this.io.onMessage('likepost', (post) => {
+      this.handleUpdatePostMessage(post)
+    });
+    this.io.onMessage('deletepost', (post) => {
+      this.handleDeletePostMessage(post)
+    });
+  }
+
+  handleUpdatePostMessage = updatedPost => {
+    let alreadyAdded = false;
+    let updatedPosts = this.state().posts.map((post, index) => {
+      if(post._id === updatedPost._id) {
+        alreadyAdded = true;
+        return { ...post, ...updatedPost}
+      }
+      return post;
+    })
+
+    if(!alreadyAdded) {
+      updatedPosts = [...updatedPosts, updatedPost];
+    }
+
+    this.setState({
+      posts: updatedPosts
+    })
+  }
+
+  handleDeletePostMessage = deletePost => {
+    this.setState(prevState => ({
+      posts: prevState.posts.filter(post => post._id !== deletePost._id)
+    }));
   }
 
   loadPosts = async () => {
@@ -54,7 +88,7 @@ class App extends Component {
 
   deletePost = (_id, e) => {
     this.setState(prevState => ({
-      posts: prevState.posts.filter((post, index) => post._id !== _id)
+      posts: prevState.posts.filter(post => post._id !== _id)
     }));
 
     this.eos

@@ -1,7 +1,7 @@
 import Eos from 'eosjs';
 
 const EOS_CONFIG = {
-  httpEndpoint: process.env.REACT_APP_EOS_ENV === 'local' ? process.env.REACT_APP_EOS_LOCAL_HTTP_URL : process.env.REACT_APP_EOS_TEST_HTTP_URL,
+  httpEndpoint: process.env.REACT_APP_EOS_HTTP_URL,
   chainId: process.env.REACT_APP_EOS_CHAIN_ID,
   keyProvider: [process.env.REACT_APP_EOS_PRIVATE_KEY],
   broadcast: true,

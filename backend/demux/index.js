@@ -14,7 +14,7 @@ const models = require("../models");
 const actionHandler = new MongooseActionHandler(updaters, effects, process.env.MONGODB_URL, models)
 
 const actionReader = new NodeosActionReader(
-  process.env.EOS_ENV === "local" ? process.env.EOS_LOCAL_HTTP_URL : process.env.EOS_TEST_HTTP_URL,
+  process.env.EOS_HTTP_URL,
   parseInt(process.env.EOS_STARTING_BLOCK) // First actions relevant to this dapp happen at this block
 );
 

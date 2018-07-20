@@ -36,11 +36,11 @@ public:
   }
 
   //@abi action
-  void deletepost(const uint64_t _id)
+  void deletepost(const string &_id)
   {
     post_index posts(_self, _self);
 
-    auto iterator = posts.find(_id);
+    auto iterator = posts.find(N(_id));
     eosio_assert(iterator != posts.end(), "Post for _id could not be found");
 
     // check if authorized to delete post
@@ -50,11 +50,11 @@ public:
   }
 
   //@abi action
-  void editpost(const uint64_t _id, const string &title, const string &content, const string &tag)
+  void editpost(const string &_id, const string &title, const string &content, const string &tag)
   {
     post_index posts(_self, _self);
 
-    auto iterator = posts.find(_id);
+    auto iterator = posts.find(N(_id));
     eosio_assert(iterator != posts.end(), "Post for _id could not be found");
 
     // check if authorized to update post
@@ -62,14 +62,14 @@ public:
   }
 
   //@abi action
-  void likepost(const uint64_t _id)
+  void likepost(const string &_id)
   {
     // do not require_auth since want to allow anyone to call
 
     post_index posts(_self, _self);
 
     // verify already exist
-    auto iterator = posts.find(_id);
+    auto iterator = posts.find(N(_id));
     eosio_assert(iterator != posts.end(), "Post for _id not found");
   }
 

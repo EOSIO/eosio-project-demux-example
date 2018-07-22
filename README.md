@@ -75,7 +75,17 @@ docker exec --detach eosio keosd --wallet-dir=/opt/eosio/bin/data-dir --http-ser
     ```
 
 #### Backend Config
-1.  Start the server
+1.  Update the [.env](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/backend/.env) with the following values: 
+    ```bash
+    EOS_CONTRACT_ACCOUNT=blog
+    EOS_STARTING_BLOCK=0
+
+    EOS_HTTP_URL=http://0.0.0.0:8888
+    PORT=4000
+
+    MONGODB_URL=mongodb://127.0.0.1/blog_platform
+    ```
+2.  Start the server
     ```bash
     cd backend
     npm start
@@ -83,13 +93,11 @@ docker exec --detach eosio keosd --wallet-dir=/opt/eosio/bin/data-dir --http-ser
 
 #### Frontend Config
 
-1.  Update the root [.env](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/frontend/.env) with your account name, generated private key and chain ID like below
+1.  Update the [.env](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/frontend/.env) with your account name, generated private key and chain ID like below:
     ```bash
-    REACT_APP_EOS_ACCOUNT=
+    REACT_APP_EOS_ACCOUNT=blog
     REACT_APP_EOS_PRIVATE_KEY=
     REACT_APP_EOS_CHAIN_ID=
-
-    REACT_APP_EOS_CONTRACT_ACCOUNT=blog
 
     REACT_APP_EOS_HTTP_URL=http://localhost:8888
     ```

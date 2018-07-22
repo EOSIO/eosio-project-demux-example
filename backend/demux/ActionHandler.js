@@ -4,7 +4,7 @@ const {
 const mongoose = require("mongoose");
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Post = require("../api/post/post.model");
-const io = require("../io");
+const io = require("../util/io");
 
 class ObjectActionHandler extends AbstractActionHandler {
   constructor(updaters, effects, uri) {

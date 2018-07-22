@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import EOSClient from './lib/eos-client';
-import IOClient from './lib/io-client';
+import EOSClient from './util/eos-client';
+import IOClient from './util/io-client';
 import CreatePost from './CreatePost/CreatePost';
 import Posts from './Posts/Posts';
 import './App.css';

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button } from 'antd';
-import uuidv4 from "uuid/v4";
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
@@ -20,7 +19,7 @@ class CreatePost extends Component {
 
   createPost = e => {
     e.preventDefault();
-    this.props.createPost({ ...this.state, likes: 0, _id: uuidv4()});
+    this.props.createPost({ ...this.state, likes: 0});
     this.setState({
       title: '',
       content: '',

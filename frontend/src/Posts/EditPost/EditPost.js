@@ -10,7 +10,8 @@ class EditPost extends Component {
       post: {
         title: this.props.post.title,
         content: this.props.post.content,
-        tag: this.props.post.tag
+        tag: this.props.post.tag,
+        likes: this.props.post.likes
       }
     };
   }

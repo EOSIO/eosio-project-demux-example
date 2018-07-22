@@ -5,13 +5,12 @@ const {
   watchers: { BaseActionWatcher }
 } = require("demux")
 
-const MongooseActionHandler = require("./MongooseActionHandler")
+const ActionHandler = require("./ActionHandler")
 
 const updaters = require("./updaters")
 const effects = require("./effects")
-const models = require("../models");
 
-const actionHandler = new MongooseActionHandler(updaters, effects, process.env.MONGODB_URL, models)
+const actionHandler = new ActionHandler(updaters, effects, process.env.MONGODB_URL)
 
 const actionReader = new NodeosActionReader(
   process.env.EOS_HTTP_URL,

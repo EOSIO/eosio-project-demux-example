@@ -1,26 +1,16 @@
 const util = require('util');
 
-let socket = null
+let io = null
 
 connect = (server, cb) => {
-  const io = require('socket.io')(server);
-  io.on('connection', function (s) {
-    socket = s
-    cb(socket)
-  });
-}
-
-setSocket = (s) => {
-  this.socket = s
+  io = require('socket.io')(server);
 }
 
 getSocket = () => {
-  return this.socket
+  return io;
 }
-
 
 module.exports = {
   connect,
-  setSocket,
   getSocket
 };

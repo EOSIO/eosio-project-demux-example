@@ -27,7 +27,7 @@ class App extends Component {
       this.handleUpdatePostMessage(post)
     });
     this.io.onMessage('likepost', (post) => {
-      this.handleUpdatePostMessage(post)
+      this.handleLikePostMessage(post)
     });
     this.io.onMessage('deletepost', (post) => {
       this.handleDeletePostMessage(post)
@@ -36,7 +36,7 @@ class App extends Component {
 
   handleUpdatePostMessage = updatedPost => {
     let alreadyAdded = false;
-    let updatedPosts = this.state().posts.map((post, index) => {
+    let updatedPosts = this.state.posts.map((post, index) => {
       if(post._id === updatedPost._id) {
         alreadyAdded = true;
         return { ...post, ...updatedPost}
@@ -45,6 +45,7 @@ class App extends Component {
     })
 
     if(!alreadyAdded) {
+      updatedPost.likes = 0;
       updatedPosts = [...updatedPosts, updatedPost];
     }
 
@@ -53,9 +54,22 @@ class App extends Component {
     })
   }
 
-  handleDeletePostMessage = deletePost => {
+  handleLikePostMessage = likedPost => {
+    let updatedPosts = this.state.posts.map((post, index) => {
+      if(post._id === likedPost._id) {
+        return { ...post, ...likedPost, likes: post.likes++ }
+      }
+      return post;
+    })
+
+    this.setState({
+      posts: updatedPosts
+    })
+  }
+
+  handleDeletePostMessage = deletedPost => {
     this.setState(prevState => ({
-      posts: prevState.posts.filter(post => post._id !== deletePost._id)
+      posts: prevState.posts.filter(post => post._id !== deletedPost._id)
     }));
   }
 
@@ -64,17 +78,20 @@ class App extends Component {
     this.setState({ posts: response.data })
   };
 
-  createPost = post => {
+  createPost = async (post) => {
     this.setState({ loading: true });
 
-    this.setState({ posts: [...this.state.posts, post] });
+    let newPost = await axios.get(process.env.REACT_APP_API_URL + "/posts/newEmpty");   
+    newPost = {...newPost.data, ...post, author: process.env.REACT_APP_EOS_ACCOUNT};
+
+    this.setState({ posts: [...this.state.posts, newPost] });
 
     this.eos
       .transaction(
         process.env.REACT_APP_EOS_ACCOUNT,
         'createpost', {
         author: process.env.REACT_APP_EOS_ACCOUNT,
-        ...post
+        ...newPost
       })
       .then(res => {
         console.log(res);
@@ -86,7 +103,7 @@ class App extends Component {
       });
   };
 
-  deletePost = (_id, e) => {
+  deletePost = (contractPkey, _id, e) => {
     this.setState(prevState => ({
       posts: prevState.posts.filter(post => post._id !== _id)
     }));
@@ -95,6 +112,7 @@ class App extends Component {
       .transaction(process.env.REACT_APP_EOS_ACCOUNT,
         'deletepost', 
         {
+          contractPkey,
           _id
         })
       .then(res => {
@@ -124,11 +142,12 @@ class App extends Component {
       });
   };
 
-  likePost = (_id, e) => {
+  likePost = (contractPkey, _id, e) => {
     this.eos
       .transaction(
         process.env.REACT_APP_EOS_ACCOUNT, 
         'likepost', {
+          contractPkey,
           _id
         })
       .then(res => {

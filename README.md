@@ -10,6 +10,12 @@ Follow the instructions on the [Developer Portal for the Docker Quickstart](http
 #### Cleos
 Make sure to also set the [alias for cleos](https://developers.eos.io/eosio-nodeos/docs/docker-quickstart#section-cleos), the command line interface to interact with the blockchain and manage wallets. The tutorial will be using cleos
 
+#### Keosd
+Run keosd, which stores EOSIO keys in wallets, in the docker container:
+```bash
+docker exec --detach eosio keosd --wallet-dir=/opt/eosio/bin/data-dir --http-server-address=0.0.0.0:8900 --http-alias=keosd:8900 --http-alias=localhost:8900
+```
+
 ### Contract Deployment
 
 1.  Create a wallet
@@ -17,6 +23,11 @@ Make sure to also set the [alias for cleos](https://developers.eos.io/eosio-node
     ```bash
     # cleos wallet create -n <Wallet Name>
     cleos wallet create -n blog.platform
+    ```
+    * If you receive the error `Error 3120003: Locked wallet`, run the following command to unlock it: 
+    ```bash
+    # cleos wallet unlock -n <Wallet Name>
+    cleos wallet unlock -n blog.platform
     ```
 2.  Create keys - owner and active keys
     * Save the private keys. You will need them to add the keys to the wallet
@@ -60,7 +71,7 @@ Make sure to also set the [alias for cleos](https://developers.eos.io/eosio-node
 7.  Deploy contract
     ```bash
     # cleos set contract <Account> <Path to contract folder> <Path to .wast file> <Path to .abi file>
-    cleos set contract blog /tmp/eosio/data/contracts/blog/ /tmp/eosio/data/contracts/blog/blog.wast /tmp/eosio/data/contracts/blog/blog.abi
+    cleos set contract blog /mnt/dev/data/contracts/blog /mnt/dev/data/contracts/blog/blog.wast /mnt/dev/data/contracts/blog/blog.abi
     ```
 
 #### Backend Config

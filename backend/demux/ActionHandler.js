@@ -2,9 +2,12 @@ const {
   handlers: { AbstractActionHandler }
 } = require("demux");
 const mongoose = require("mongoose");
+const AutoIncrement = require('mongoose-sequence')(mongoose);
+const Post = require("../api/post/post.model");
+const io = require("../io");
 
 class ObjectActionHandler extends AbstractActionHandler {
-  constructor(updaters, effects, uri, models) {
+  constructor(updaters, effects, uri) {
     mongoose.connect(uri);
 
     // CONNECTION EVENTS
@@ -14,7 +17,7 @@ class ObjectActionHandler extends AbstractActionHandler {
 
       // If using nodemon to restart the server on change - prevents duplicate records in the db
       // Clear db on each restart
-      if(process.env.MONGODB_CLEAR_ON_RESTART) {
+      if(process.env.MONGODB_CLEAR_ON_RESTART === "true") {
         mongoose.connection.db.dropDatabase();
       }
     }); 
@@ -35,13 +38,16 @@ class ObjectActionHandler extends AbstractActionHandler {
       }); 
     }); 
     super(updaters, effects)
-    this.models = models
   }
 
   async handleWithState(handle) {
-    // do not need to use the mongoose.connection object if using mongoose.Model
-    // mongoose.model objects will use the default connection pool which we setup in the constructor above
-    await handle(this.models);
+    const context = { socket: io.getSocket() }
+    const state = { post: Post };
+    await handle(state, context);
+  }
+
+  async rollbackTo(blockNumber) {
+
   }
 }
 

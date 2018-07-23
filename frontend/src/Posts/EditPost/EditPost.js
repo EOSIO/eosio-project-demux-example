@@ -49,7 +49,7 @@ class EditPost extends Component {
         </div>
         <div className="padding-30 card-footer grid-2">
         <div onClick={e => {
-          this.props.savePost(this.state.post, e);
+          this.props.savePost({...this.props.post, ...this.state.post}, e);
         }}>
           <img className="" src={save} alt="Update"/>
         </div>

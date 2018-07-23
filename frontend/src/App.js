@@ -68,9 +68,6 @@ class App extends Component {
     this.io.onMessage('editpost', (post) => {
       this.handleUpdatePost(post)
     });
-    this.io.onMessage('likepost', (post) => {
-      this.handleLikePost(post._id)
-    });
     this.io.onMessage('deletepost', (post) => {
       this.handleDeletePost(post._id)
     });
@@ -95,14 +92,14 @@ class App extends Component {
     })
   }
 
-  handleLikePost = _id => {
+  handleLikePost = (likedPost) => {
     let updatedPosts = this.state.posts.map((post, index) => {
-      if(post._id === _id) {
-        return { ...post, likes: post.likes++ }
+      if(post._id === likedPost._id) {
+        post.likes++;
+        return { ...post }
       }
       return post;
     })
-
     this.setState({
       posts: updatedPosts
     })
@@ -190,14 +187,14 @@ class App extends Component {
   };
 
   // Like a post
-  likePost = (contractPkey, _id, e) => {
-    this.handleLikePost(_id);
+  likePost = (post, e) => {
+    this.handleLikePost(post);
     this.eos
       .transaction(
         process.env.REACT_APP_EOS_ACCOUNT,
         'likepost', {
-          contractPkey,
-          _id
+          contractPkey: post.contractPkey,
+          _id: post._id
         })
       .then(res => {
         console.log(res);

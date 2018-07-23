@@ -52,7 +52,7 @@ class Post extends Component {
               this.setState(prevState => ({
                 liked: !prevState.liked
               }));
-              this.props.likePost(this.props.post.contractPkey, this.props.post._id, e);
+              this.props.likePost(this.props.post, e);
             }}><img className="" src={heart} alt="Heart"/></div>
           </div>
         </div>

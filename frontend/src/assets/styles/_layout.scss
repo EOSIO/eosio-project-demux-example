@@ -1,0 +1,67 @@
+.layoutStandard {
+  .createContainer{
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+  .toggleCreate {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background: #141C47;
+    cursor: pointer;
+    background: linear-gradient(135deg,#6BDAD5 0%,#4E82DB 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    span {
+      display: block;
+      background: #ffffff;
+      height: 3px;
+      width: 30px;
+      position: absolute;
+      left: 15px;
+      top: 30px;
+      &:nth-child(1) {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  &.createOpen {
+    .createContainer{
+      height: auto;
+    }
+    .toggleCreate {
+      span {
+        &:nth-child(1) {
+          opacity: 0;
+        }
+      }
+    }
+  }
+  .logo, .search {
+    height: 70px;
+    color: #ffffff;
+  }
+  .logo {
+    background: #141C47;
+    width: 80px;
+    float: left;
+    a {
+      display: block;
+      margin: 25px auto;
+      text-align: center;
+      color: #ffffff;
+      text-decoration: none;
+      position: relative;
+      img {
+        margin: -14px 0 0 30px;
+      }
+    }
+  }
+  .main {
+    min-height: 100vh;
+    grid-area: main;
+    background: #EEF2F9;
+  }
+}

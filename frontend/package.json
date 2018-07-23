@@ -5,6 +5,7 @@
   "dependencies": {
     "antd": "^3.5.4",
     "eosjs": "^15.0.3",
+    "fuse.js": "^3.2.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-scripts": "1.1.4"

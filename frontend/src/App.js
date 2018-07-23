@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React, { Component } from "react"
+import axios from "axios"
 
-import EOSClient from './utils/eos-client'
-import IOClient from './utils/io-client'
-import CreatePost from './CreatePost/CreatePost'
-import Posts from './Posts/Posts'
-import Logo from './assets/img/logo-inverted.svg'
-import './assets/styles/core.css'
+import EOSClient from "./utils/eos-client"
+import IOClient from "./utils/io-client"
+import CreatePost from "./CreatePost/CreatePost"
+import Posts from "./Posts/Posts"
+import Logo from "./assets/img/logo-inverted.svg"
+import "./assets/styles/core.css"
 
 class App extends Component {
   static displayName = "App"
@@ -30,10 +30,10 @@ class App extends Component {
     this.io.onMessage("editpost", (post) => {
       this.handleUpdatePost(post)
     })
-    this.io.onMessage('likepost', (post) => {
+    this.io.onMessage("likepost", (post) => {
       this.handleLikePost(post)
     })
-    this.io.onMessage('deletepost', (post) => {
+    this.io.onMessage("deletepost", (post) => {
       this.handleDeletePost(post)
     })
   }

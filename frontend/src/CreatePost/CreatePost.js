@@ -2,17 +2,17 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 
 class CreatePost extends Component {
-  state = {
-    title: '',
-    content: '',
-    tag: ''
-  }
-
   static displayName = "CreatePost"
 
   static propTypes = {
     createPost: PropTypes.func.isRequired,
     toggleCreate: PropTypes.func.isRequired,
+  }
+
+  state = {
+    title: "",
+    content: "",
+    tag: "",
   }
 
   handleOnChange = e => {

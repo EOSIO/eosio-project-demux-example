@@ -2,12 +2,6 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 
 class EditPost extends Component {
-  state = {
-    title: this.props.post.title,
-    content: this.props.post.content,
-    tag: this.props.post.tag
-  }
-
   static displayName = "EditPost"
 
   static propTypes = {
@@ -24,12 +18,18 @@ class EditPost extends Component {
     toggleEditing: PropTypes.func.isRequired,
   }
 
+  state = {
+    title: this.props.post.title,
+    content: this.props.post.content,
+    tag: this.props.post.tag,
+  }
+
   handleOnChange = (event, field) => {
     this.setState({ [field]: event.target.value })
   };
 
-  handlePostSave = e => {
-    this.props.savePost({...this.props.post, ...this.state})
+  handlePostSave = () => {
+    this.props.savePost({ ...this.props.post, ...this.state })
   };
 
   render() {

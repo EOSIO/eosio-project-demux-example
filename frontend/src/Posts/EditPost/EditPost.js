@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 
 class EditPost extends Component {
   state = {
@@ -7,42 +8,56 @@ class EditPost extends Component {
       content: this.props.post.content,
       tag: this.props.post.tag
     }
-  };
+  }
 
-  handleOnChange = e => {
-    let post = Object.assign({}, this.state.post);
-    post[e.target.name] = e.target.value;
-    this.setState({ post });
+  static displayName = "EditPost"
+
+  static propTypes = {
+    post: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      contractPkey: PropTypes.number.isRequired,
+      author: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      tag: PropTypes.string.isRequired,
+      likes: PropTypes.number.isRequired,
+    }).isRequired,
+    savePost: PropTypes.func.isRequired,
+    toggleEditing: PropTypes.func.isRequired,
+  }
+
+  handleOnChange = (event, field) => {
+    this.setState({ [field]: event.target.value })
   };
 
   handlePostSave = e => {
-    this.props.savePost(this.state.post, e);
+    this.props.savePost(this.state.post)
   };
 
   render() {
     return (
-      <div className='card-item'>
+      <div className="card-item">
         <div className="padding-30">
           <input
             className="margin-bottom-15"
             name="title"
-            onChange={this.handleOnChange}
-            value={this.state.post.title}
+            onChange={(e) => this.handleOnChange(e, "title")}
+            value={this.state.title}
             placeholder="Title"
           />
           <textarea
             className="margin-bottom-15"
             name="content"
-            onChange={this.handleOnChange}
-            value={this.state.post.content}
+            onChange={(e) => this.handleOnChange(e, "content")}
+            value={this.state.content}
             rows={4}
             placeholder="Content"
           />
           <input
             className="margin-bottom-15"
             name="tag"
-            onChange={this.handleOnChange}
-            value={this.state.post.tag}
+            onChange={(e) => this.handleOnChange(e, "tag")}
+            value={this.state.tag}
             placeholder="Tag"
           />
           <button
@@ -61,8 +76,8 @@ class EditPost extends Component {
           </button>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default EditPost;
+export default EditPost

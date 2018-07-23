@@ -56,7 +56,7 @@ docker exec --detach eosio keosd --wallet-dir=/opt/eosio/bin/data-dir --http-ser
     ```bash
     alias eosiocpp='docker exec -it eosio /opt/eosio/bin/eosiocpp'
     ```
-    * Create a folder under /tmp/eosio/data/contracts called blog and copy the entire contents of the [contract directory](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/contract) over to this new folder
+    * Create two folders under /tmp/eosio/data/, which should already exist, called contracts/blog and copy the entire contents of the [contract directory](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/contract) over to this new folder
     * This folder is mounted onto the docker container, which will allow you to compile your contract using the eosiocpp executable in the container
     ```bash
     # eosiocpp -o <Target> <Smart Contract File>
@@ -88,12 +88,14 @@ docker exec --detach eosio keosd --wallet-dir=/opt/eosio/bin/data-dir --http-ser
 2.  Start the server
     ```bash
     cd backend
-    npm start
+    yarn install
+    yarn start
     ```
 
 #### Frontend Config
 
-1.  Update the [.env](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/frontend/.env) with your account name, generated private key and chain ID like below:
+1.  Update the [.env](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/frontend/.env) with your account name, generated Active Private Key and chain ID like below:
+    **Never store your private key in your frontend application, this is being stored here for demo purposes**
     ```bash
     REACT_APP_EOS_ACCOUNT=blog
     REACT_APP_EOS_PRIVATE_KEY=
@@ -110,5 +112,6 @@ docker exec --detach eosio keosd --wallet-dir=/opt/eosio/bin/data-dir --http-ser
 2.  Start the react app
     ```bash
     cd frontend
-    npm start
+    yarn install
+    yarn start
     ```

@@ -3,3 +3,4 @@ ignore.txt
 *.wast
 *.abi
 .DS_Store
+.vscode/settings.json

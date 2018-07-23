@@ -10,7 +10,7 @@ const Posts = ({ posts, deletePost, editPost, likePost }) => {
         deletePost={deletePost}
         editPost={editPost}
         likePost={likePost}
-        key={index}
+        key={post._id}
       />
     );
   });

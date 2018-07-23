@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Fuse from "fuse.js"
 
 import fuseConfig from "./fuseConfig";
-import EOSClient from './lib/eos-client';
+import EOSClient from './util/eos-client';
+import IOClient from './util/io-client';
 import CreatePost from './CreatePost/CreatePost';
 import Posts from './Posts/Posts';
 import Logo from './assets/img/logo-inverted.svg';
@@ -49,37 +51,88 @@ class App extends Component {
       ],
       returnedAmount: 25,
     };
-    const contractAccount = process.env.REACT_APP_EOS_ENV === 'local' ? process.env.REACT_APP_EOS_LOCAL_CONTRACT_ACCOUNT : process.env.REACT_APP_EOS_TEST_CONTRACT_ACCOUNT;
+    const contractAccount = process.env.REACT_APP_EOS_ACCOUNT;
     this.eos = new EOSClient(contractAccount, contractAccount);
-    this.loadPosts();
+    this.io = new IOClient();
   }
 
-  loadPosts = () => {
-    this.eos
-      .getTableRows('post')
-      .then(data => {
-        console.log(data);
-        this.setState({ posts: data.rows });
-        this.setState({
-          postsFiltered: this.state.posts,
-        });
-      })
-      .catch(e => {
-        console.error(e);
+  async componentDidMount() {
+    this.loadPosts();
+    this.io.onMessage('createpost', (post) => {
+      this.handleUpdatePost(post)
+    });
+    this.io.onMessage('editpost', (post) => {
+      this.handleUpdatePost(post)
+    });
+    this.io.onMessage('likepost', (post) => {
+      this.handleLikePost(post._id)
+    });
+    this.io.onMessage('deletepost', (post) => {
+      this.handleDeletePost(post._id)
+    });
+  }
+
+  handleUpdatePost = updatedPost => {
+    let alreadyAdded = false;
+    let updatedPosts = this.state.posts.map((post, index) => {
+      if(post._id === updatedPost._id) {
+        alreadyAdded = true;
+        return { ...post, ...updatedPost}
+      }
+      return post;
+    })
+
+    if(!alreadyAdded) {
+      updatedPost.likes = 0;
+      updatedPosts = [...updatedPosts, updatedPost];
+    }
+    this.setState({
+      posts: updatedPosts
+    })
+  }
+
+  handleLikePost = _id => {
+    let updatedPosts = this.state.posts.map((post, index) => {
+      if(post._id === _id) {
+        return { ...post, likes: post.likes++ }
+      }
+      return post;
+    })
+
+    this.setState({
+      posts: updatedPosts
+    })
+  }
+
+  handleDeletePost = _id => {
+    this.setState(prevState => ({
+      posts: prevState.posts.filter(post => post._id !== _id)
+    }));
+  }
+
+  loadPosts = async () => {
+    let response = await axios.get(process.env.REACT_APP_API_URL + "/posts");
+    this.setState({ posts: response.data }, () => {
+      this.setState({
+        postsFiltered: this.state.posts,
       });
+    })
   };
 
-  createPost = post => {
+  createPost = async (post) => {
     this.setState({ loading: true });
 
-    this.setState({ posts: [...this.state.posts, post] });
+    let newPost = await axios.get(process.env.REACT_APP_API_URL + "/posts/newEmpty");
+    newPost = {...newPost.data, ...post, author: process.env.REACT_APP_EOS_ACCOUNT};
+
+    this.handleUpdatePost(newPost);
 
     this.eos
       .transaction(
         process.env.REACT_APP_EOS_ACCOUNT,
         'createpost', {
-        author: process.env.REACT_APP_EOS_CONTRACT_ACCOUNT,
-        ...post
+        author: process.env.REACT_APP_EOS_ACCOUNT,
+        ...newPost
       })
       .then(res => {
         console.log(res);
@@ -91,16 +144,14 @@ class App extends Component {
       });
   };
 
-  deletePost = (pkey, e) => {
-    this.setState(prevState => ({
-      posts: prevState.posts.filter((post, index) => post.pkey !== pkey)
-    }));
-
+  deletePost = (contractPkey, _id, e) => {
+    this.handleDeletePost(_id);
     this.eos
       .transaction(process.env.REACT_APP_EOS_ACCOUNT,
         'deletepost',
         {
-          pkey
+          contractPkey,
+          _id
         })
       .then(res => {
         console.log(res);
@@ -113,6 +164,7 @@ class App extends Component {
   };
 
   editPost = (post, e) => {
+    this.handleUpdatePost(post);
     this.eos
       .transaction(process.env.REACT_APP_EOS_ACCOUNT,
         'editpost',
@@ -129,12 +181,14 @@ class App extends Component {
       });
   };
 
-  likePost = (pkey, e) => {
+  likePost = (contractPkey, _id, e) => {
+    this.handleLikePost(_id);
     this.eos
       .transaction(
         process.env.REACT_APP_EOS_ACCOUNT,
         'likepost', {
-          pkey
+          contractPkey,
+          _id
         })
       .then(res => {
         console.log(res);
@@ -148,9 +202,9 @@ class App extends Component {
 
   // Toggle if create window is open or not
   toggleCreate = () => {
-    this.setState({
-      createOpen: !this.state.createOpen
-    });
+    this.setState(prevState => ({
+      createOpen: !prevState.createOpen
+    }));
   }
 
   // Fuzzy Search via Fuse.js
@@ -196,7 +250,8 @@ class App extends Component {
           <CreatePost createPost={this.createPost} toggleCreate={this.toggleCreate} />
           <div className="cards">
             <Posts
-              posts={this.state.postsFiltered}
+              posts={this.state.posts}
+              handleOnChange={this.handleOnChange}
               deletePost={this.deletePost}
               editPost={this.editPost}
               likePost={this.likePost}

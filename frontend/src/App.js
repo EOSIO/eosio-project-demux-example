@@ -15,7 +15,6 @@ class App extends Component {
     super(props);
     this.state = {
       createOpen: false,
-      loading: false,
       posts: [],
       postsFiltered: [
         {
@@ -123,8 +122,6 @@ class App extends Component {
 
   // Create a post
   createPost = async (post) => {
-    this.setState({ loading: true });
-
     let newPost = await axios.get(process.env.REACT_APP_API_URL + "/posts/newEmpty");
     newPost = {...newPost.data, ...post, author: process.env.REACT_APP_EOS_ACCOUNT};
 
@@ -137,12 +134,7 @@ class App extends Component {
         author: process.env.REACT_APP_EOS_ACCOUNT,
         ...newPost
       })
-      .then(res => {
-        console.log(res);
-        this.setState({ loading: false });
-      })
       .catch(err => {
-        this.setState({ loading: false });
         console.log(err);
       });
   };
@@ -157,12 +149,7 @@ class App extends Component {
           contractPkey,
           _id
         })
-      .then(res => {
-        console.log(res);
-        this.setState({ loading: false });
-      })
       .catch(err => {
-        this.setState({ loading: false });
         console.log(err);
       });
   };
@@ -176,12 +163,7 @@ class App extends Component {
         {
           ...post
         })
-      .then(res => {
-        console.log(res);
-        this.setState({ loading: false });
-      })
       .catch(err => {
-        this.setState({ loading: false });
         console.log(err);
       });
   };
@@ -196,12 +178,7 @@ class App extends Component {
           contractPkey: post.contractPkey,
           _id: post._id
         })
-      .then(res => {
-        console.log(res);
-        this.setState({ loading: false });
-      })
       .catch(err => {
-        this.setState({ loading: false });
         console.log(err);
       });
   };

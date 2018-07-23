@@ -38,7 +38,7 @@ hr {
   border: none;
   height: 1px;
   background: #eaeaea;
-  margin: 1rem 0; }
+  margin: 2rem 0; }
 
 .text-align-center {
   text-align: center; }
@@ -58,6 +58,9 @@ input, textarea {
   font-size: 1rem; }
   input:focus, textarea:focus {
     border-color: #000000; }
+
+textarea {
+  height: 60px; }
 
 button, .btn, submit {
   border: none;
@@ -106,9 +109,30 @@ button, .btn, submit {
 .card-footer {
   background: #fbfbfb;
   color: #ffffff;
-  grid-template-columns: repeat(auto-fill, minmax(1fr, 1fr));
+  align-self: center;
+  justify-self: center; }
+  .card-footer img {
+    margin: 0 auto;
+    align-self: center;
+    justify-self: center; }
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: auto auto auto;
   grid-gap: 0px;
-  padding: 10px; }
+  padding: 30px 10px; }
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 0px;
+  padding: 30px 10px; }
+
+.author {
+  float: left;
+  margin-right: 10px;
+  height: 16px;
+  width: 16px; }
 
 .layoutStandard .createContainer {
   height: 0;

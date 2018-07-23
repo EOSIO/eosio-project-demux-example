@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import pencil from '../assets/img/pencil.svg';
+import save from '../assets/img/save.svg';
 import back from '../assets/img/back.svg';
 
 class EditPost extends Component {
@@ -47,14 +47,14 @@ class EditPost extends Component {
             placeholder="Tag"
           />
         </div>
-        <div className="padding-30 card-footer">
+        <div className="padding-30 card-footer grid-2">
         <div onClick={e => {
           this.props.savePost(this.state.post, e);
         }}>
-          <img className="float-left margin-right-15" src={pencil} alt="Update"/>
+          <img className="" src={save} alt="Update"/>
         </div>
         <div onClick={this.props.toggleEditing}>
-          <img className="float-left margin-right-15" src={back} alt="Back"/>
+          <img className="" src={back} alt="Back"/>
         </div>
       </div>
     </div>

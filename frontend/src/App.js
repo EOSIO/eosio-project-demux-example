@@ -20,31 +20,35 @@ class App extends Component {
       postsFiltered: [
         {
           pkey: '0',
-          title: 'fdsfsd',
-          content: 'fdsfds fsdf sdf fsd fsd fsdf fsd',
-          likes: '3',
+          title: 'Bright Hope',
+          content: 'Automatically, beautiful things will happen.',
+          likes: '1',
+          tag: 'beautiful',
           author: 'Jane Doe'
         },
         {
           pkey: '1',
-          title: 'fdsf',
-          content: 'fdsfds fsdf sdf fsdgdfg gfdgdf gdfg',
+          title: 'The Wind',
+          content: 'Just float and the wind to blow you around.',
           likes: '3',
-          author: 'Jane Doe'
+          tag: 'wind',
+          author: 'Frank Peter'
         },
         {
           pkey: '2',
-          title: 'dfdfd',
-          content: 'fdsfds fsdf sfdg fsdf fsd',
+          title: 'Strong',
+          content: 'So strong, a little bit can go a long way.',
           likes: '3',
-          author: 'Jane Doe'
+          tag: 'little',
+          author: 'Steve West'
         },
         {
           pkey: '3',
-          title: 'dsfsd',
-          content: 'fdsfds gddfg sdf fgdfgd fsd fsgfddf fsd',
+          title: 'A Journey',
+          content: 'You can go anywhere you choose.',
           likes: '3',
-          author: 'Jane Doe'
+          tag: 'anywhere',
+          author: 'Peter Johnson'
         }
       ],
       filters: [

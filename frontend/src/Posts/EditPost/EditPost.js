@@ -10,8 +10,7 @@ class EditPost extends Component {
       post: {
         title: this.props.post.title,
         content: this.props.post.content,
-        tag: this.props.post.tag,
-        likes: this.props.post.likes
+        tag: this.props.post.tag
       }
     };
   }
@@ -29,7 +28,7 @@ class EditPost extends Component {
             <Icon
               type="save"
               onClick={e => {
-                this.props.savePost(this.state.post, e);
+                this.props.savePost({...this.props.post, ...this.state.post}, e);
               }}
               style={{ color: '#13c2c2' }}
             />,

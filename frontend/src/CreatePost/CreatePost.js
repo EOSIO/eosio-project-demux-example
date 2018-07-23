@@ -31,12 +31,14 @@ class CreatePost extends Component {
           <input
             className="margin-bottom-15"
             name="title"
+            value={this.state.title}
             onChange={this.handleOnChange}
             placeholder="Title"
           />
           <textarea
             className="margin-bottom-15"
             name="content"
+            value={this.state.content}
             onChange={this.handleOnChange}
             rows={4}
             placeholder="Content"
@@ -44,6 +46,7 @@ class CreatePost extends Component {
           <input
             className="margin-bottom-15"
             name="tag"
+            value={this.state.tag}
             onChange={this.handleOnChange}
             placeholder="Tag"
           />
@@ -61,50 +64,3 @@ class CreatePost extends Component {
 }
 
 export default CreatePost;
-
-
-
-
-// <div className="pure-g Post">
-//   <div className="pure-u-8-24" />
-//   <div className="pure-u-8-24">
-//     <Form onSubmit={this.createPost} className="CreatPost">
-//       <FormItem>
-//         <Input
-//           name="title"
-//           onChange={this.handleOnChange}
-//           value={this.state.title}
-//           prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />}
-//           placeholder="Title"
-//         />
-//       </FormItem>
-//       <FormItem>
-//         <TextArea
-//           name="content"
-//           onChange={this.handleOnChange}
-//           value={this.state.content}
-//           rows={4}
-//           placeholder="Content"
-//         />
-//       </FormItem>
-//       <FormItem>
-//         <Input
-//           name="tag"
-//           onChange={this.handleOnChange}
-//           value={this.state.tag}
-//           prefix={<Icon type="tag" style={{ color: 'rgba(0,0,0,.25)' }} />}
-//           placeholder="Tag"
-//         />
-//       </FormItem>
-//       <Button
-//         onClick={this.createPost}
-//         type="primary"
-//         htmlType="submit"
-//         className="login-form-button"
-//       >
-//         Create Post
-//       </Button>
-//     </Form>
-//   </div>
-//   <div className="pure-u-8-24" />
-// </div>

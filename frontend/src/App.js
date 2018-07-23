@@ -29,20 +29,20 @@ class App extends Component {
   async componentDidMount() {
     this.loadPosts();
     this.io.onMessage('createpost', (post) => {
-      this.handleUpdatePostMessage(post)
+      this.handleUpdatePost(post)
     });
     this.io.onMessage('editpost', (post) => {
-      this.handleUpdatePostMessage(post)
+      this.handleUpdatePost(post)
     });
     this.io.onMessage('likepost', (post) => {
-      this.handleLikePostMessage(post)
+      this.handleLikePost(post._id)
     });
     this.io.onMessage('deletepost', (post) => {
-      this.handleDeletePostMessage(post)
+      this.handleDeletePost(post._id)
     });
   }
 
-  handleUpdatePostMessage = updatedPost => {
+  handleUpdatePost = updatedPost => {
     let alreadyAdded = false;
     let updatedPosts = this.state.posts.map((post, index) => {
       if(post._id === updatedPost._id) {
@@ -56,16 +56,15 @@ class App extends Component {
       updatedPost.likes = 0;
       updatedPosts = [...updatedPosts, updatedPost];
     }
-
     this.setState({
       posts: updatedPosts
     })
   }
 
-  handleLikePostMessage = likedPost => {
+  handleLikePost = _id => {
     let updatedPosts = this.state.posts.map((post, index) => {
-      if(post._id === likedPost._id) {
-        return { ...post, ...likedPost, likes: post.likes++ }
+      if(post._id === _id) {
+        return { ...post, likes: post.likes++ }
       }
       return post;
     })
@@ -75,9 +74,9 @@ class App extends Component {
     })
   }
 
-  handleDeletePostMessage = deletedPost => {
+  handleDeletePost = _id => {
     this.setState(prevState => ({
-      posts: prevState.posts.filter(post => post._id !== deletedPost._id)
+      posts: prevState.posts.filter(post => post._id !== _id)
     }));
   }
 
@@ -96,7 +95,7 @@ class App extends Component {
     let newPost = await axios.get(process.env.REACT_APP_API_URL + "/posts/newEmpty");   
     newPost = {...newPost.data, ...post, author: process.env.REACT_APP_EOS_ACCOUNT};
 
-    this.setState({ posts: [...this.state.posts, newPost] });
+    this.handleUpdatePost(newPost);
 
     this.eos
       .transaction(
@@ -116,10 +115,7 @@ class App extends Component {
   };
 
   deletePost = (contractPkey, _id, e) => {
-    this.setState(prevState => ({
-      posts: prevState.posts.filter(post => post._id !== _id)
-    }));
-
+    this.handleDeletePost(_id);
     this.eos
       .transaction(process.env.REACT_APP_EOS_ACCOUNT,
         'deletepost',
@@ -138,6 +134,7 @@ class App extends Component {
   };
 
   editPost = (post, e) => {
+    this.handleUpdatePost(post);
     this.eos
       .transaction(process.env.REACT_APP_EOS_ACCOUNT,
         'editpost',
@@ -155,6 +152,7 @@ class App extends Component {
   };
 
   likePost = (contractPkey, _id, e) => {
+    this.handleLikePost(_id);
     this.eos
       .transaction(
         process.env.REACT_APP_EOS_ACCOUNT,
@@ -174,9 +172,9 @@ class App extends Component {
 
   // Toggle if create window is open or not
   toggleCreate = () => {
-    this.setState({
-      createOpen: !this.state.createOpen
-    });
+    this.setState(prevState => ({
+      createOpen: !prevState.createOpen
+    }));
   }
 
   // Fuzzy Search via Fuse.js
@@ -222,7 +220,8 @@ class App extends Component {
           <CreatePost createPost={this.createPost} toggleCreate={this.toggleCreate} />
           <div className="cards">
             <Posts
-              posts={this.state.postsFiltered}
+              posts={this.state.posts}
+              handleOnChange={this.handleOnChange}
               deletePost={this.deletePost}
               editPost={this.editPost}
               likePost={this.likePost}

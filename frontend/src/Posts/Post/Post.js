@@ -14,12 +14,6 @@ class Post extends Component {
     this.state = {
       editing: false,
       liked: false,
-      post: {
-        title: this.props.post.title,
-        content: this.props.post.content,
-        tag: this.props.post.tag,
-        likes: this.props.post.likes
-      }
     };
   }
 
@@ -30,11 +24,9 @@ class Post extends Component {
   };
 
   savePost = (post, e) => {
-    const updatePost = Object.assign(this.props.post, post);
-    this.props.editPost(updatePost, e);
+    this.props.editPost(post, e);
     this.setState(prevState => ({
       editing: !prevState.editing,
-      post
     }));
   };
 
@@ -44,11 +36,11 @@ class Post extends Component {
       !editing ? (
         <div className='card-item'>
           <div className="padding-30">
-            <h3>{this.state.post.title}</h3>
+            <h3>{this.props.post.title}</h3>
             <h5><img src={user} alt="User"/> {this.props.post.author}</h5>
-            <p>Likes {this.state.post.likes} | Tags {'#' + this.state.post.tag}</p>
+            <p>Likes {this.props.post.likes} | Tags {'#' + this.props.post.tag}</p>
             <hr />
-            <p>{this.state.post.content}</p>
+            <p>{this.props.post.content}</p>
           </div>
           <div className="padding-30 card-footer">
             <div onClick={e => {
@@ -57,10 +49,7 @@ class Post extends Component {
             <div onClick={this.toggleEditing}><img className="float-left margin-right-15" src={pencil} alt="Update"/></div>
             <div onClick={e => {
               this.setState(prevState => ({
-                liked: !prevState.liked,
-                post: Object.assign(prevState.post, {
-                  likes: prevState.liked ? prevState.post.likes : prevState.post.likes + 1
-                })
+                liked: !prevState.liked
               }));
               this.props.likePost(this.props.post.contractPkey, this.props.post._id, e);
             }}><img className="float-left" src={heart} alt="Heart"/></div>
@@ -68,7 +57,7 @@ class Post extends Component {
         </div>
       ) : (
         <div className='card-item'>
-          <EditPost savePost={this.savePost} post={this.state.post} toggleEditing={this.toggleEditing} />
+          <EditPost savePost={this.savePost} post={this.props.post} toggleEditing={this.toggleEditing} />
         </div>
       )
     );

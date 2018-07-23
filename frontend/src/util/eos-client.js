@@ -29,7 +29,7 @@ export default class EOSClient {
           name: action,
           authorization: [
             {
-              actor: process.env.REACT_APP_EOS_ACCOUNT,
+              actor: actor,
               permission: 'active'
             }
           ],

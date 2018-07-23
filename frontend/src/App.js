@@ -21,7 +21,7 @@ class App extends Component {
       filters: [],
       returnedAmount: 25,
     };
-    const contractAccount = process.env.REACT_APP_EOS_CONTRACT_ACCOUNT;
+    const contractAccount = process.env.REACT_APP_EOS_ACCOUNT;
     this.eos = new EOSClient(contractAccount, contractAccount);
     this.io = new IOClient();
   }

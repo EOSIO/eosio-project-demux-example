@@ -98,8 +98,10 @@ docker exec --detach eosio keosd --wallet-dir=/opt/eosio/bin/data-dir --http-ser
     REACT_APP_EOS_ACCOUNT=blog
     REACT_APP_EOS_PRIVATE_KEY=
     REACT_APP_EOS_CHAIN_ID=
+    REACT_APP_EOS_HTTP_URL=http://0.0.0.0:8888
 
-    REACT_APP_EOS_HTTP_URL=http://localhost:8888
+    REACT_APP_API_URL=http://localhost:4000
+    REACT_APP_WS_URL=localhost:4000
     ```
     * You can get the chainId via the command:
     ```bash

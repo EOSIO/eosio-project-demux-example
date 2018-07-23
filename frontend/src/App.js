@@ -15,59 +15,6 @@ class App extends Component {
       createOpen: false,
       loading: false,
       posts: [],
-      postsMocked: [
-        {
-          pkey: '0',
-          title: 'Bright Hope',
-          content: 'Automatically, beautiful things will happen.',
-          likes: '1',
-          tag: 'beautiful',
-          author: 'Jane Doe'
-        },
-        {
-          pkey: '1',
-          title: 'The Wind',
-          content: 'Just float and the wind to blow you around.',
-          likes: '3',
-          tag: 'wind',
-          author: 'Frank Peter'
-        },
-        {
-          pkey: '2',
-          title: 'Strong',
-          content: 'So strong, a little bit can go a long way.',
-          likes: '3',
-          tag: 'little',
-          author: 'Steve West'
-        },
-        {
-          pkey: '3',
-          title: 'Journey',
-          content: 'You can go anywhere you choose.',
-          likes: '3',
-          tag: 'anywhere',
-          author: 'Peter Johnson'
-        },
-        {
-          pkey: '4',
-          title: 'Journey',
-          content: 'You can go anywhere you choose.',
-          likes: '3',
-          tag: 'anywhere',
-          author: 'Ryan Smith'
-        },
-        {
-          pkey: '5',
-          title: 'Journey',
-          content: 'You can go anywhere you choose.',
-          likes: '3',
-          tag: 'anywhere',
-          author: 'Bob Daniel'
-        }
-      ],
-      filters: [
-      ],
-      returnedAmount: 25,
     };
     const contractAccount = process.env.REACT_APP_EOS_ACCOUNT;
     this.eos = new EOSClient(contractAccount, contractAccount);
@@ -244,7 +191,7 @@ class App extends Component {
           <CreatePost createPost={this.createPost} toggleCreate={this.toggleCreate} />
           <div className="cards">
             <Posts
-              posts={this.state.postsMocked}
+              posts={this.state.posts}
               handleOnChange={this.handleOnChange}
               deletePost={this.deletePost}
               editPost={this.editPost}

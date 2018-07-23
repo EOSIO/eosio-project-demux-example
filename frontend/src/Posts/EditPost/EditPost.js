@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-import save from '../assets/img/save.svg';
-import back from '../assets/img/back.svg';
-
 class EditPost extends Component {
   state = {
     post: {
@@ -42,19 +39,26 @@ class EditPost extends Component {
             placeholder="Content"
           />
           <input
+            className="margin-bottom-15"
             name="tag"
             onChange={this.handleOnChange}
             value={this.state.post.tag}
             placeholder="Tag"
           />
-        </div>
-        <div className="padding-30 card-footer grid-2">
-          <div onClick={this.props.toggleEditing} className="icon">
-            <img className="" src={back} alt="Back"/>
-          </div>
-          <div onClick={this.handlePostSave} className="icon">
-            <img className="" src={save} alt="Update"/>
-          </div>
+          <button
+            onClick={this.handlePostSave}
+            type="submit"
+            className="margin-right-15"
+          >
+            Update
+          </button>
+          <button
+            onClick={this.props.toggleEditing}
+            type="submit"
+            className="secondary"
+          >
+            Cancel
+          </button>
         </div>
       </div>
     );

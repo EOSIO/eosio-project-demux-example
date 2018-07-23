@@ -50,9 +50,16 @@ class CreatePost extends Component {
           <button
             onClick={this.createPost}
             type="submit"
-            className="login-form-button"
+            className="margin-right-15"
           >
             Create Post
+          </button>
+          <button
+            onClick={this.props.toggleCreate}
+            type="submit"
+            className="secondary"
+          >
+            Cancel
           </button>
         </div>
       </div>

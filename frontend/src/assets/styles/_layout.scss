@@ -14,7 +14,7 @@
     border-radius: 50%;
     background: #141C47;
     cursor: pointer;
-    background: linear-gradient(135deg,#6BDAD5 0%,#4E82DB 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: linear-gradient(135deg,#5fe2dc 0%,#0d5de4 100%);
     span {
       display: block;
       background: #ffffff;
@@ -47,6 +47,8 @@
     float: left;
     height: 70px;
     color: #ffffff;
+    z-index: 2;
+    position: relative;
     a {
       display: block;
       margin: 25px auto;
@@ -63,5 +65,7 @@
     min-height: 100vh;
     grid-area: main;
     background: #EEF2F9;
+    position: relative;
+    z-index: 1;
   }
 }

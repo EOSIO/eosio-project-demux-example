@@ -3,7 +3,7 @@ input, textarea {
   border: 2px solid #eaeaea;
   border-radius: .3rem;
   color: #222222;
-  padding: .9rem 1.5rem;
+  padding: 1rem 1rem;
   font-size: 1rem;
   &:focus {
     border-color: #000000;
@@ -12,7 +12,6 @@ input, textarea {
 textarea {
   min-width: 100%;
   max-width: 100%;
-  height: 53px;
 }
 
 button, .btn, submit {
@@ -23,11 +22,11 @@ button, .btn, submit {
   padding: 1rem 1.5rem;
   font-size: 1rem;
   cursor: pointer;
-  background: linear-gradient(135deg,#6BDAD5 0%,#4E82DB 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: linear-gradient(135deg,#5fe2dc 0%,#0d5de4 100%);
   &.secondary {
     background: transparent;
     padding: .9rem 1.4rem;
-    border: 2px solid #5fb7d8;
+    border: 2px solid transparent;
     color: #5fb7d8;
   }
 }

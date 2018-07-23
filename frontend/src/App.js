@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Fuse from "fuse.js"
+
+import fuseConfig from "./fuseConfig";
 import EOSClient from './util/eos-client';
 import IOClient from './util/io-client';
 import CreatePost from './CreatePost/CreatePost';
 import Posts from './Posts/Posts';
-import './App.css';
+import Logo from './assets/img/logo-inverted.svg';
+import './assets/styles/core.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      createOpen: false,
       loading: false,
-      posts: []
+      posts: [],
+      postsFiltered: [],
+      filters: [],
+      returnedAmount: 25,
     };
     const contractAccount = process.env.REACT_APP_EOS_CONTRACT_ACCOUNT;
     this.eos = new EOSClient(contractAccount, contractAccount);
@@ -75,7 +83,11 @@ class App extends Component {
 
   loadPosts = async () => {
     let response = await axios.get(process.env.REACT_APP_API_URL + "/posts");
-    this.setState({ posts: response.data })
+    this.setState({ posts: response.data }, () => {
+      this.setState({
+        postsFiltered: this.state.posts,
+      });
+    })
   };
 
   createPost = async (post) => {
@@ -110,7 +122,7 @@ class App extends Component {
 
     this.eos
       .transaction(process.env.REACT_APP_EOS_ACCOUNT,
-        'deletepost', 
+        'deletepost',
         {
           contractPkey,
           _id
@@ -128,7 +140,7 @@ class App extends Component {
   editPost = (post, e) => {
     this.eos
       .transaction(process.env.REACT_APP_EOS_ACCOUNT,
-        'editpost', 
+        'editpost',
         {
           ...post
         })
@@ -145,7 +157,7 @@ class App extends Component {
   likePost = (contractPkey, _id, e) => {
     this.eos
       .transaction(
-        process.env.REACT_APP_EOS_ACCOUNT, 
+        process.env.REACT_APP_EOS_ACCOUNT,
         'likepost', {
           contractPkey,
           _id
@@ -160,18 +172,61 @@ class App extends Component {
       });
   };
 
+  // Toggle if create window is open or not
+  toggleCreate = () => {
+    this.setState({
+      createOpen: !this.state.createOpen
+    });
+  }
+
+  // Fuzzy Search via Fuse.js
+  handleKeyPress = (event) => {
+    if (event.target.value !== "" ) {
+      const enter = () => {
+        if(event.key === "Enter"){
+          keyUp()
+        }
+      }
+      const keyUp = () => {
+        var fuse = new Fuse(this.state.posts, fuseConfig)
+        this.setState({
+          filters: event.target.value,
+          postsFiltered: fuse.search(event.target.value).slice(0,this.state.returnedAmount),
+        })
+      }
+      this.state.onEnter ? enter() : keyUp()
+    } else {
+      this.setState({
+        postsFiltered: this.state.posts,
+      })
+    }
+  }
+
   render() {
     return (
-      <div className="App">
-        <div className="pure-g">
-          <div className="pure-u-1">
+      <div className={ "layoutStandard " + (this.state.createOpen ? 'createOpen' : '') }>
+        <div className="logo">
+          <a href="/"><img src={Logo} alt="Eos.io"/></a>
+        </div>
+        <div className="search">
+          <input
+            placeholder="Search"
+            onKeyUp={this.handleKeyPress}
+          />
+        </div>
+        <div className="main">
+          <div className="toggleCreate" onClick={this.toggleCreate}>
+            <span></span>
+            <span></span>
+          </div>
+          <CreatePost createPost={this.createPost} toggleCreate={this.toggleCreate} />
+          <div className="cards">
             <Posts
-              posts={this.state.posts}
+              posts={this.state.postsFiltered}
               deletePost={this.deletePost}
               editPost={this.editPost}
               likePost={this.likePost}
             />
-            <CreatePost createPost={this.createPost} />
           </div>
         </div>
       </div>

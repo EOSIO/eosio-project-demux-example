@@ -1,10 +1,10 @@
-const express = require('express');
-const postController = require('./post.controller');
+const express = require("express")
+const postController = require("./post.controller")
 
-const router = express.Router();
+const router = express.Router()
 
-router.route('/').get(postController.listConfirmed)
+router.route("/").get(postController.listConfirmed)
 
-router.route('/newEmpty').get(postController.createEmpty)
+router.route("/newEmpty").get(postController.createEmpty)
 
-module.exports = router;
+module.exports = router

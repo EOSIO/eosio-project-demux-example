@@ -1,27 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 
 class CreatePost extends Component {
+  static displayName = "CreatePost"
+
+  static propTypes = {
+    createPost: PropTypes.func.isRequired,
+    toggleCreate: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      title: '',
-      content: '',
-      tag: ''
-    };
+      title: "",
+      content: "",
+      tag: "",
+    }
   }
 
   handleOnChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value })
   };
 
   createPost = e => {
-    e.preventDefault();
-    this.props.createPost({ ...this.state, likes: 0});
+    e.preventDefault()
+    this.props.createPost({ ...this.state, likes: 0 })
     this.setState({
-      title: '',
-      content: '',
-      tag: ''
-    });
+      title: "",
+      content: "",
+      tag: "",
+    })
+    this.props.toggleCreate()
   };
 
   render() {
@@ -59,8 +68,8 @@ class CreatePost extends Component {
           </button>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default CreatePost;
+export default CreatePost

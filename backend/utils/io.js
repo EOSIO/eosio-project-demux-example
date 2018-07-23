@@ -1,14 +1,14 @@
+const socketIO = require("socket.io")
+
 let io = null
 
-connect = (server, cb) => {
-  io = require('socket.io')(server);
+const connect = (server) => {
+  io = socketIO(server)
 }
 
-getSocket = () => {
-  return io;
-}
+const getSocket = () => io
 
 module.exports = {
   connect,
-  getSocket
-};
+  getSocket,
+}

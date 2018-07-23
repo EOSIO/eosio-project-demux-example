@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import EOSClient from './util/eos-client';
-import IOClient from './util/io-client';
+import EOSClient from './utils/eos-client';
+import IOClient from './utils/io-client';
 import CreatePost from './CreatePost/CreatePost';
 import Posts from './Posts/Posts';
 import Logo from './assets/img/logo-inverted.svg';
@@ -47,6 +47,22 @@ class App extends Component {
           likes: '3',
           tag: 'anywhere',
           author: 'Peter Johnson'
+        },
+        {
+          pkey: '4',
+          title: 'Journey',
+          content: 'You can go anywhere you choose.',
+          likes: '3',
+          tag: 'anywhere',
+          author: 'Ryan Smith'
+        },
+        {
+          pkey: '5',
+          title: 'Journey',
+          content: 'You can go anywhere you choose.',
+          likes: '3',
+          tag: 'anywhere',
+          author: 'Bob Daniel'
         }
       ],
       filters: [
@@ -228,7 +244,7 @@ class App extends Component {
           <CreatePost createPost={this.createPost} toggleCreate={this.toggleCreate} />
           <div className="cards">
             <Posts
-              posts={this.state.posts}
+              posts={this.state.postsMocked}
               handleOnChange={this.handleOnChange}
               deletePost={this.deletePost}
               editPost={this.editPost}

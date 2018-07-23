@@ -23,7 +23,7 @@ class CreatePost extends Component {
 
   render() {
     return (
-      <div className="createContainer padding-30 border-bottom">
+      <div className="createContainer padding-30">
         <div className="card-item padding-30">
           <input
             className="margin-bottom-15"

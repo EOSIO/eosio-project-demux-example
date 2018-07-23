@@ -31,7 +31,7 @@ class App extends Component {
       this.handleUpdatePost(post)
     })
     this.io.onMessage("deletepost", (post) => {
-      this.handleDeletePost(post._id)
+      this.handleDeletePost(post)
     })
   }
 
@@ -66,8 +66,8 @@ class App extends Component {
     })
   }
 
-  handleDeletePost = _id => {
-    this.setState((prevState) => ({ posts: prevState.posts.filter(post => post._id !== _id) }))
+  handleDeletePost = deletedPost => {
+    this.setState((prevState) => ({ posts: prevState.posts.filter(post => post._id !== deletedPost._id) }))
   }
 
   // Load posts
@@ -97,14 +97,14 @@ class App extends Component {
   };
 
   // Delete a post
-  deletePost = (contractPkey, _id) => {
-    this.handleDeletePost(_id)
+  deletePost = (post) => {
+    this.handleDeletePost(post)
     this.eos
       .transaction(process.env.REACT_APP_EOS_ACCOUNT,
         "deletepost",
         {
-          contractPkey,
-          _id,
+          contractPkey: post.contractPkey,
+          _id: post._id,
         })
       .catch(err => {
         console.log(err)

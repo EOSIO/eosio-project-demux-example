@@ -62,7 +62,7 @@ class Post extends Component {
           </div>
           <div className="padding-30 card-footer grid-3">
             <div onClick={() => {
-              this.props.deletePost(this.props.post.contractPkey, this.props.post._id)
+              this.props.deletePost(this.props.post)
             }}
             ><img className="margin-right-15" src={trash} alt="Delete" />
             </div>

@@ -105,7 +105,10 @@ button, .btn, submit {
 
 .card-footer {
   background: #fbfbfb;
-  color: #ffffff; }
+  color: #ffffff;
+  grid-template-columns: repeat(auto-fill, minmax(1fr, 1fr));
+  grid-gap: 0px;
+  padding: 10px; }
 
 .layoutStandard .createContainer {
   height: 0;

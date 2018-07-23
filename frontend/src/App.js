@@ -110,6 +110,7 @@ class App extends Component {
     }));
   }
 
+  // Load posts
   loadPosts = async () => {
     let response = await axios.get(process.env.REACT_APP_API_URL + "/posts");
     this.setState({ posts: response.data }, () => {
@@ -119,6 +120,7 @@ class App extends Component {
     })
   };
 
+  // Create a post
   createPost = async (post) => {
     this.setState({ loading: true });
 
@@ -144,6 +146,7 @@ class App extends Component {
       });
   };
 
+  // Delete a post
   deletePost = (contractPkey, _id, e) => {
     this.handleDeletePost(_id);
     this.eos
@@ -163,6 +166,7 @@ class App extends Component {
       });
   };
 
+  // Edit a post
   editPost = (post, e) => {
     this.handleUpdatePost(post);
     this.eos
@@ -181,6 +185,7 @@ class App extends Component {
       });
   };
 
+  // Like a post
   likePost = (contractPkey, _id, e) => {
     this.handleLikePost(_id);
     this.eos

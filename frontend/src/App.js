@@ -3,8 +3,8 @@ import axios from 'axios';
 import Fuse from "fuse.js"
 
 import fuseConfig from "./fuseConfig";
-import EOSClient from './util/eos-client';
-import IOClient from './util/io-client';
+import EOSClient from './utils/eos-client';
+import IOClient from './utils/io-client';
 import CreatePost from './CreatePost/CreatePost';
 import Posts from './Posts/Posts';
 import Logo from './assets/img/logo-inverted.svg';

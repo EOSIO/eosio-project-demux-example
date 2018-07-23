@@ -3,7 +3,7 @@ var app = require('express')();
 const cors = require('cors');
 const demux = require("./demux");
 const postRoutes = require('./api/post/post.route');
-const io = require("./util/io");
+const io = require("./utils/io");
 
 app.use(cors());
 

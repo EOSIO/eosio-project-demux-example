@@ -1,5 +1,3 @@
-const util = require('util');
-
 let io = null
 
 connect = (server, cb) => {

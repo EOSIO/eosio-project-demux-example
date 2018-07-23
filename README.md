@@ -73,6 +73,8 @@ docker exec --detach eosio keosd --wallet-dir=/opt/eosio/bin/data-dir --http-ser
     # cleos set contract <Account> <Path to contract folder> <Path to .wast file> <Path to .abi file>
     cleos set contract blog /mnt/dev/data/contracts/blog /mnt/dev/data/contracts/blog/blog.wast /mnt/dev/data/contracts/blog/blog.abi
     ```
+#### MongoDB
+1.  Install and start [MongoDB](https://www.mongodb.com/download-center?jmp=nav#community) with the default configuration and the `mongod` command
 
 #### Backend Config
 1.  Update the [.env](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/backend/.env) with the following values: 

@@ -29,7 +29,7 @@ class EditPost extends Component {
   };
 
   handlePostSave = e => {
-    this.props.savePost(this.state.post)
+    this.props.savePost({...this.props.post, ...this.state})
   };
 
   render() {

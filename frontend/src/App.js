@@ -31,10 +31,10 @@ class App extends Component {
       this.handleUpdatePost(post)
     })
     this.io.onMessage('likepost', (post) => {
-      this.handleLikePost(post._id)
+      this.handleLikePost(post)
     })
     this.io.onMessage('deletepost', (post) => {
-      this.handleDeletePost(post._id)
+      this.handleDeletePost(post)
     })
   }
 

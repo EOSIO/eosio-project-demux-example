@@ -9,6 +9,9 @@ input, textarea {
     border-color: #000000;
   }
 }
+textarea {
+  height: 60px;
+}
 
 button, .btn, submit {
   border: none;

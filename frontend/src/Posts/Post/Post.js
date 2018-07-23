@@ -37,22 +37,23 @@ class Post extends Component {
         <div className='card-item'>
           <div className="padding-30">
             <h3>{this.props.post.title}</h3>
-            <h5><img src={user} alt="User"/> {this.props.post.author}</h5>
-            <p>Likes {this.props.post.likes} | Tags {'#' + this.props.post.tag}</p>
-            <hr />
             <p>{this.props.post.content}</p>
+            <h5><img className="author" src={user} alt="User"/> {this.props.post.author}</h5>
+            <hr />
+            <small>Likes {this.props.post.likes} | Tags {'#' + this.props.post.tag}</small>
+
           </div>
-          <div className="padding-30 card-footer">
+          <div className="padding-30 card-footer grid-3">
             <div onClick={e => {
               this.props.deletePost(this.props.post.contractPkey, this.props.post._id, e);
-            }}><img className="float-left margin-right-15" src={trash} alt="Delete"/></div>
-            <div onClick={this.toggleEditing}><img className="float-left margin-right-15" src={pencil} alt="Update"/></div>
+            }}><img className="margin-right-15" src={trash} alt="Delete"/></div>
+            <div onClick={this.toggleEditing}><img className="margin-right-15" src={pencil} alt="Update"/></div>
             <div onClick={e => {
               this.setState(prevState => ({
                 liked: !prevState.liked
               }));
               this.props.likePost(this.props.post.contractPkey, this.props.post._id, e);
-            }}><img className="float-left" src={heart} alt="Heart"/></div>
+            }}><img className="" src={heart} alt="Heart"/></div>
           </div>
         </div>
       ) : (

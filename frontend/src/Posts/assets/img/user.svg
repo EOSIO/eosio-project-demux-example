@@ -1,1 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g class="nc-icon-wrapper" stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" fill="#111111" stroke="#111111"><path fill="none" stroke="#111111" stroke-miterlimit="10" d="M12,12L12,12 c-2.761,0-5-2.239-5-5V6c0-2.761,2.239-5,5-5h0c2.761,0,5,2.239,5,5v1C17,9.761,14.761,12,12,12z"></path> <path data-color="color-2" fill="none" stroke-miterlimit="10" d="M22,20.908 c0-1.8-1.197-3.383-2.934-3.856C17.172,16.535,14.586,16,12,16s-5.172,0.535-7.066,1.052C3.197,17.525,2,19.108,2,20.908V23h20 V20.908z"></path></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="24px" viewBox="0 0 22 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>user</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="user" transform="translate(1.000000, 1.000000)" stroke="#9A9A9A" stroke-width="2">
+            <path d="M10,11 C7.239,11 5,8.761 5,6 L5,5 C5,2.239 7.239,0 10,0 C12.761,0 15,2.239 15,5 L15,6 C15,8.761 12.761,11 10,11 Z" id="Shape"></path>
+            <path d="M20,19.908 C20,18.108 18.803,16.525 17.066,16.052 C15.172,15.535 12.586,15 10,15 C7.414,15 4.828,15.535 2.934,16.052 C1.197,16.525 0,18.108 0,19.908 L0,22 L20,22 L20,19.908 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

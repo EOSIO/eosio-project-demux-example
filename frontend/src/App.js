@@ -20,31 +20,35 @@ class App extends Component {
       postsFiltered: [
         {
           pkey: '0',
-          title: 'fdsfsd',
-          content: 'fdsfds fsdf sdf fsd fsd fsdf fsd',
-          likes: '3',
+          title: 'Bright Hope',
+          content: 'Automatically, beautiful things will happen.',
+          likes: '1',
+          tag: 'beautiful',
           author: 'Jane Doe'
         },
         {
           pkey: '1',
-          title: 'fdsf',
-          content: 'fdsfds fsdf sdf fsdgdfg gfdgdf gdfg',
+          title: 'The Wind',
+          content: 'Just float and the wind to blow you around.',
           likes: '3',
-          author: 'Jane Doe'
+          tag: 'wind',
+          author: 'Frank Peter'
         },
         {
           pkey: '2',
-          title: 'dfdfd',
-          content: 'fdsfds fsdf sfdg fsdf fsd',
+          title: 'Strong',
+          content: 'So strong, a little bit can go a long way.',
           likes: '3',
-          author: 'Jane Doe'
+          tag: 'little',
+          author: 'Steve West'
         },
         {
           pkey: '3',
-          title: 'dsfsd',
-          content: 'fdsfds gddfg sdf fgdfgd fsd fsgfddf fsd',
+          title: 'A Journey',
+          content: 'You can go anywhere you choose.',
           likes: '3',
-          author: 'Jane Doe'
+          tag: 'anywhere',
+          author: 'Peter Johnson'
         }
       ],
       filters: [
@@ -110,6 +114,7 @@ class App extends Component {
     }));
   }
 
+  // Load posts
   loadPosts = async () => {
     let response = await axios.get(process.env.REACT_APP_API_URL + "/posts");
     this.setState({ posts: response.data }, () => {
@@ -119,6 +124,7 @@ class App extends Component {
     })
   };
 
+  // Create a post
   createPost = async (post) => {
     this.setState({ loading: true });
 
@@ -144,6 +150,7 @@ class App extends Component {
       });
   };
 
+  // Delete a post
   deletePost = (contractPkey, _id, e) => {
     this.handleDeletePost(_id);
     this.eos
@@ -163,6 +170,7 @@ class App extends Component {
       });
   };
 
+  // Edit a post
   editPost = (post, e) => {
     this.handleUpdatePost(post);
     this.eos
@@ -181,6 +189,7 @@ class App extends Component {
       });
   };
 
+  // Like a post
   likePost = (contractPkey, _id, e) => {
     this.handleLikePost(_id);
     this.eos

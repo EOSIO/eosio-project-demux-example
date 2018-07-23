@@ -3,11 +3,9 @@ import PropTypes from "prop-types"
 
 class EditPost extends Component {
   state = {
-    post: {
-      title: this.props.post.title,
-      content: this.props.post.content,
-      tag: this.props.post.tag
-    }
+    title: this.props.post.title,
+    content: this.props.post.content,
+    tag: this.props.post.tag
   }
 
   static displayName = "EditPost"

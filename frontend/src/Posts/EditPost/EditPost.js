@@ -3,10 +3,6 @@ import React, { Component } from 'react';
 import pencil from '../assets/img/pencil.svg';
 import back from '../assets/img/back.svg';
 
-import { Card, Form, Icon, Input } from 'antd';
-const FormItem = Form.Item;
-const { TextArea } = Input;
-
 class EditPost extends Component {
   constructor(props) {
     super(props);
@@ -27,59 +23,41 @@ class EditPost extends Component {
 
   render() {
     return (
-      <div>
-
+      <div className='card-item'>
+        <div className="padding-30">
+          <input
+            className="margin-bottom-15"
+            name="title"
+            onChange={this.handleOnChange}
+            value={this.state.post.title}
+            placeholder="Title"
+          />
+          <textarea
+            className="margin-bottom-15"
+            name="content"
+            onChange={this.handleOnChange}
+            value={this.state.post.content}
+            rows={4}
+            placeholder="Content"
+          />
+          <input
+            name="tag"
+            onChange={this.handleOnChange}
+            value={this.state.post.tag}
+            placeholder="Tag"
+          />
+        </div>
+        <div className="padding-30 card-footer">
         <div onClick={e => {
           this.props.savePost(this.state.post, e);
         }}>
           <img className="float-left margin-right-15" src={pencil} alt="Update"/>
         </div>
-
-        <Card
-          actions={[
-            <Icon
-              type="save"
-              onClick={e => {
-                this.props.savePost(this.state.post, e);
-              }}
-              style={{ color: '#13c2c2' }}
-            />,
-            <Icon
-              onClick={this.props.toggleEditing}
-              type="rollback"
-              style={{ color: '#13c2c2' }}
-            />
-          ]}
-        >
-          <FormItem>
-            <Input
-              name="title"
-              onChange={this.handleOnChange}
-              value={this.state.post.title}
-              prefix={<Icon type="edit" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Title"
-            />
-          </FormItem>
-          <FormItem>
-            <TextArea
-              name="content"
-              onChange={this.handleOnChange}
-              value={this.state.post.content}
-              rows={4}
-              placeholder="Content"
-            />
-          </FormItem>
-          <FormItem>
-            <Input
-              name="tag"
-              onChange={this.handleOnChange}
-              value={this.state.post.tag}
-              prefix={<Icon type="tag" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Tag"
-            />
-          </FormItem>
-        </Card>
+        <div onClick={this.props.toggleEditing}>
+          <img className="float-left margin-right-15" src={back} alt="Back"/>
+        </div>
       </div>
+    </div>
     );
   }
 }

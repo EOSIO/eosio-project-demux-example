@@ -41,8 +41,25 @@ class ActionHandler extends AbstractActionHandler {
 
   async handleWithState(handle) {
     const context = { socket: io.getSocket() }
-    const state = { post: Post }
+    const state = { post: Post, blockState: BlockState }
     await handle(state, context)
+  }
+
+  async updateIndexState(state, block, isReplay) {
+    state._index_state.save({
+      id: 0,
+      block_number: block.blockNumber,
+      block_hash: block.blockHash,
+      is_replay: isReplay,
+    })
+  }
+
+  async loadIndexState() {
+    const { blockNumber, blockHash } = await this.massiveInstance._index_state.findOne({ id: 0 })
+    if (blockNumber && blockHash) {
+      return { blockNumber, blockHash }
+    }
+    return { blockNumber: 0, blockHash: "" }
   }
 }
 

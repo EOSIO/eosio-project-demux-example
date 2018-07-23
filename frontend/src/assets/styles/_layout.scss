@@ -30,6 +30,7 @@
   &.createOpen {
     .createContainer{
       height: auto;
+      overflow: visible;
     }
     .toggleCreate {
       span {
@@ -39,14 +40,12 @@
       }
     }
   }
-  .logo, .search {
-    height: 70px;
-    color: #ffffff;
-  }
   .logo {
     background: #141C47;
-    width: 80px;
+    width: 100%;
     float: left;
+    height: 70px;
+    color: #ffffff;
     a {
       display: block;
       margin: 25px auto;

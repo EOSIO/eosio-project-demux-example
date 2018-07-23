@@ -4,21 +4,22 @@ import save from '../assets/img/save.svg';
 import back from '../assets/img/back.svg';
 
 class EditPost extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      post: {
-        title: this.props.post.title,
-        content: this.props.post.content,
-        tag: this.props.post.tag
-      }
-    };
-  }
+  state = {
+    post: {
+      title: this.props.post.title,
+      content: this.props.post.content,
+      tag: this.props.post.tag
+    }
+  };
 
   handleOnChange = e => {
     let post = Object.assign({}, this.state.post);
     post[e.target.name] = e.target.value;
     this.setState({ post });
+  };
+
+  handlePostSave = e => {
+    this.props.savePost(this.state.post, e);
   };
 
   render() {
@@ -48,16 +49,14 @@ class EditPost extends Component {
           />
         </div>
         <div className="padding-30 card-footer grid-2">
-        <div onClick={e => {
-          this.props.savePost(this.state.post, e);
-        }}>
-          <img className="" src={save} alt="Update"/>
-        </div>
-        <div onClick={this.props.toggleEditing}>
-          <img className="" src={back} alt="Back"/>
+          <div onClick={this.props.toggleEditing} className="icon">
+            <img className="" src={back} alt="Back"/>
+          </div>
+          <div onClick={this.handlePostSave} className="icon">
+            <img className="" src={save} alt="Update"/>
+          </div>
         </div>
       </div>
-    </div>
     );
   }
 }

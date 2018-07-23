@@ -78,22 +78,6 @@ button, .btn, submit {
     border: 2px solid #5fb7d8;
     color: #5fb7d8; }
 
-.search {
-  background: #0D163A; }
-  .search ::placeholder {
-    color: #ffffff; }
-  .search input {
-    position: absolute;
-    top: 0;
-    height: 70px;
-    width: calc(100vw - 80px);
-    background: 0;
-    border: 0;
-    color: #ffffff;
-    font-size: 1.2rem;
-    margin: 0;
-    padding: 0px 30px; }
-
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -101,10 +85,15 @@ button, .btn, submit {
   padding: 30px; }
 
 .card-item {
+  position: relative;
   background: #ffffff;
   box-shadow: 0px 0px 20px #e4e4e4;
   border-radius: .5rem;
   overflow: hidden; }
+  .card-item .heart {
+    position: absolute;
+    top: 30px;
+    right: 30px; }
 
 .card-footer {
   background: #fbfbfb;
@@ -115,12 +104,6 @@ button, .btn, submit {
     margin: 0 auto;
     align-self: center;
     justify-self: center; }
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-gap: 0px;
-  padding: 30px 10px; }
 
 .grid-2 {
   display: grid;
@@ -133,6 +116,9 @@ button, .btn, submit {
   margin-right: 10px;
   height: 16px;
   width: 16px; }
+
+.icon {
+  cursor: pointer; }
 
 .layoutStandard .createContainer {
   height: 0;
@@ -162,19 +148,18 @@ button, .btn, submit {
       transform: rotate(90deg); }
 
 .layoutStandard.createOpen .createContainer {
-  height: auto; }
+  height: auto;
+  overflow: visible; }
 
 .layoutStandard.createOpen .toggleCreate span:nth-child(1) {
   opacity: 0; }
 
-.layoutStandard .logo, .layoutStandard .search {
-  height: 70px;
-  color: #ffffff; }
-
 .layoutStandard .logo {
   background: #141C47;
-  width: 80px;
-  float: left; }
+  width: 100%;
+  float: left;
+  height: 70px;
+  color: #ffffff; }
   .layoutStandard .logo a {
     display: block;
     margin: 25px auto;

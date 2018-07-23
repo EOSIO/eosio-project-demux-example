@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 
 class CreatePost extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-      content: '',
-      tag: ''
-    };
-  }
+  state = {
+    title: '',
+    content: '',
+    tag: ''
+  };
 
   handleOnChange = e => {
     this.setState({ [e.target.name]: e.target.value });

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Fuse from "fuse.js"
 
-import fuseConfig from "./fuseConfig";
 import EOSClient from './util/eos-client';
 import IOClient from './util/io-client';
 import CreatePost from './CreatePost/CreatePost';
@@ -17,7 +15,7 @@ class App extends Component {
       createOpen: false,
       loading: false,
       posts: [],
-      postsFiltered: [
+      postsMocked: [
         {
           pkey: '0',
           title: 'Bright Hope',
@@ -44,7 +42,7 @@ class App extends Component {
         },
         {
           pkey: '3',
-          title: 'A Journey',
+          title: 'Journey',
           content: 'You can go anywhere you choose.',
           likes: '3',
           tag: 'anywhere',
@@ -209,34 +207,11 @@ class App extends Component {
       });
   };
 
-  // Toggle if create window is open or not
+  // Toggle if create window is open
   toggleCreate = () => {
     this.setState(prevState => ({
       createOpen: !prevState.createOpen
     }));
-  }
-
-  // Fuzzy Search via Fuse.js
-  handleKeyPress = (event) => {
-    if (event.target.value !== "" ) {
-      const enter = () => {
-        if(event.key === "Enter"){
-          keyUp()
-        }
-      }
-      const keyUp = () => {
-        var fuse = new Fuse(this.state.posts, fuseConfig)
-        this.setState({
-          filters: event.target.value,
-          postsFiltered: fuse.search(event.target.value).slice(0,this.state.returnedAmount),
-        })
-      }
-      this.state.onEnter ? enter() : keyUp()
-    } else {
-      this.setState({
-        postsFiltered: this.state.posts,
-      })
-    }
   }
 
   render() {
@@ -244,12 +219,6 @@ class App extends Component {
       <div className={ "layoutStandard " + (this.state.createOpen ? 'createOpen' : '') }>
         <div className="logo">
           <a href="/"><img src={Logo} alt="Eos.io"/></a>
-        </div>
-        <div className="search">
-          <input
-            placeholder="Search"
-            onKeyUp={this.handleKeyPress}
-          />
         </div>
         <div className="main">
           <div className="toggleCreate" onClick={this.toggleCreate}>

@@ -6,10 +6,16 @@
 }
 
 .card-item {
+  position: relative;
   background: #ffffff;
   box-shadow: 0px 0px 20px #e4e4e4;
   border-radius: .5rem;
   overflow: hidden;
+  .heart {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+  }
 }
 .card-footer {
   background: #fbfbfb;
@@ -23,12 +29,6 @@
   }
 }
 
-.grid-3 {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-gap: 0px;
-  padding: 30px 10px;
-}
 .grid-2 {
   display: grid;
   grid-template-columns: auto auto;
@@ -41,4 +41,8 @@
   margin-right: 10px;
   height: 16px;
   width: 16px;
+}
+
+.icon {
+  cursor: pointer;
 }

@@ -9,13 +9,10 @@ import trash from '../assets/img/trash.svg';
 import EditPost from '../EditPost/EditPost';
 
 class Post extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editing: false,
-      liked: false,
-    };
-  }
+  state = {
+    editing: false,
+    liked: false,
+  };
 
   toggleEditing = () => {
     this.setState(prevState => ({
@@ -36,24 +33,31 @@ class Post extends Component {
       !editing ? (
         <div className='card-item'>
           <div className="padding-30">
-            <h3>{this.props.post.title}</h3>
-            <p>{this.props.post.content}</p>
-            <h5><img className="author" src={user} alt="User"/> {this.props.post.author}</h5>
-            <hr />
-            <small>Likes {this.props.post.likes} | Tags {'#' + this.props.post.tag}</small>
-
-          </div>
-          <div className="padding-30 card-footer grid-3">
-            <div onClick={e => {
-              this.props.deletePost(this.props.post.contractPkey, this.props.post._id, e);
-            }}><img className="margin-right-15" src={trash} alt="Delete"/></div>
-            <div onClick={this.toggleEditing}><img className="margin-right-15" src={pencil} alt="Update"/></div>
             <div onClick={e => {
               this.setState(prevState => ({
                 liked: !prevState.liked
               }));
               this.props.likePost(this.props.post.contractPkey, this.props.post._id, e);
-            }}><img className="" src={heart} alt="Heart"/></div>
+            }} className="icon">
+              <img className="heart" src={heart} alt="Heart"/>
+            </div>
+
+            <h2>{this.props.post.title}</h2>
+            <p>{this.props.post.content}</p>
+
+            <hr />
+            <small><img className="author" src={user} alt="User"/> {this.props.post.author} <strong>Likes</strong>  {this.props.post.likes} <strong>Tags</strong>  {'#' + this.props.post.tag}</small>
+
+          </div>
+          <div className="padding-30 card-footer grid-2">
+            <div onClick={e => {
+              this.props.deletePost(this.props.post.contractPkey, this.props.post._id, e);
+            }} className="icon">
+              <img src={trash} alt="Delete icon"/>
+            </div>
+            <div onClick={this.toggleEditing} className="icon">
+              <img src={pencil} alt="Update"/>
+            </div>
           </div>
         </div>
       ) : (

@@ -1,25 +1,25 @@
-const createPost = require("./createpost")
-const deletePost = require("./deletepost")
-const editPost = require("./editpost")
-const likePost = require("./likepost")
+const createPost = require('./createpost')
+const deletePost = require('./deletepost')
+const editPost = require('./editpost')
+const likePost = require('./likepost')
 
 const account = process.env.EOS_CONTRACT_ACCOUNT
 
 module.exports = [
   {
     actionType: `${account}::createpost`, // account::action name
-    effect: createPost,
+    effect: createPost
   },
   {
     actionType: `${account}::deletepost`,
-    effect: deletePost,
+    effect: deletePost
   },
   {
     actionType: `${account}::editpost`,
-    effect: editPost,
+    effect: editPost
   },
   {
     actionType: `${account}::likepost`,
-    effect: likePost,
-  },
+    effect: likePost
+  }
 ]

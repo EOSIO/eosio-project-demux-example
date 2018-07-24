@@ -9,18 +9,18 @@ import Logo from './assets/img/logo.svg'
 import './assets/styles/core.css'
 
 class App extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       createOpen: false,
-      posts: []
+      posts: [],
     }
     const contractAccount = process.env.REACT_APP_EOS_ACCOUNT
     this.eos = new EOSClient(contractAccount, contractAccount)
     this.io = new IOClient()
   }
 
-  async componentDidMount () {
+  async componentDidMount() {
     this.loadPosts()
     this.io.onMessage('createpost', (post) => {
       this.handleUpdatePost(post)
@@ -89,8 +89,8 @@ class App extends Component {
         process.env.REACT_APP_EOS_ACCOUNT,
         'createpost', {
           author: process.env.REACT_APP_EOS_ACCOUNT,
-          ...newPost
-        }
+          ...newPost,
+        },
       )
       .catch(err => {
         console.log(err)
@@ -105,7 +105,7 @@ class App extends Component {
         'deletepost',
         {
           contractPkey: post.contractPkey,
-          _id: post._id
+          _id: post._id,
         })
       .catch(err => {
         console.log(err)
@@ -119,7 +119,7 @@ class App extends Component {
       .transaction(process.env.REACT_APP_EOS_ACCOUNT,
         'editpost',
         {
-          ...post
+          ...post,
         })
       .catch(err => {
         console.log(err)
@@ -134,8 +134,8 @@ class App extends Component {
         process.env.REACT_APP_EOS_ACCOUNT,
         'likepost', {
           contractPkey: post.contractPkey,
-          _id: post._id
-        }
+          _id: post._id,
+        },
       )
       .catch(err => {
         console.log(err)
@@ -145,16 +145,16 @@ class App extends Component {
   // Toggle if create window is open
   toggleCreate = () => {
     this.setState(prevState => ({
-      createOpen: !prevState.createOpen
+      createOpen: !prevState.createOpen,
     }))
   }
 
-  render () {
+  render() {
     return (
       <div className={`layoutStandard ${this.state.createOpen ? 'createOpen' : ''}`}>
         <div className='logo'><a href='/'><img src={Logo} alt='Eos.io' /></a></div>
         <div className='main'>
-          <div className='toggleCreate' onClick={this.toggleCreate} />
+          <div className='toggleCreate' onClick={this.toggleCreate}></div>
           <CreatePost createPost={this.createPost} toggleCreate={this.toggleCreate} />
           <div className='cards'>
             <Posts
@@ -170,7 +170,6 @@ class App extends Component {
     )
   }
 }
-
 App.displayName = 'App'
 
 export default App

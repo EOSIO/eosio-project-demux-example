@@ -1,16 +1,15 @@
-import Eos from "eosjs"
+import Eos from 'eosjs'
 
 const EOS_CONFIG = {
   httpEndpoint: process.env.REACT_APP_EOS_HTTP_URL,
   chainId: process.env.REACT_APP_EOS_CHAIN_ID,
   keyProvider: [process.env.REACT_APP_EOS_PRIVATE_KEY],
   broadcast: true,
-  sign: true,
+  sign: true
 }
 
-
 export default class EOSClient {
-  constructor(contractName, contractSender) {
+  constructor (contractName, contractSender) {
     this.contractName = contractName
     this.contractSender = contractSender
 
@@ -27,13 +26,13 @@ export default class EOSClient {
         authorization: [
           {
             actor,
-            permission: "active",
-          },
+            permission: 'active'
+          }
         ],
         data: {
-          ...data,
-        },
-      },
-    ],
+          ...data
+        }
+      }
+    ]
   });
 }

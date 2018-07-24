@@ -1,4 +1,4 @@
-function createPost(state, payload, blockInfo, context) {
+function createPost (state, payload, blockInfo, context) {
   const updatedPost = { ...payload.data }
   delete updatedPost._id
   state.post.findByIdAndUpdate(payload.data._id, { ...updatedPost, postConfirmed: true }, (err) => {

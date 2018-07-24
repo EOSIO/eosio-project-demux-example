@@ -1,5 +1,5 @@
-const blog = require("./blog")
+const blog = require('./blog')
 
 module.exports = [
-  ...blog,
+  ...blog
 ]

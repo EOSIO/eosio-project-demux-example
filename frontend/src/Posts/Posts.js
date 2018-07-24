@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react'
 
-import Post from "./Post/Post"
+import Post from './Post/Post'
 
 const Posts = ({ posts, deletePost, editPost, likePost }) => posts.map(post => (
   <Post
@@ -11,5 +11,6 @@ const Posts = ({ posts, deletePost, editPost, likePost }) => posts.map(post => (
     key={post._id}
   />
 ))
+Posts.displayName = 'Posts' // Tell React Dev Tools the component name
 
 export default Posts

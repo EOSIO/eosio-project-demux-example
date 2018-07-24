@@ -15,7 +15,7 @@
     background: #141C47;
     cursor: pointer;
     background: linear-gradient(135deg,#5fe2dc 0%,#0d5de4 100%);
-    span {
+    &:before, &:after {
       display: block;
       background: #ffffff;
       height: 3px;
@@ -23,9 +23,10 @@
       position: absolute;
       left: 15px;
       top: 30px;
-      &:nth-child(1) {
-        transform: rotate(90deg);
-      }
+      content: "";
+    }
+    &:after {
+      transform: rotate(90deg);
     }
   }
   &.createOpen {
@@ -34,10 +35,8 @@
       overflow: visible;
     }
     .toggleCreate {
-      span {
-        &:nth-child(1) {
-          opacity: 0;
-        }
+      &:after {
+        opacity: 0;
       }
     }
   }

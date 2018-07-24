@@ -1,43 +1,45 @@
-import React, { Component } from "react"
-import axios from "axios"
+import React, { Component } from 'react'
+import axios from 'axios'
 
-import EOSClient from "./utils/eos-client"
-import IOClient from "./utils/io-client"
-import CreatePost from "./CreatePost/CreatePost"
-import Posts from "./Posts/Posts"
-import Logo from "./assets/img/logo-inverted.svg"
-import "./assets/styles/core.css"
+import EOSClient from './utils/eos-client'
+import IOClient from './utils/io-client'
+import CreatePost from './CreatePost/CreatePost'
+import Posts from './Posts/Posts'
+import Logo from './assets/img/logo.svg'
+import './assets/styles/core.css'
 
 class App extends Component {
-  static displayName = "App"
+  state = {
+    createOpen: false,
+    posts: [],
+  }
 
+  // Instantiate shared eosjs helper
   constructor(props) {
     super(props)
-    this.state = {
-      createOpen: false,
-      posts: [],
-    }
     const contractAccount = process.env.REACT_APP_EOS_ACCOUNT
     this.eos = new EOSClient(contractAccount, contractAccount)
     this.io = new IOClient()
   }
 
+  // Enable Realtime updates via Socket.io
   async componentDidMount() {
     this.loadPosts()
-    this.io.onMessage("createpost", (post) => {
+    this.io.onMessage('createpost', (post) => {
       this.handleUpdatePost(post)
     })
-    this.io.onMessage("editpost", (post) => {
+    this.io.onMessage('editpost', (post) => {
       this.handleUpdatePost(post)
     })
-    this.io.onMessage("likepost", (post) => {
+    this.io.onMessage('likepost', (post) => {
       this.handleLikePost(post)
     })
-    this.io.onMessage("deletepost", (post) => {
+    this.io.onMessage('deletepost', (post) => {
       this.handleDeletePost(post)
     })
   }
 
+  // Updated child component post
   handleUpdatePost = updatedPost => {
     this.setState((prevState) => {
       let alreadyAdded = false
@@ -57,6 +59,7 @@ class App extends Component {
     })
   }
 
+  // Updated likes on child component post
   handleLikePost = (likedPost) => {
     this.setState((prevState) => {
       const updatedPosts = prevState.posts.map(post => {
@@ -69,6 +72,7 @@ class App extends Component {
     })
   }
 
+  // Delete child component post
   handleDeletePost = deletedPost => {
     this.setState((prevState) => ({ posts: prevState.posts.filter(post => post._id !== deletedPost._id) }))
   }
@@ -89,7 +93,7 @@ class App extends Component {
     this.eos
       .transaction(
         process.env.REACT_APP_EOS_ACCOUNT,
-        "createpost", {
+        'createpost', {
           author: process.env.REACT_APP_EOS_ACCOUNT,
           ...newPost,
         },
@@ -104,7 +108,7 @@ class App extends Component {
     this.handleDeletePost(post)
     this.eos
       .transaction(process.env.REACT_APP_EOS_ACCOUNT,
-        "deletepost",
+        'deletepost',
         {
           contractPkey: post.contractPkey,
           _id: post._id,
@@ -119,7 +123,7 @@ class App extends Component {
     this.handleUpdatePost(post)
     this.eos
       .transaction(process.env.REACT_APP_EOS_ACCOUNT,
-        "editpost",
+        'editpost',
         {
           ...post,
         })
@@ -134,7 +138,7 @@ class App extends Component {
     this.eos
       .transaction(
         process.env.REACT_APP_EOS_ACCOUNT,
-        "likepost", {
+        'likepost', {
           contractPkey: post.contractPkey,
           _id: post._id,
         },
@@ -153,17 +157,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className={`layoutStandard ${this.state.createOpen ? "createOpen" : ""}`}>
-        <div className="logo">
-          <a href="/"><img src={Logo} alt="Eos.io" /></a>
-        </div>
-        <div className="main">
-          <div className="toggleCreate" onClick={this.toggleCreate}>
-            <span />
-            <span />
-          </div>
+      <div className={`layoutStandard ${this.state.createOpen ? 'createOpen' : ''}`}>
+        <div className='logo'><a href='/'><img src={Logo} alt='Eos.io' /></a></div>
+        <div className='main'>
+          <div className='toggleCreate' onClick={this.toggleCreate}></div>
           <CreatePost createPost={this.createPost} toggleCreate={this.toggleCreate} />
-          <div className="cards">
+          <div className='cards'>
             <Posts
               posts={this.state.posts}
               handleOnChange={this.handleOnChange}
@@ -177,5 +176,6 @@ class App extends Component {
     )
   }
 }
+App.displayName = 'App' // Tell React Dev Tools the component name
 
 export default App

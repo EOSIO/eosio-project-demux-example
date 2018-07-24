@@ -137,22 +137,23 @@ button, .btn, submit {
   background: #141C47;
   cursor: pointer;
   background: linear-gradient(135deg, #5fe2dc 0%, #0d5de4 100%); }
-  .layoutStandard .toggleCreate span {
+  .layoutStandard .toggleCreate:before, .layoutStandard .toggleCreate:after {
     display: block;
     background: #ffffff;
     height: 3px;
     width: 30px;
     position: absolute;
     left: 15px;
-    top: 30px; }
-    .layoutStandard .toggleCreate span:nth-child(1) {
-      transform: rotate(90deg); }
+    top: 30px;
+    content: ""; }
+  .layoutStandard .toggleCreate:after {
+    transform: rotate(90deg); }
 
 .layoutStandard.createOpen .createContainer {
   height: auto;
   overflow: visible; }
 
-.layoutStandard.createOpen .toggleCreate span:nth-child(1) {
+.layoutStandard.createOpen .toggleCreate:after {
   opacity: 0; }
 
 .layoutStandard .logo {

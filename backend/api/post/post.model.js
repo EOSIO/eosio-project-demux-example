@@ -1,5 +1,5 @@
-const mongoose = require("mongoose")
-const AutoIncrement = require("mongoose-sequence")(mongoose)
+const mongoose = require('mongoose')
+const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 const { Schema } = mongoose
 
@@ -13,17 +13,17 @@ try {
     tag: String,
     likes: {
       type: Number,
-      default: 0,
+      default: 0
     },
     postConfirmed: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   })
-  PostSchema.plugin(AutoIncrement, { inc_field: "contractPkey" })
-  Post = mongoose.model("Post", PostSchema)
+  PostSchema.plugin(AutoIncrement, { inc_field: 'contractPkey' })
+  Post = mongoose.model('Post', PostSchema)
 } catch (e) {
-  Post = mongoose.model("Post")
+  Post = mongoose.model('Post')
 }
 
 module.exports = Post

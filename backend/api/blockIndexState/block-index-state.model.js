@@ -6,9 +6,9 @@ let BlockIndexState = null
 
 try {
   const BlockIndexStateSchema = new Schema({
-    block_number: Number,
-    block_hash: String,
-    is_replay: Boolean,
+    blockNumber: Number,
+    blockHash: String,
+    isReplay: Boolean,
   })
   BlockIndexState = mongoose.model("BlockIndexState", BlockIndexStateSchema)
 } catch (e) {

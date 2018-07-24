@@ -3,6 +3,7 @@ const {
 } = require("demux")
 const mongoose = require("mongoose")
 const Post = require("../api/post/post.model")
+const BlockIndexState = require("../api/blockIndexState/block-index-state.model")
 const io = require("../utils/io")
 
 class ActionHandler extends AbstractActionHandler {
@@ -41,21 +42,20 @@ class ActionHandler extends AbstractActionHandler {
 
   async handleWithState(handle) {
     const context = { socket: io.getSocket() }
-    const state = { post: Post, blockState: BlockState }
+    const state = { post: Post, blockIndexState: BlockIndexState }
     await handle(state, context)
   }
 
   async updateIndexState(state, block, isReplay) {
-    state._index_state.save({
-      id: 0,
-      block_number: block.blockNumber,
-      block_hash: block.blockHash,
-      is_replay: isReplay,
-    })
+    await state.blockIndexState.update({}, {
+      blockNumber: block.blockNumber,
+      blockHash: block.blockHash,
+      isReplay,
+    }, { upsert: true }).exec()
   }
 
   async loadIndexState() {
-    const { blockNumber, blockHash } = await this.massiveInstance._index_state.findOne({ id: 0 })
+    const { blockNumber, blockHash } = await BlockIndexState.findOne({}).exec()
     if (blockNumber && blockHash) {
       return { blockNumber, blockHash }
     }

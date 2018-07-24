@@ -89,8 +89,8 @@ class Post extends Component {
     )
   }
 }
+Post.displayName = 'Post' // Tell React Dev Tools the component name
 
-Post.displayName = 'Post'
 Post.propTypes = {
   post: PropTypes.shape({
     _id: PropTypes.string.isRequired,

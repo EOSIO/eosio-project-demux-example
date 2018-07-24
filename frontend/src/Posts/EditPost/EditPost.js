@@ -2,22 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class EditPost extends Component {
-  static displayName = 'EditPost'
-
-  static propTypes = {
-    post: PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      contractPkey: PropTypes.number.isRequired,
-      author: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      content: PropTypes.string.isRequired,
-      tag: PropTypes.string.isRequired,
-      likes: PropTypes.number.isRequired
-    }).isRequired,
-    savePost: PropTypes.func.isRequired,
-    toggleEditing: PropTypes.func.isRequired
-  }
-
   state = {
     title: this.props.post.title,
     content: this.props.post.content,
@@ -76,6 +60,21 @@ class EditPost extends Component {
       </div>
     )
   }
+}
+EditPost.displayName = 'EditPost' // Tell React Dev Tools the component name
+
+EditPost.propTypes = {
+  post: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    contractPkey: PropTypes.number.isRequired,
+    author: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    tag: PropTypes.string.isRequired,
+    likes: PropTypes.number.isRequired
+  }).isRequired,
+  savePost: PropTypes.func.isRequired,
+  toggleEditing: PropTypes.func.isRequired
 }
 
 export default EditPost

@@ -9,17 +9,19 @@ import Logo from './assets/img/logo.svg'
 import './assets/styles/core.css'
 
 class App extends Component {
+  state = {
+    createOpen: false,
+    posts: [],
+  }
+
+  // Instantiate shared eosjs helper
   constructor(props) {
-    super(props)
-    this.state = {
-      createOpen: false,
-      posts: [],
-    }
     const contractAccount = process.env.REACT_APP_EOS_ACCOUNT
     this.eos = new EOSClient(contractAccount, contractAccount)
     this.io = new IOClient()
   }
 
+  // Enable Realtime updates via Socket.io
   async componentDidMount() {
     this.loadPosts()
     this.io.onMessage('createpost', (post) => {
@@ -36,6 +38,7 @@ class App extends Component {
     })
   }
 
+  // Updated child component post
   handleUpdatePost = updatedPost => {
     this.setState((prevState) => {
       let alreadyAdded = false
@@ -55,6 +58,7 @@ class App extends Component {
     })
   }
 
+  // Updated likes on child component post
   handleLikePost = (likedPost) => {
     this.setState((prevState) => {
       const updatedPosts = prevState.posts.map(post => {
@@ -67,6 +71,7 @@ class App extends Component {
     })
   }
 
+  // Delete child component post
   handleDeletePost = deletedPost => {
     this.setState((prevState) => ({ posts: prevState.posts.filter(post => post._id !== deletedPost._id) }))
   }
@@ -170,6 +175,6 @@ class App extends Component {
     )
   }
 }
-App.displayName = 'App'
+App.displayName = 'App' // Tell React Dev Tools the component name
 
 export default App

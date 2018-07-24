@@ -11,5 +11,6 @@ const Posts = ({ posts, deletePost, editPost, likePost }) => posts.map(post => (
     key={post._id}
   />
 ))
+Posts.displayName = 'Posts' // Tell React Dev Tools the component name
 
 export default Posts

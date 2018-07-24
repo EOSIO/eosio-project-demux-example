@@ -2,13 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class CreatePost extends Component {
-  static displayName = 'CreatePost'
-
-  static propTypes = {
-    createPost: PropTypes.func.isRequired,
-    toggleCreate: PropTypes.func.isRequired
-  }
-
   state = {
     title: '',
     content: '',
@@ -75,4 +68,11 @@ class CreatePost extends Component {
     )
   }
 }
+CreatePost.displayName = 'CreatePost' // Tell React Dev Tools the component name
+
+CreatePost.propTypes = {
+  createPost: PropTypes.func.isRequired,
+  toggleCreate: PropTypes.func.isRequired
+}
+
 export default CreatePost

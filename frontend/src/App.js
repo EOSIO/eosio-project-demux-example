@@ -5,7 +5,7 @@ import EOSClient from "./utils/eos-client"
 import IOClient from "./utils/io-client"
 import CreatePost from "./CreatePost/CreatePost"
 import Posts from "./Posts/Posts"
-import Logo from "./assets/img/logo-inverted.svg"
+import Logo from "./assets/img/logo.svg"
 import "./assets/styles/core.css"
 
 class App extends Component {
@@ -154,14 +154,9 @@ class App extends Component {
   render() {
     return (
       <div className={`layoutStandard ${this.state.createOpen ? "createOpen" : ""}`}>
-        <div className="logo">
-          <a href="/"><img src={Logo} alt="Eos.io" /></a>
-        </div>
+        <div className="logo"><a href="/"><img src={Logo} alt="Eos.io" /></a></div>
         <div className="main">
-          <div className="toggleCreate" onClick={this.toggleCreate}>
-            <span />
-            <span />
-          </div>
+          <div className="toggleCreate" onClick={this.toggleCreate}></div>
           <CreatePost createPost={this.createPost} toggleCreate={this.toggleCreate} />
           <div className="cards">
             <Posts

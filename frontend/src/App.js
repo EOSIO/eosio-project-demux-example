@@ -16,6 +16,7 @@ class App extends Component {
 
   // Instantiate shared eosjs helper
   constructor(props) {
+    super(props)
     const contractAccount = process.env.REACT_APP_EOS_ACCOUNT
     this.eos = new EOSClient(contractAccount, contractAccount)
     this.io = new IOClient()

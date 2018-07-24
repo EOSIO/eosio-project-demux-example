@@ -90,9 +90,6 @@ docker exec --detach eosio keosd --wallet-dir=/opt/eosio/bin/data-dir --http-ser
 #### MongoDB
 1.  Install and start [MongoDB](https://www.mongodb.com/download-center?jmp=nav#community) with the default configuration and the `mongod` command
 
-docker pull mongo
-docker run --name mongo -d mongo:latest
-
 #### Backend Config
 1.  Update the [.env](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/backend/.env) with the following values: 
     ```bash

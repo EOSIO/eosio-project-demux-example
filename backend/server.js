@@ -9,7 +9,7 @@ app.use(cors())
 
 app.use('/posts', postRoutes)
 
-const server = app.listen(process.env.PORT, () => console.info('Example app listening on port 4000!'))
+const server = app.listen(process.env.PORT, () => console.info(`Example app listening on port ${process.env.PORT}!`))
 
 io.connect(server)
 

@@ -31,9 +31,6 @@ class App extends Component {
     this.io.onMessage('editpost', (post) => {
       this.handleUpdatePost(post)
     })
-    this.io.onMessage('likepost', (post) => {
-      this.handleLikePost(post)
-    })
     this.io.onMessage('deletepost', (post) => {
       this.handleDeletePost(post)
     })

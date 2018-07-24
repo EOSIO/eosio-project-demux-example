@@ -94,7 +94,7 @@ docker exec --detach eosio keosd --wallet-dir=/opt/eosio/bin/data-dir --http-ser
 1.  Update the [.env](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/backend/.env) with the following values: 
     ```bash
     EOS_CONTRACT_ACCOUNT=blog
-    EOS_STARTING_BLOCK=0
+    EOS_STARTING_BLOCK=1
 
     EOS_HTTP_URL=http://0.0.0.0:8888
     PORT=4000

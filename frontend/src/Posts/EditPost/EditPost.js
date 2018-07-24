@@ -10,11 +10,11 @@ class EditPost extends Component {
 
   handleOnChange = (event, field) => {
     this.setState({ [field]: event.target.value })
-  };
+  }
 
   handlePostSave = () => {
     this.props.savePost({ ...this.props.post, ...this.state })
-  };
+  }
 
   render () {
     return (
@@ -32,7 +32,6 @@ class EditPost extends Component {
             name='content'
             onChange={(e) => this.handleOnChange(e, 'content')}
             value={this.state.content}
-            rows={4}
             placeholder='Content'
           />
           <input
@@ -63,6 +62,7 @@ class EditPost extends Component {
 }
 EditPost.displayName = 'EditPost' // Tell React Dev Tools the component name
 
+// Assign Prop Types
 EditPost.propTypes = {
   post: PropTypes.shape({
     _id: PropTypes.string.isRequired,

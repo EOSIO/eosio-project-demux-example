@@ -70,6 +70,7 @@ class CreatePost extends Component {
 }
 CreatePost.displayName = 'CreatePost' // Tell React Dev Tools the component name
 
+// Assign Prop Types
 CreatePost.propTypes = {
   createPost: PropTypes.func.isRequired,
   toggleCreate: PropTypes.func.isRequired

@@ -13,20 +13,20 @@ class Post extends Component {
   state = {
     editing: false,
     liked: false
-  };
+  }
 
   toggleEditing = () => {
     this.setState(prevState => ({
       editing: !prevState.editing
     }))
-  };
+  }
 
   savePost = (post) => {
     this.props.editPost(post)
     this.setState(prevState => ({
       editing: !prevState.editing
     }))
-  };
+  }
 
   render () {
     const { editing, liked } = this.state
@@ -37,9 +37,7 @@ class Post extends Component {
 
             <div
               onClick={() => {
-                this.setState(prevState => ({
-                  liked: !prevState.liked
-                }))
+                this.setState(prevState => ({ liked: !prevState.liked }))
                 this.props.likePost(this.props.post)
               }}
               className='icon'
@@ -59,9 +57,7 @@ class Post extends Component {
           <div className='padding-30 card-footer grid-2'>
 
             <div
-              onClick={() => {
-                this.props.deletePost(this.props.post)
-              }}
+              onClick={() => {this.props.deletePost(this.props.post)}}
               className='icon'
             >
               <img src={trash} alt='Delete icon' />
@@ -91,6 +87,7 @@ class Post extends Component {
 }
 Post.displayName = 'Post' // Tell React Dev Tools the component name
 
+// Assign Prop Types
 Post.propTypes = {
   post: PropTypes.shape({
     _id: PropTypes.string.isRequired,

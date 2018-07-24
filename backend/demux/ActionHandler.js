@@ -3,7 +3,7 @@ const {
 } = require("demux")
 const mongoose = require("mongoose")
 const Post = require("../api/post/post.model")
-const BlockIndexState = require("../api/blockIndexState/block-index-state.model")
+const BlockIndexState = require("../api/block-index-state/block-index-state.model")
 const io = require("../utils/io")
 
 class ActionHandler extends AbstractActionHandler {
@@ -43,23 +43,35 @@ class ActionHandler extends AbstractActionHandler {
   async handleWithState (handle) {
     const context = { socket: io.getSocket() }
     const state = { post: Post, blockIndexState: BlockIndexState }
-    await handle(state, context)
+    try {
+      await handle(state, context)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   async updateIndexState(state, block, isReplay) {
-    await state.blockIndexState.update({}, {
-      blockNumber: block.blockNumber,
-      blockHash: block.blockHash,
-      isReplay,
-    }, { upsert: true }).exec()
+    try {
+      await state.blockIndexState.update({}, {
+        blockNumber: block.blockNumber,
+        blockHash: block.blockHash,
+        isReplay,
+      }, { upsert: true }).exec()
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   async loadIndexState() {
-    const { blockNumber, blockHash } = await BlockIndexState.findOne({}).exec()
-    if (blockNumber && blockHash) {
-      return { blockNumber, blockHash }
+    try {
+      const { blockNumber, blockHash } = await BlockIndexState.findOne({}).exec()
+      if (blockNumber && blockHash) {
+        return { blockNumber, blockHash }
+      }
+      return { blockNumber: 0, blockHash: "" }
+    } catch (err) {
+      console.error(err)
     }
-    return { blockNumber: 0, blockHash: "" }
   }
 }
 

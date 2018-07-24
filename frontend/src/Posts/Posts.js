@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react'
 
-import Post from "./Post/Post"
+import Post from './Post/Post'
 
 const Posts = ({ posts, deletePost, editPost, likePost }) => posts.map(post => (
   <Post

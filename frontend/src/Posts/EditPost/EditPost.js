@@ -1,8 +1,8 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class EditPost extends Component {
-  static displayName = "EditPost"
+  static displayName = 'EditPost'
 
   static propTypes = {
     post: PropTypes.shape({
@@ -12,16 +12,16 @@ class EditPost extends Component {
       title: PropTypes.string.isRequired,
       content: PropTypes.string.isRequired,
       tag: PropTypes.string.isRequired,
-      likes: PropTypes.number.isRequired,
+      likes: PropTypes.number.isRequired
     }).isRequired,
     savePost: PropTypes.func.isRequired,
-    toggleEditing: PropTypes.func.isRequired,
+    toggleEditing: PropTypes.func.isRequired
   }
 
   state = {
     title: this.props.post.title,
     content: this.props.post.content,
-    tag: this.props.post.tag,
+    tag: this.props.post.tag
   }
 
   handleOnChange = (event, field) => {
@@ -32,43 +32,43 @@ class EditPost extends Component {
     this.props.savePost({ ...this.props.post, ...this.state })
   };
 
-  render() {
+  render () {
     return (
-      <div className="card-item">
-        <div className="padding-30">
+      <div className='card-item'>
+        <div className='padding-30'>
           <input
-            className="margin-bottom-15"
-            name="title"
-            onChange={(e) => this.handleOnChange(e, "title")}
+            className='margin-bottom-15'
+            name='title'
+            onChange={(e) => this.handleOnChange(e, 'title')}
             value={this.state.title}
-            placeholder="Title"
+            placeholder='Title'
           />
           <textarea
-            className="margin-bottom-15"
-            name="content"
-            onChange={(e) => this.handleOnChange(e, "content")}
+            className='margin-bottom-15'
+            name='content'
+            onChange={(e) => this.handleOnChange(e, 'content')}
             value={this.state.content}
             rows={4}
-            placeholder="Content"
+            placeholder='Content'
           />
           <input
-            className="margin-bottom-15"
-            name="tag"
-            onChange={(e) => this.handleOnChange(e, "tag")}
+            className='margin-bottom-15'
+            name='tag'
+            onChange={(e) => this.handleOnChange(e, 'tag')}
             value={this.state.tag}
-            placeholder="Tag"
+            placeholder='Tag'
           />
           <button
             onClick={this.handlePostSave}
-            type="submit"
-            className="margin-right-15"
+            type='submit'
+            className='margin-right-15'
           >
             Update
           </button>
           <button
             onClick={this.props.toggleEditing}
-            type="submit"
-            className="secondary"
+            type='submit'
+            className='secondary'
           >
             Cancel
           </button>

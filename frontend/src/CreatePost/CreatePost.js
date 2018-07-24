@@ -1,18 +1,18 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class CreatePost extends Component {
-  static displayName = "CreatePost"
+  static displayName = 'CreatePost'
 
   static propTypes = {
     createPost: PropTypes.func.isRequired,
-    toggleCreate: PropTypes.func.isRequired,
+    toggleCreate: PropTypes.func.isRequired
   }
 
   state = {
-    title: "",
-    content: "",
-    tag: "",
+    title: '',
+    content: '',
+    tag: ''
   }
 
   handleOnChange = e => {
@@ -23,50 +23,50 @@ class CreatePost extends Component {
     e.preventDefault()
     this.props.createPost({ ...this.state, likes: 0 })
     this.setState({
-      title: "",
-      content: "",
-      tag: "",
+      title: '',
+      content: '',
+      tag: ''
     })
     this.props.toggleCreate()
   }
 
-  render() {
+  render () {
     return (
-      <div className="createContainer padding-30">
-        <div className="card-item padding-30">
+      <div className='createContainer padding-30'>
+        <div className='card-item padding-30'>
           <input
-            className="margin-bottom-15"
-            name="title"
+            className='margin-bottom-15'
+            name='title'
             value={this.state.title}
             onChange={this.handleOnChange}
-            placeholder="Title"
+            placeholder='Title'
           />
           <textarea
-            className="margin-bottom-15"
-            name="content"
+            className='margin-bottom-15'
+            name='content'
             value={this.state.content}
             onChange={this.handleOnChange}
             rows={4}
-            placeholder="Content"
+            placeholder='Content'
           />
           <input
-            className="margin-bottom-15"
-            name="tag"
+            className='margin-bottom-15'
+            name='tag'
             value={this.state.tag}
             onChange={this.handleOnChange}
-            placeholder="Tag"
+            placeholder='Tag'
           />
           <button
             onClick={this.createPost}
-            type="submit"
-            className="margin-right-15"
+            type='submit'
+            className='margin-right-15'
           >
             Create Post
           </button>
           <button
             onClick={this.props.toggleCreate}
-            type="submit"
-            className="secondary"
+            type='submit'
+            className='secondary'
           >
             Cancel
           </button>

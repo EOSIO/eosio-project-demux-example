@@ -1,39 +1,37 @@
-import React, { Component } from "react"
-import axios from "axios"
+import React, { Component } from 'react'
+import axios from 'axios'
 
-import EOSClient from "./utils/eos-client"
-import IOClient from "./utils/io-client"
-import CreatePost from "./CreatePost/CreatePost"
-import Posts from "./Posts/Posts"
-import Logo from "./assets/img/logo.svg"
-import "./assets/styles/core.css"
+import EOSClient from './utils/eos-client'
+import IOClient from './utils/io-client'
+import CreatePost from './CreatePost/CreatePost'
+import Posts from './Posts/Posts'
+import Logo from './assets/img/logo.svg'
+import './assets/styles/core.css'
 
 class App extends Component {
-  static displayName = "App"
-
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       createOpen: false,
-      posts: [],
+      posts: []
     }
     const contractAccount = process.env.REACT_APP_EOS_ACCOUNT
     this.eos = new EOSClient(contractAccount, contractAccount)
     this.io = new IOClient()
   }
 
-  async componentDidMount() {
+  async componentDidMount () {
     this.loadPosts()
-    this.io.onMessage("createpost", (post) => {
+    this.io.onMessage('createpost', (post) => {
       this.handleUpdatePost(post)
     })
-    this.io.onMessage("editpost", (post) => {
+    this.io.onMessage('editpost', (post) => {
       this.handleUpdatePost(post)
     })
-    this.io.onMessage("likepost", (post) => {
+    this.io.onMessage('likepost', (post) => {
       this.handleLikePost(post)
     })
-    this.io.onMessage("deletepost", (post) => {
+    this.io.onMessage('deletepost', (post) => {
       this.handleDeletePost(post)
     })
   }
@@ -89,10 +87,10 @@ class App extends Component {
     this.eos
       .transaction(
         process.env.REACT_APP_EOS_ACCOUNT,
-        "createpost", {
+        'createpost', {
           author: process.env.REACT_APP_EOS_ACCOUNT,
-          ...newPost,
-        },
+          ...newPost
+        }
       )
       .catch(err => {
         console.log(err)
@@ -104,10 +102,10 @@ class App extends Component {
     this.handleDeletePost(post)
     this.eos
       .transaction(process.env.REACT_APP_EOS_ACCOUNT,
-        "deletepost",
+        'deletepost',
         {
           contractPkey: post.contractPkey,
-          _id: post._id,
+          _id: post._id
         })
       .catch(err => {
         console.log(err)
@@ -119,9 +117,9 @@ class App extends Component {
     this.handleUpdatePost(post)
     this.eos
       .transaction(process.env.REACT_APP_EOS_ACCOUNT,
-        "editpost",
+        'editpost',
         {
-          ...post,
+          ...post
         })
       .catch(err => {
         console.log(err)
@@ -134,10 +132,10 @@ class App extends Component {
     this.eos
       .transaction(
         process.env.REACT_APP_EOS_ACCOUNT,
-        "likepost", {
+        'likepost', {
           contractPkey: post.contractPkey,
-          _id: post._id,
-        },
+          _id: post._id
+        }
       )
       .catch(err => {
         console.log(err)
@@ -147,18 +145,18 @@ class App extends Component {
   // Toggle if create window is open
   toggleCreate = () => {
     this.setState(prevState => ({
-      createOpen: !prevState.createOpen,
+      createOpen: !prevState.createOpen
     }))
   }
 
-  render() {
+  render () {
     return (
-      <div className={`layoutStandard ${this.state.createOpen ? "createOpen" : ""}`}>
-        <div className="logo"><a href="/"><img src={Logo} alt="Eos.io" /></a></div>
-        <div className="main">
-          <div className="toggleCreate" onClick={this.toggleCreate}></div>
+      <div className={`layoutStandard ${this.state.createOpen ? 'createOpen' : ''}`}>
+        <div className='logo'><a href='/'><img src={Logo} alt='Eos.io' /></a></div>
+        <div className='main'>
+          <div className='toggleCreate' onClick={this.toggleCreate} />
           <CreatePost createPost={this.createPost} toggleCreate={this.toggleCreate} />
-          <div className="cards">
+          <div className='cards'>
             <Posts
               posts={this.state.posts}
               handleOnChange={this.handleOnChange}
@@ -172,5 +170,7 @@ class App extends Component {
     )
   }
 }
+
+App.displayName = 'App'
 
 export default App

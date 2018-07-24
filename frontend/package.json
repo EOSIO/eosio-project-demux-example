@@ -20,17 +20,16 @@
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src"
+    "lint": "standard --fix --config .eslintrc | snazzy"
   },
   "devDependencies": {
-    "babel-plugin-import": "^1.7.0",
-    "eslint": "^5.1.0",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-loader": "2.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jsx-a11y": "6.0.3",
-    "eslint-plugin-react": "^7.10.0",
+    "babel-eslint": "^8.2.6",
     "node-sass-chokidar": "^1.3.3",
-    "npm-run-all": "^4.1.3"
+    "npm-run-all": "^4.1.3",
+    "snazzy": "^7.1.1",
+    "standard": "^11.0.1"
+  },
+  "standard": {
+    "parser": "babel-eslint"
   }
 }

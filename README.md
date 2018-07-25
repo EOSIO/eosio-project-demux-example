@@ -1,8 +1,22 @@
 # eosio-hackathon-starter
 
+## Introduction
+This is a sample DApp that demonstrates the basic usage of eosio software and how to build a DApp on it.
+
 ## Getting Started
 
 ### Prerequisites
+
+It is recommended to use macOS for the following steps.
+
+### Docker
+
+Make sure Docker and Node.js are installed.
+
+Install Docker: https://docs.docker.com/docker-for-mac/install/
+Install Node.js: https://nodejs.org/en/
+
+### EOSIO
 
 #### Nodeos
 Follow the instructions on the [Developer Portal for the Docker Quickstart](https://developers.eos.io/eosio-nodeos/docs/docker-quickstart) to run nodeos, the daemon to run a EOSIO node

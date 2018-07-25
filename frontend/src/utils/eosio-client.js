@@ -9,19 +9,17 @@ const EOSIO_CONFIG = {
 }
 
 export default class EOSIOClient {
-  constructor (contractName, contractSender) {
-    this.contractName = contractName
-    this.contractSender = contractSender
-
+  constructor (contractAccount) {
+    this.contractAccount = contractAccount
     this.eosio = Eosjs(EOSIO_CONFIG)
   }
 
-  getTableRows = table => this.eosio.getTableRows(true, this.contractName, this.contractSender, table);
+  getTableRows = (scope, table) => this.eosio.getTableRows(true, this.contractAccount, scope, table);
 
   transaction = (actor, action, data) => this.eosio.transaction({
     actions: [
       {
-        account: this.contractName,
+        account: this.contractAccount,
         name: action,
         authorization: [
           {

@@ -1,8 +1,22 @@
 # eosio-hackathon-starter
 
+## Introduction
+This is a sample DApp that demonstrates the basic usage of eosio software and how to build a DApp on it.
+
 ## Getting Started
 
 ### Prerequisites
+
+It is recommended to use macOS for the following steps.
+
+### Docker
+
+Make sure Docker and Node.js are installed.
+
+Install Docker: https://docs.docker.com/docker-for-mac/install/
+Install Node.js: https://nodejs.org/en/
+
+### EOSIO
 
 #### Nodeos
 Follow the instructions on the [Developer Portal for the Docker Quickstart](https://developers.eos.io/eosio-nodeos/docs/docker-quickstart) to run nodeos, the daemon to run a EOSIO node
@@ -80,7 +94,7 @@ docker exec --detach eosio keosd --wallet-dir=/opt/eosio/bin/data-dir --http-ser
 1.  Update the [.env](https://github.com/EOSIO/eosio-hackathon-starter/blob/master/backend/.env) with the following values: 
     ```bash
     EOS_CONTRACT_ACCOUNT=blog
-    EOS_STARTING_BLOCK=0
+    EOS_STARTING_BLOCK=1
 
     EOS_HTTP_URL=http://0.0.0.0:8888
     PORT=4000

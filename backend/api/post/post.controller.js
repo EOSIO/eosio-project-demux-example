@@ -20,7 +20,7 @@ const listConfirmed = async (req, res) => {
 const createEmpty = async (req, res) => {
   const post = new Post()
   try {
-    await post.save().exec()
+    await post.save()
     res.send(post)
   } catch (err) {
     console.error(err)

@@ -1,10 +1,10 @@
 const {
-  handlers: { AbstractActionHandler },
-} = require("demux")
-const mongoose = require("mongoose")
-const Post = require("../api/post/post.model")
-const BlockIndexState = require("../api/block-index-state/block-index-state.model")
-const io = require("../utils/io")
+  handlers: { AbstractActionHandler }
+} = require('demux')
+const mongoose = require('mongoose')
+const Post = require('../api/post/post.model')
+const BlockIndexState = require('../api/block-index-state/block-index-state.model')
+const io = require('../utils/io')
 
 class ActionHandler extends AbstractActionHandler {
   constructor (updaters, effects, uri) {
@@ -50,30 +50,30 @@ class ActionHandler extends AbstractActionHandler {
     }
   }
 
-  async updateIndexState(state, block, isReplay) {
+  async updateIndexState (state, block, isReplay) {
     try {
       await state.blockIndexState.update({}, {
         blockNumber: block.blockNumber,
         blockHash: block.blockHash,
-        isReplay,
+        isReplay
       }, { upsert: true }).exec()
     } catch (err) {
       console.error(err)
     }
   }
 
-  async loadIndexState() {
+  async loadIndexState () {
     try {
       let blockHash
       let blockNumber
       const indexState = await BlockIndexState.findOne({}).exec()
-      if(indexState) {
+      if (indexState) {
         ({ blockHash, blockNumber } = indexState)
       }
       if (blockNumber && blockHash) {
         return { blockNumber, blockHash }
       }
-      return { blockNumber: 0, blockHash: "" }
+      return { blockNumber: 0, blockHash: '' }
     } catch (err) {
       console.error(err)
     }

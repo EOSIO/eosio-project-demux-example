@@ -5,7 +5,7 @@ const {
   watchers: { BaseActionWatcher }
 } = require('demux')
 
-const ActionHandler = require("./ActionHandler")
+const ActionHandler = require('./ActionHandler')
 
 const updaters = require('./updaters')
 const effects = require('./effects')

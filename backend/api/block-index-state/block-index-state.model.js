@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 
 const { Schema } = mongoose
 
@@ -8,11 +8,11 @@ try {
   const BlockIndexStateSchema = new Schema({
     blockNumber: Number,
     blockHash: String,
-    isReplay: Boolean,
+    isReplay: Boolean
   })
-  BlockIndexState = mongoose.model("BlockIndexState", BlockIndexStateSchema)
+  BlockIndexState = mongoose.model('BlockIndexState', BlockIndexStateSchema)
 } catch (e) {
-  BlockIndexState = mongoose.model("BlockIndexState")
+  BlockIndexState = mongoose.model('BlockIndexState')
 }
 
 module.exports = BlockIndexState

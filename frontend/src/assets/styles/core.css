@@ -5,7 +5,8 @@
     outline: 0; }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.8rem;
   margin: 0;
   padding: 0; }
 
@@ -24,6 +25,9 @@ img {
 
 svg:not(:root) {
   overflow: hidden; }
+
+.margin-top-0 {
+  margin-top: 0; }
 
 .margin-bottom-15 {
   margin-bottom: 15px; }
@@ -45,6 +49,7 @@ input, textarea {
     border-color: #000000; }
 
 textarea {
+  line-height: 1.8rem;
   min-width: 100%;
   max-width: 100%; }
 
@@ -74,14 +79,80 @@ button, .btn, submit {
   background: #ffffff;
   box-shadow: 0px 2px 20px #e4e4e4;
   overflow: hidden; }
-  .card-item .heart {
-    position: absolute;
-    top: 30px;
-    right: 30px; }
   .card-item img.center {
     margin: 0 auto;
     align-self: center;
     justify-self: center; }
+  .card-item .detailAvatar {
+    background: url(img/icons/avatar.svg);
+    background-repeat: no-repeat;
+    background-position: left center;
+    width: auto;
+    height: 30px;
+    padding: 0px 0 0 34px; }
+  .card-item .detailHeart {
+    background: url(img/icons/heart.svg);
+    background-repeat: no-repeat;
+    background-position: left center;
+    width: auto;
+    height: 30px;
+    padding: 0px 0 0 34px; }
+  .card-item .detailTag {
+    background: url(img/icons/tag.svg);
+    background-repeat: no-repeat;
+    background-position: left center;
+    width: auto;
+    height: 30px;
+    padding: 0px 0 0 34px; }
+  .card-item .iconHeart {
+    background: url(img/icons/heart.svg);
+    width: 24px;
+    height: 22px;
+    cursor: pointer;
+    position: absolute;
+    top: 30px;
+    right: 30px; }
+  .card-item .iconEdit {
+    background: url(img/icons/edit.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 25px;
+    cursor: pointer;
+    display: block; }
+  .card-item .iconDelete {
+    background: url(img/icons/delete.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 25px;
+    cursor: pointer;
+    display: block; }
+  .card-item .heart {
+    background-color: #D8DFE2;
+    display: inline-block;
+    height: 15px;
+    margin: 0 5px;
+    transform: rotate(-45deg);
+    width: 15px;
+    position: absolute;
+    top: 30px;
+    right: 30px; }
+    .card-item .heart:before, .card-item .heart:after {
+      content: "";
+      background-color: #D8DFE2;
+      border-radius: 50%;
+      height: 15px;
+      position: absolute;
+      width: 15px; }
+    .card-item .heart:before {
+      top: -7px;
+      left: 0; }
+    .card-item .heart:after {
+      left: 7px;
+      top: 0; }
+  .card-item.liked .heart {
+    background-color: #f35ee7; }
+    .card-item.liked .heart:before, .card-item.liked .heart:after {
+      background-color: #f35ee7; }
 
 .card-footer {
   background: #fafafa;
@@ -100,27 +171,6 @@ button, .btn, submit {
   grid-template-columns: auto auto auto;
   grid-gap: 0px;
   padding: 1.5rem 2rem; }
-
-.margin-top-5 {
-  margin-top: 5px; }
-
-.small-author, .small-heart {
-  top: 3px;
-  position: relative;
-  display: inline-block;
-  margin-right: 8px;
-  height: 16px;
-  width: 16px; }
-
-.tag {
-  background: #d5ffd5;
-  border: 1px solid #1aee1a;
-  color: #00b000;
-  padding: .25rem .5rem .25rem .4rem;
-  border-radius: .25rem; }
-
-.icon {
-  cursor: pointer; }
 
 .layoutStandard .createContainer {
   height: 0;
@@ -158,22 +208,15 @@ button, .btn, submit {
   opacity: 0; }
 
 .layoutStandard .logo {
-  background: #141C47;
-  width: 100%;
-  float: left;
-  height: 70px;
-  color: #ffffff;
+  background: #141C47 url(img/logo.svg);
+  background-position: 30px center;
+  background-repeat: no-repeat;
+  height: 80px;
+  position: relative;
   z-index: 2;
-  position: relative; }
-  .layoutStandard .logo a {
-    display: block;
-    margin: 25px auto;
-    text-align: center;
-    color: #ffffff;
-    text-decoration: none;
-    position: relative; }
-    .layoutStandard .logo a img {
-      margin: -14px 0 0 30px; }
+  color: #ffffff;
+  padding: 26px 20px 0 80px;
+  font-size: 1.6rem; }
 
 .layoutStandard .main {
   min-height: 100vh;

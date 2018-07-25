@@ -64,7 +64,12 @@ class ActionHandler extends AbstractActionHandler {
 
   async loadIndexState() {
     try {
-      const { blockNumber, blockHash } = await BlockIndexState.findOne({}).exec()
+      let blockHash
+      let blockNumber
+      const indexState = await BlockIndexState.findOne({}).exec()
+      if(indexState) {
+        ({ blockHash, blockNumber } = indexState)
+      }
       if (blockNumber && blockHash) {
         return { blockNumber, blockHash }
       }

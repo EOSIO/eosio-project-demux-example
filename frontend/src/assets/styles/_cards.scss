@@ -10,7 +10,7 @@
     transform: scale(1) rotate(-45deg);;
   }
   35% {
-    transform: scale(1.3) rotate(-45deg);;
+    transform: scale(1.4) rotate(-45deg);;
   }
   100% {
     transform: scale(1) rotate(-45deg);;
@@ -22,16 +22,19 @@
   background: #ffffff;
   box-shadow: 0px 3px 18px rgba(112, 119, 136, .15);
   overflow: hidden;
+  p {
+    color: #6b808f;
+  }
   img.center {
     margin: 0 auto;
     align-self: center;
     justify-self: center;
   }
   .card-footer {
-    background: #fafafa;
-    border-top: 1px solid #eaeaea;
-    border-bottom: 1px solid #eaeaea;
-    color: #888888;
+    background: #f7fafc;
+    border-top: 1px solid #dde7f1;
+    border-bottom: 1px solid #dde7f1;
+    color: #b1bfc8;
   }
   .detailAvatar {
     background: url(img/icons/avatar.svg);
@@ -96,7 +99,7 @@
   }
   &.liked {
     .heart {
-      animation-duration: 1.5s;
+      animation-duration: .6s;
       animation-name: heart;
       background-color: #f35ee7;
       &:before, &:after {

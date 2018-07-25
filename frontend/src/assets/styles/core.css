@@ -80,7 +80,7 @@ button, .btn, submit {
   0% {
     transform: scale(1) rotate(-45deg); }
   35% {
-    transform: scale(1.3) rotate(-45deg); }
+    transform: scale(1.4) rotate(-45deg); }
   100% {
     transform: scale(1) rotate(-45deg); } }
 
@@ -89,15 +89,17 @@ button, .btn, submit {
   background: #ffffff;
   box-shadow: 0px 3px 18px rgba(112, 119, 136, 0.15);
   overflow: hidden; }
+  .card-item p {
+    color: #6b808f; }
   .card-item img.center {
     margin: 0 auto;
     align-self: center;
     justify-self: center; }
   .card-item .card-footer {
-    background: #fafafa;
-    border-top: 1px solid #eaeaea;
-    border-bottom: 1px solid #eaeaea;
-    color: #888888; }
+    background: #f7fafc;
+    border-top: 1px solid #dde7f1;
+    border-bottom: 1px solid #dde7f1;
+    color: #b1bfc8; }
   .card-item .detailAvatar {
     background: url(img/icons/avatar.svg); }
   .card-item .detailHeart {
@@ -149,7 +151,7 @@ button, .btn, submit {
       left: 7px;
       top: 0; }
   .card-item.liked .heart {
-    animation-duration: 1.5s;
+    animation-duration: .6s;
     animation-name: heart;
     background-color: #f35ee7; }
     .card-item.liked .heart:before, .card-item.liked .heart:after {

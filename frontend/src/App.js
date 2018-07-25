@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-import EOSClient from './utils/eos-client'
+import EOSIOClient from './utils/eosio-client'
 import IOClient from './utils/io-client'
 import CreatePost from './CreatePost/CreatePost'
 import Posts from './Posts/Posts'
@@ -11,28 +11,25 @@ import './assets/styles/core.css'
 class App extends Component {
   state = {
     createOpen: false,
-    posts: [],
+    posts: []
   }
 
   // Instantiate shared eosjs helper
-  constructor(props) {
+  constructor (props) {
     super(props)
-    const contractAccount = process.env.REACT_APP_EOS_ACCOUNT
-    this.eos = new EOSClient(contractAccount, contractAccount)
+    const contractAccount = process.env.REACT_APP_EOSIO_ACCOUNT
+    this.eosio = new EOSIOClient(contractAccount, contractAccount)
     this.io = new IOClient()
   }
 
   // Enable Realtime updates via Socket.io
-  async componentDidMount() {
+  async componentDidMount () {
     this.loadPosts()
     this.io.onMessage('createpost', (post) => {
       this.handleUpdatePost(post)
     })
     this.io.onMessage('editpost', (post) => {
       this.handleUpdatePost(post)
-    })
-    this.io.onMessage('likepost', (post) => {
-      this.handleLikePost(post)
     })
     this.io.onMessage('deletepost', (post) => {
       this.handleDeletePost(post)
@@ -85,82 +82,85 @@ class App extends Component {
 
   // Create a post
   createPost = async (post) => {
-    let newPost = await axios.get(`${process.env.REACT_APP_API_URL}/posts/newEmpty`)
-    newPost = { ...newPost.data, ...post, author: process.env.REACT_APP_EOS_ACCOUNT }
+    try {
+      let newPost = await axios.get(`${process.env.REACT_APP_API_URL}/posts/newEmpty`)
+      newPost = { ...newPost.data, ...post, author: process.env.REACT_APP_EOSIO_ACCOUNT }
 
-    this.handleUpdatePost(newPost)
-
-    this.eos
-      .transaction(
-        process.env.REACT_APP_EOS_ACCOUNT,
+      await this.eosio.transaction(
+        process.env.REACT_APP_EOSIO_ACCOUNT,
         'createpost', {
-          author: process.env.REACT_APP_EOS_ACCOUNT,
-          ...newPost,
-        },
+          author: process.env.REACT_APP_EOSIO_ACCOUNT,
+          ...newPost
+        }
       )
-      .catch(err => {
-        console.log(err)
-      })
+      this.handleUpdatePost(newPost)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   // Delete a post
-  deletePost = (post) => {
-    this.handleDeletePost(post)
-    this.eos
-      .transaction(process.env.REACT_APP_EOS_ACCOUNT,
+  deletePost = async (post) => {
+    try {
+      this.eosio.transaction(
+        process.env.REACT_APP_EOSIO_ACCOUNT,
         'deletepost',
         {
           contractPkey: post.contractPkey,
-          _id: post._id,
-        })
-      .catch(err => {
-        console.log(err)
-      })
+          _id: post._id
+        }
+      )
+      this.handleDeletePost(post)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   // Edit a post
-  editPost = (post) => {
-    this.handleUpdatePost(post)
-    this.eos
-      .transaction(process.env.REACT_APP_EOS_ACCOUNT,
+  editPost = async (post) => {
+    try {
+      await this.eosio.transaction(
+        process.env.REACT_APP_EOSIO_ACCOUNT,
         'editpost',
         {
-          ...post,
-        })
-      .catch(err => {
-        console.log(err)
-      })
+          ...post
+        }
+      )
+      this.handleUpdatePost(post)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   // Like a post
-  likePost = (post) => {
-    this.handleLikePost(post)
-    this.eos
-      .transaction(
-        process.env.REACT_APP_EOS_ACCOUNT,
+  likePost = async (post) => {
+    try {
+      await this.eosio.transaction(
+        process.env.REACT_APP_EOSIO_ACCOUNT,
         'likepost', {
           contractPkey: post.contractPkey,
-          _id: post._id,
-        },
+          _id: post._id
+        }
       )
-      .catch(err => {
-        console.log(err)
-      })
+      this.handleLikePost(post)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   // Toggle if create window is open
   toggleCreate = () => {
     this.setState(prevState => ({
-      createOpen: !prevState.createOpen,
+      createOpen: !prevState.createOpen
     }))
   }
 
-  render() {
+  render () {
     return (
       <div className={`layoutStandard ${this.state.createOpen ? 'createOpen' : ''}`}>
         <div className='logo'><a href='/'><img src={Logo} alt='Eos.io' /></a></div>
         <div className='main'>
-          <div className='toggleCreate' onClick={this.toggleCreate}></div>
+          <div className='toggleCreate' onClick={this.toggleCreate} />
           <CreatePost createPost={this.createPost} toggleCreate={this.toggleCreate} />
           <div className='cards'>
             <Posts

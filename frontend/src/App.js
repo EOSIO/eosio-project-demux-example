@@ -19,7 +19,7 @@ class App extends Component {
   constructor (props) {
     super(props)
     const contractAccount = process.env.REACT_APP_EOSIO_ACCOUNT
-    this.eosio = new EOSIOClient(contractAccount, contractAccount)
+    this.eosio = new EOSIOClient(contractAccount)
     this.io = new IOClient()
   }
 

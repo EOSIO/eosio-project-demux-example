@@ -14,7 +14,7 @@ class App extends Component {
         pkey: '0',
         title: 'Fun',
         content: `You're meant to have fun in life. Let's build an almighty mountain.
-        We want to use a lot pressure while using no pressure at all. You don't have 
+        We want to use a lot pressure while using no pressure at all. You don't have
         to be crazy to do this but it does help. It's beautiful - and we haven't even
         done anything to it yet.`,
         likes: '4',
@@ -242,7 +242,7 @@ class App extends Component {
         <div className='logo'>Hackathon Starter</div>
         <div className='main'>
           <div className='toggleCreate' onClick={this.toggleCreate} />
-          <CreatePost createPost={this.createPost} toggleCreate={this.toggleCreate} />
+          <CreatePost createPost={this.createPost} />
           <div className='cards'>
             <Posts
               posts={this.state.postsMocked}

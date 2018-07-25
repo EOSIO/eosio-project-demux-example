@@ -13,8 +13,8 @@ const effects = require('./effects')
 const actionHandler = new ActionHandler(updaters, effects, process.env.MONGODB_URL)
 
 const actionReader = new NodeosActionReader(
-  process.env.EOS_HTTP_URL,
-  parseInt(process.env.EOS_STARTING_BLOCK, 10) // First actions relevant to this dapp happen at this block
+  process.env.EOSIO_HTTP_URL,
+  parseInt(process.env.EOSIO_STARTING_BLOCK, 10) // First actions relevant to this dapp happen at this block
 )
 
 const actionWatcher = new BaseActionWatcher(

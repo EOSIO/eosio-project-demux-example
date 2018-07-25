@@ -1278,7 +1278,7 @@ delegates@^1.0.0:
 
 "demux@git+ssh://git@github.com:EOSIO/demux-js.git":
   version "0.0.1"
-  resolved "git+ssh://git@github.com:EOSIO/demux-js.git#9d723199db36c14fcf27df15c3240de7a9990dba"
+  resolved "git+ssh://git@github.com:EOSIO/demux-js.git#395f4c0cb483dd6019ed6f20bbdae48d3dc123cb"
   dependencies:
     massive "^5.1.3"
     pg-promise "^8.4.5"

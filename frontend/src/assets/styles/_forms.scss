@@ -24,6 +24,9 @@ button, .btn, submit {
   font-size: 1rem;
   cursor: pointer;
   background: linear-gradient(135deg,#5fe2dc 0%,#0d5de4 100%);
+  &:hover {
+    background: linear-gradient(135deg,#0d5de4 0%,#5fe2dc 100%);
+  }
   &.secondary {
     background: transparent;
     padding: .9rem 1.4rem;

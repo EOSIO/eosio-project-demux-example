@@ -16,33 +16,49 @@
     top: 30px;
     right: 30px;
   }
+  img.center {
+    margin: 0 auto;
+    align-self: center;
+    justify-self: center;
+  }
 }
 .card-footer {
   background: #fafafa;
   border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
-  color: #ffffff;
-  align-self: center;
-  justify-self: center;
-  img {
-    margin: 0 auto;
-    align-self: center;
-    justify-self: center;
-  }
+  color: #888888;
 }
 
 .grid-2 {
   display: grid;
   grid-template-columns: auto auto;
   grid-gap: 0px;
-  padding: 1.5rem 0;
+  padding: 1.5rem 1rem;
 }
 
-.author {
-  float: left;
-  margin-right: 10px;
+.grid-3 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 0px;
+  padding: 1.5rem 2rem;
+}
+.margin-top-5 {
+  margin-top: 5px;
+}
+.small-author, .small-heart {
+  top: 3px;
+  position: relative;
+  display: inline-block;
+  margin-right: 8px;
   height: 16px;
   width: 16px;
+}
+.tag {
+  background: #d5ffd5;
+  border: 1px solid #1aee1a;
+  color: #00b000;
+  padding: .25rem .5rem .25rem .4rem;
+  border-radius: .25rem;
 }
 
 .icon {

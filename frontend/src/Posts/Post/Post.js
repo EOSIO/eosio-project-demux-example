@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import user from '../assets/img/user.svg'
-import heart from '../assets/img/heart.svg'
-import heartFilled from '../assets/img/heartFilled.svg'
-import pencil from '../assets/img/pencil.svg'
-import trash from '../assets/img/trash.svg'
-
 import EditPost from '../EditPost/EditPost'
 
 class Post extends Component {
@@ -21,6 +15,11 @@ class Post extends Component {
     }))
   }
 
+  likePost = (post) => {
+    this.setState(prevState => ({ liked: !prevState.liked }))
+    this.props.likePost(post)
+  }
+
   savePost = (post) => {
     this.props.editPost(post)
     this.setState(prevState => ({
@@ -29,50 +28,22 @@ class Post extends Component {
   }
 
   render () {
-    const { editing, liked } = this.state
     return (
-      !editing ? (
-        <div className='card-item'>
+      !this.state.editing ? (
+        <div className={`card-item ${this.state.liked ? 'liked' : ''}`} key={this.props.post.pkey}>
           <div className='padding-30'>
-
-            <div
-              onClick={() => {
-                this.setState(prevState => ({ liked: !prevState.liked }))
-                this.props.likePost(this.props.post)
-              }}
-              className='icon'
-            >
-              {!liked ? (
-                <img className='heart' src={heart} alt='Heart' />
-              ) : (
-                <img className='heart' src={heartFilled} alt='Heart' />
-              )}
-            </div>
-
-            <h2>{this.props.post.title}</h2>
+            <div className='heart' onClick={() => {this.likePost(this.props.post)}}></div>
+            <h2 className="margin-top-0">{this.props.post.title}</h2>
             <p>{this.props.post.content}</p>
-
           </div>
-
           <div className='padding-30 card-footer grid-3'>
-
-              <div className="margin-right-15 margin-top-5"><img className='small-author' src={user} alt='User' /> {this.props.post.author} </div>
-              <div className="margin-right-15 margin-top-5"><img className='small-heart' src={heart} alt='Likes' /> {this.props.post.likes} </div>
-              <div className="tag">{`#${this.props.post.tag}`}</div>
-
+            <div className='detailAvatar'>{this.props.post.author}</div>
+            <div className='detailHeart'>{this.props.post.likes}</div>
+            <div className="detailTag">{this.props.post.tag}</div>
           </div>
-
           <div className='padding-30 grid-2'>
-
-            <div
-              onClick={() => {this.props.deletePost(this.props.post)}}
-              className='icon'>
-              <img src={trash} className="center" alt='Delete icon' />
-            </div>
-            <div onClick={this.toggleEditing} className='icon'>
-              <img src={pencil} className="center" alt='Update' />
-            </div>
-
+            <div onClick={() => {this.props.deletePost(this.props.post)}} className='iconDelete'></div>
+            <div onClick={this.toggleEditing} className='iconEdit'></div>
           </div>
         </div>
       ) : (

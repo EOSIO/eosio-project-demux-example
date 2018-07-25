@@ -41,24 +41,15 @@
     }
   }
   .logo {
-    background: #141C47;
-    width: 100%;
-    float: left;
-    height: 70px;
-    color: #ffffff;
-    z-index: 2;
+    background: #141C47 url(img/logo.svg);
+    background-position: 30px center;
+    background-repeat: no-repeat;
+    height: 80px;
     position: relative;
-    a {
-      display: block;
-      margin: 25px auto;
-      text-align: center;
-      color: #ffffff;
-      text-decoration: none;
-      position: relative;
-      img {
-        margin: -14px 0 0 30px;
-      }
-    }
+    z-index: 2;
+    color: #ffffff;
+    padding: 26px 20px 0 80px;
+    font-size: 1.6rem;
   }
   .main {
     min-height: 100vh;

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 const { Schema } = mongoose
 
@@ -7,6 +6,10 @@ let Post = null
 
 try {
   const PostSchema = new Schema({
+    _id: {
+      timestamp: Number,
+      author: String
+    },
     author: String,
     title: String,
     content: String,
@@ -20,7 +23,6 @@ try {
       default: false
     }
   })
-  PostSchema.plugin(AutoIncrement, { inc_field: 'contractPkey' })
   Post = mongoose.model('Post', PostSchema)
 } catch (e) {
   Post = mongoose.model('Post')

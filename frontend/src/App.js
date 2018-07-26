@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import EOSIOClient from './utils/eosio-client'
 import IOClient from './utils/io-client'
-import { updatePostsForCreateAndEdit, updatePostsForLike, updatePostsForDelete } from './utils/posts-updater';
+import { updatePostsForCreateAndEdit, updatePostsForLike, updatePostsForDelete } from './utils/posts-updater'
 import CreatePost from './CreatePost/CreatePost'
 import Posts from './Posts/Posts'
 
@@ -13,10 +13,10 @@ class App extends Component {
     posts: []
   }
 
-  // Instantiate shared eosjs helper
+  // Instantiate shared eosjs helper and socket io helper
   constructor (props) {
     super(props)
-    const contractAccount = process.env.REACT_APP_EOSIO_ACCOUNT
+    const contractAccount = process.env.REACT_APP_EOSIO_CONTRACT_ACCOUNT
     this.eosio = new EOSIOClient(contractAccount)
     this.io = new IOClient()
   }
@@ -25,13 +25,13 @@ class App extends Component {
   async componentDidMount () {
     this.loadPosts()
     this.io.onMessage('createpost', (post) => {
-      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }));
+      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }))
     })
     this.io.onMessage('editpost', (post) => {
-      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }));
+      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }))
     })
     this.io.onMessage('deletepost', (post) => {
-      this.setState((prevState) => ({ posts: updatePostsForDelete(prevState, post) }));
+      this.setState((prevState) => ({ posts: updatePostsForDelete(prevState, post) }))
     })
   }
 
@@ -44,17 +44,24 @@ class App extends Component {
   // Create a post
   createPost = async (post) => {
     try {
-      let newPost = await axios.get(`${process.env.REACT_APP_API_URL}/posts/newEmpty`)
-      newPost = { ...newPost.data, ...post, author: process.env.REACT_APP_EOSIO_ACCOUNT }
+      const newPost = {
+        ...post,
+        _id: {
+          timestamp: Math.floor(Date.now() / 1000),
+          author: process.env.REACT_APP_EOSIO_ACCOUNT
+        },
+        author: process.env.REACT_APP_EOSIO_ACCOUNT
+      }
 
       await this.eosio.transaction(
         process.env.REACT_APP_EOSIO_ACCOUNT,
         'createpost', {
-          author: process.env.REACT_APP_EOSIO_ACCOUNT,
-          ...newPost
+          timestamp: newPost._id.timestamp,
+          author: newPost._id.author,
+          ...post
         }
       )
-      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, newPost) }));
+      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, newPost) }))
     } catch (err) {
       console.error(err)
     }
@@ -67,10 +74,12 @@ class App extends Component {
         process.env.REACT_APP_EOSIO_ACCOUNT,
         'editpost',
         {
+          timestamp: post._id.timestamp,
+          author: post._id.author,
           ...post
         }
       )
-      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }));
+      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }))
     } catch (err) {
       console.error(err)
     }
@@ -79,15 +88,15 @@ class App extends Component {
   // Delete a post
   deletePost = async (post) => {
     try {
-      this.eosio.transaction(
+      await this.eosio.transaction(
         process.env.REACT_APP_EOSIO_ACCOUNT,
         'deletepost',
         {
-          contractPkey: post.contractPkey,
-          _id: post._id
+          timestamp: post._id.timestamp,
+          author: post._id.author
         }
       )
-      this.setState((prevState) => ({ posts: updatePostsForDelete(prevState, post) }));
+      this.setState((prevState) => ({ posts: updatePostsForDelete(prevState, post) }))
     } catch (err) {
       console.error(err)
     }
@@ -99,11 +108,11 @@ class App extends Component {
       await this.eosio.transaction(
         process.env.REACT_APP_EOSIO_ACCOUNT,
         'likepost', {
-          contractPkey: post.contractPkey,
-          _id: post._id
+          timestamp: post._id.timestamp,
+          author: post._id.author
         }
       )
-      this.setState((prevState) => ({ posts: updatePostsForLike(prevState, post) }));
+      this.setState((prevState) => ({ posts: updatePostsForLike(prevState, post) }))
     } catch (err) {
       console.error(err)
     }

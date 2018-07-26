@@ -66,8 +66,10 @@ EditPost.displayName = 'EditPost' // Tell React Dev Tools the component name
 // Assign Prop Types
 EditPost.propTypes = {
   post: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    contractPkey: PropTypes.number.isRequired,
+    _id: PropTypes.shape({
+      timestamp: PropTypes.number.isRequired,
+      author: PropTypes.string.isRequired
+    }),
     author: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,

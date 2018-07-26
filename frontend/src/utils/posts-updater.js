@@ -2,7 +2,7 @@
 export const updatePostsForCreateAndEdit = (prevState, updatedPost) => {
   let alreadyAdded = false
   let updatedPosts = prevState.posts.map(post => {
-    if (post._id === updatedPost._id) {
+    if ((post._id.timestamp === updatedPost._id.timestamp) && (post._id.author === updatedPost._id.author)) {
       alreadyAdded = true
       return { ...post, ...updatedPost }
     }
@@ -19,7 +19,7 @@ export const updatePostsForCreateAndEdit = (prevState, updatedPost) => {
 // Update likes on liked post in posts
 export const updatePostsForLike = (prevState, likedPost) => {
   const updatedPosts = prevState.posts.map(post => {
-    if (post._id === likedPost._id) {
+    if (post._id.timestamp === likedPost._id.timestamp && post._id.author === likedPost._id.author) {
       return { ...post, likes: post.likes + 1 }
     }
     return post
@@ -29,5 +29,5 @@ export const updatePostsForLike = (prevState, likedPost) => {
 
 // Remove deleted post from posts
 export const updatePostsForDelete = (prevState, deletedPost) => {
-  return prevState.posts.filter(post => post._id !== deletedPost._id)
+  return prevState.posts.filter(post => (post._id.timestamp !== deletedPost._id.timestamp) || (post._id.author !== deletedPost._id.author))
 }

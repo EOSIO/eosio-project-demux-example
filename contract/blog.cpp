@@ -16,7 +16,7 @@ public:
   //@abi action
   void createpost(const uint64_t timestamp, const account_name author, const string &title, const string &content, const string &tag)
   {
-    // check if authorized for account to create a blog post
+    // check if authorized for account to sign action
     // if you are not authorized then this action will be aborted
     // and the transaction will by rolled back - any modifications will be reset
     require_auth(author);
@@ -61,7 +61,7 @@ public:
     auto posts = poststable.get_index<N(getbyskey)>();
     uint128_t skey = static_cast<uint128_t>(N(author)) << 64 | timestamp; 
 
-    // verify already exist
+    // verify it already exists
     auto post = posts.find(skey);
     eosio_assert(post != posts.end(), "Post for hash not found");
   }

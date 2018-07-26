@@ -15,10 +15,10 @@ class App extends Component {
     posts: []
   }
 
-  // Instantiate shared eosjs helper
+  // Instantiate shared eosjs helper and socket io helper
   constructor (props) {
     super(props)
-    const contractAccount = process.env.REACT_APP_EOSIO_ACCOUNT
+    const contractAccount = process.env.REACT_APP_EOSIO_CONTRACT_ACCOUNT
     this.eosio = new EOSIOClient(contractAccount, contractAccount)
     this.io = new IOClient()
   }

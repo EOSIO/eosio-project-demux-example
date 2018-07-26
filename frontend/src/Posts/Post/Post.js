@@ -13,20 +13,20 @@ class Post extends Component {
   state = {
     editing: false,
     liked: false
-  };
+  }
 
   toggleEditing = () => {
     this.setState(prevState => ({
       editing: !prevState.editing
     }))
-  };
+  }
 
   savePost = (post) => {
     this.props.editPost(post)
     this.setState(prevState => ({
       editing: !prevState.editing
     }))
-  };
+  }
 
   render () {
     const { editing, liked } = this.state
@@ -37,9 +37,7 @@ class Post extends Component {
 
             <div
               onClick={() => {
-                this.setState(prevState => ({
-                  liked: !prevState.liked
-                }))
+                this.setState(prevState => ({ liked: !prevState.liked }))
                 this.props.likePost(this.props.post)
               }}
               className='icon'
@@ -56,30 +54,24 @@ class Post extends Component {
 
           </div>
 
-          <div className='padding-30 card-footer grid-2'>
+          <div className='padding-30 card-footer grid-3'>
 
-            <div
-              onClick={() => {
-                this.props.deletePost(this.props.post)
-              }}
-              className='icon'
-            >
-              <img src={trash} alt='Delete icon' />
-            </div>
-
-            <div onClick={this.toggleEditing} className='icon'>
-              <img src={pencil} alt='Update' />
-            </div>
+              <div className="margin-right-15 margin-top-5"><img className='small-author' src={user} alt='User' /> {this.props.post.author} </div>
+              <div className="margin-right-15 margin-top-5"><img className='small-heart' src={heart} alt='Likes' /> {this.props.post.likes} </div>
+              <div className="tag">{`#${this.props.post.tag}`}</div>
 
           </div>
 
-          <div className='padding-30'>
+          <div className='padding-30 grid-2'>
 
-            <small>
-              <img className='author' src={user} alt='User' /> {this.props.post.author}
-              <strong>Likes</strong>  {this.props.post.likes} <strong>Tags</strong>
-              {`#${this.props.post.tag}`}
-            </small>
+            <div
+              onClick={() => {this.props.deletePost(this.props.post)}}
+              className='icon'>
+              <img src={trash} className="center" alt='Delete icon' />
+            </div>
+            <div onClick={this.toggleEditing} className='icon'>
+              <img src={pencil} className="center" alt='Update' />
+            </div>
 
           </div>
         </div>
@@ -91,6 +83,7 @@ class Post extends Component {
 }
 Post.displayName = 'Post' // Tell React Dev Tools the component name
 
+// Assign Prop Types
 Post.propTypes = {
   post: PropTypes.shape({
     _id: PropTypes.string.isRequired,

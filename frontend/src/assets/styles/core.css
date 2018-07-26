@@ -4,6 +4,17 @@
   *:focus {
     outline: 0; }
 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0; }
+
+hr {
+  border: none;
+  height: 1px;
+  background: #eaeaea;
+  margin: 2.5rem 0; }
+
 ::placeholder {
   color: #888888; }
 
@@ -22,32 +33,6 @@ svg:not(:root) {
 
 .padding-30 {
   padding: 30px; }
-
-.float-left {
-  float: left; }
-
-.border-bottom {
-  border-bottom: 1px solid #E1D9F0; }
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 0; }
-
-hr {
-  border: none;
-  height: 1px;
-  background: #eaeaea;
-  margin: 2.5rem 0; }
-
-.text-align-center {
-  text-align: center; }
-
-.text-align-left {
-  text-align: left; }
-
-.text-align-right {
-  text-align: right; }
 
 input, textarea {
   width: 100%;
@@ -93,30 +78,46 @@ button, .btn, submit {
     position: absolute;
     top: 30px;
     right: 30px; }
+  .card-item img.center {
+    margin: 0 auto;
+    align-self: center;
+    justify-self: center; }
 
 .card-footer {
   background: #fafafa;
   border-top: 1px solid #eaeaea;
   border-bottom: 1px solid #eaeaea;
-  color: #ffffff;
-  align-self: center;
-  justify-self: center; }
-  .card-footer img {
-    margin: 0 auto;
-    align-self: center;
-    justify-self: center; }
+  color: #888888; }
 
 .grid-2 {
   display: grid;
   grid-template-columns: auto auto;
   grid-gap: 0px;
-  padding: 1.5rem 0; }
+  padding: 1.5rem 1rem; }
 
-.author {
-  float: left;
-  margin-right: 10px;
+.grid-3 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 0px;
+  padding: 1.5rem 2rem; }
+
+.margin-top-5 {
+  margin-top: 5px; }
+
+.small-author, .small-heart {
+  top: 3px;
+  position: relative;
+  display: inline-block;
+  margin-right: 8px;
   height: 16px;
   width: 16px; }
+
+.tag {
+  background: #d5ffd5;
+  border: 1px solid #1aee1a;
+  color: #00b000;
+  padding: .25rem .5rem .25rem .4rem;
+  border-radius: .25rem; }
 
 .icon {
   cursor: pointer; }

@@ -6,8 +6,6 @@ import IOClient from './utils/io-client'
 import { updatePostsForCreateAndEdit, updatePostsForLike, updatePostsForDelete } from './utils/posts-updater'
 import CreatePost from './CreatePost/CreatePost'
 import Posts from './Posts/Posts'
-import Logo from './assets/img/logo.svg'
-import './assets/styles/core.css'
 
 class App extends Component {
   state = {
@@ -19,7 +17,7 @@ class App extends Component {
   constructor (props) {
     super(props)
     const contractAccount = process.env.REACT_APP_EOSIO_CONTRACT_ACCOUNT
-    this.eosio = new EOSIOClient(contractAccount, contractAccount)
+    this.eosio = new EOSIOClient(contractAccount)
     this.io = new IOClient()
   }
 
@@ -130,10 +128,10 @@ class App extends Component {
   render () {
     return (
       <div className={`layoutStandard ${this.state.createOpen ? 'createOpen' : ''}`}>
-        <div className='logo'><a href='/'><img src={Logo} alt='Eos.io' /></a></div>
+        <div className='logo'>Hackathon Starter</div>
         <div className='main'>
           <div className='toggleCreate' onClick={this.toggleCreate} />
-          <CreatePost createPost={this.createPost} toggleCreate={this.toggleCreate} />
+          <CreatePost createPost={this.createPost} />
           <div className='cards'>
             <Posts
               posts={this.state.posts}

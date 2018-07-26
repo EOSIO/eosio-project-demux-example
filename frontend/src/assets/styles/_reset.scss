@@ -7,6 +7,20 @@
   }
 }
 
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.8rem;
+  margin: 0;
+  padding: 0;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: #eaeaea;
+  margin: 2.5rem 0;
+}
+
 // Style Placeholder Text
 ::placeholder {
   color: #888888;
@@ -16,6 +30,9 @@
 img { border: 0; display: block; }
 svg:not(:root) { overflow: hidden; }
 
+.margin-top-0 {
+  margin-top: 0;
+}
 .margin-bottom-15 {
   margin-bottom: 15px;
 }
@@ -24,11 +41,4 @@ svg:not(:root) { overflow: hidden; }
 }
 .padding-30 {
   padding: 30px;
-}
-
-.float-left {
-  float: left;
-}
-.border-bottom {
-  border-bottom: 1px solid #E1D9F0;
 }

@@ -2,32 +2,110 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   grid-gap: 30px;
-  padding: 30px;
+  padding: 55px 30px;
+}
+
+@keyframes heart {
+  0% {
+    transform: scale(1) rotate(-45deg);;
+  }
+  35% {
+    transform: scale(1.4) rotate(-45deg);;
+  }
+  100% {
+    transform: scale(1) rotate(-45deg);;
+  }
 }
 
 .card-item {
   position: relative;
   background: #ffffff;
-  box-shadow: 0px 2px 20px #e4e4e4;
-  //border-radius: .5rem;
+  box-shadow: 0px 3px 18px rgba(112, 119, 136, .15);
   overflow: hidden;
-  .heart {
-    position: absolute;
-    top: 30px;
-    right: 30px;
+  p {
+    color: #6b808f;
   }
-}
-.card-footer {
-  background: #fafafa;
-  border-top: 1px solid #eaeaea;
-  border-bottom: 1px solid #eaeaea;
-  color: #ffffff;
-  align-self: center;
-  justify-self: center;
-  img {
+  img.center {
     margin: 0 auto;
     align-self: center;
     justify-self: center;
+  }
+  .card-footer {
+    background: #f7fafc;
+    border-top: 1px solid #dde7f1;
+    border-bottom: 1px solid #dde7f1;
+    color: #b1bfc8;
+  }
+  .detailAvatar {
+    background: url(img/icons/avatar.svg);
+  }
+  .detailHeart {
+    background: url(img/icons/heart.svg);
+  }
+  .detailTag {
+    background: url(img/icons/tag.svg);
+  }
+  .detailAvatar, .detailHeart, .detailTag {
+    background-repeat: no-repeat;
+    background-position: left center;
+    width: auto;
+    height: 25px;
+    padding: 0px 0 0 34px;
+  }
+  .iconEdit {
+    background: url(img/icons/edit.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 25px;
+    cursor: pointer;
+    display: block;
+  }
+  .iconDelete {
+    background: url(img/icons/delete.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 25px;
+    cursor: pointer;
+    display: block;
+  }
+
+  .heart {
+    background-color: #D8DFE2;
+    cursor: pointer;
+    display: inline-block;
+    height: 15px;
+    margin: 0 5px;
+    transform: rotate(-45deg);
+    width: 15px;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    &:before, &:after {
+      content: "";
+      background-color: #D8DFE2;
+      border-radius: 50%;
+      height: 15px;
+      position: absolute;
+      width: 15px;
+    }
+    &:before {
+      top: -7px;
+      left: 0;
+    }
+    &:after {
+      left: 7px;
+      top: 0;
+    }
+  }
+  &.liked {
+    .heart {
+      animation-duration: .6s;
+      animation-name: heart;
+      background-color: #f35ee7;
+      &:before, &:after {
+        background-color: #f35ee7;
+      }
+    }
   }
 }
 
@@ -35,16 +113,12 @@
   display: grid;
   grid-template-columns: auto auto;
   grid-gap: 0px;
-  padding: 1.5rem 0;
+  padding: 1.5rem 1rem;
 }
 
-.author {
-  float: left;
-  margin-right: 10px;
-  height: 16px;
-  width: 16px;
-}
-
-.icon {
-  cursor: pointer;
+.grid-3 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 0px;
+  padding: 1.5rem 2rem;
 }

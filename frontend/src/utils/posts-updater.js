@@ -1,4 +1,4 @@
-// Update the edited post or add post to posts if new
+// Update the edited post or add post to posts if a new post
 export const updatePostsForCreateAndEdit = (prevState, updatedPost) => {
   let alreadyAdded = false
   let updatedPosts = prevState.posts.map(post => {
@@ -16,7 +16,7 @@ export const updatePostsForCreateAndEdit = (prevState, updatedPost) => {
   return updatedPosts
 }
 
-// Updated likes on liked post in posts
+// Update likes on liked post in posts
 export const updatePostsForLike = (prevState, likedPost) => {
   const updatedPosts = prevState.posts.map(post => {
     if (post._id.timestamp === likedPost._id.timestamp && post._id.author === likedPost._id.author) {

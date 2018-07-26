@@ -53,16 +53,7 @@ class CreatePost extends Component {
             onClick={this.createPost}
             type='submit'
             className='margin-right-15'
-          >
-            Create Post
-          </button>
-          <button
-            onClick={this.props.toggleCreate}
-            type='submit'
-            className='secondary'
-          >
-            Cancel
-          </button>
+          >Create Post</button>
         </div>
       </div>
     )
@@ -70,6 +61,7 @@ class CreatePost extends Component {
 }
 CreatePost.displayName = 'CreatePost' // Tell React Dev Tools the component name
 
+// Assign Prop Types
 CreatePost.propTypes = {
   createPost: PropTypes.func.isRequired,
   toggleCreate: PropTypes.func.isRequired

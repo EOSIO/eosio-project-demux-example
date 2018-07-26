@@ -89,7 +89,7 @@ class App extends Component {
   // Delete a post
   deletePost = async (post) => {
     try {
-      this.eosio.transaction(
+      await this.eosio.transaction(
         process.env.REACT_APP_EOSIO_ACCOUNT,
         'deletepost',
         {

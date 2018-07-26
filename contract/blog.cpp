@@ -101,7 +101,7 @@ private:
     uint128_t get_by_skey() const { return skey; }
 
     // call macro
-    //EOSLIB_SERIALIZE(post_struct, (pkey)(hash)(author))
+    EOSLIB_SERIALIZE(post_struct, (pkey)(author)(skey))
   };
 
   // typedef multi_index<N(table_name), object_template_to_use, other_indices> multi_index_name;

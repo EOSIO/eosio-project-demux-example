@@ -1,12 +1,21 @@
 async function createPost (state, payload, blockInfo, context) {
-  const updatedPost = { ...payload.data }
-  delete updatedPost._id
+  console.log(payload.data)
+  const Post = state.post;
+  const post = new Post(
+    {
+      _id: {
+        author: payload.data.author,
+        timestamp: payload.data.timestamp
+      },
+      title: payload.data.title,
+      content: payload.data.content,
+      tag: payload.data.tag,
+      likes: payload.data.likes,
+      postConfirmed: payload.data.postConfirmed
+    }
+  )
   try {
-    await state.post.findByIdAndUpdate(
-      payload.data._id,
-      { ...updatedPost, postConfirmed: true },
-      { upsert: true }
-    ).exec()
+    await post.save()
   } catch (err) {
     console.error(err)
   }

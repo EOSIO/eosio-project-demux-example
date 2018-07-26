@@ -46,17 +46,18 @@ class App extends Component {
   // Create a post
   createPost = async (post) => {
     try {
-      let newPost = await axios.get(`${process.env.REACT_APP_API_URL}/posts/newEmpty`)
-      newPost = { ...newPost.data, ...post, author: process.env.REACT_APP_EOSIO_ACCOUNT }
+      //let newPost = await axios.get(`${process.env.REACT_APP_API_URL}/posts/newEmpty`)
+      //newPost = { ...newPost.data, ...post, author: process.env.REACT_APP_EOSIO_ACCOUNT }
 
       await this.eosio.transaction(
         process.env.REACT_APP_EOSIO_ACCOUNT,
         'createpost', {
+          timestamp: Math.floor(Date.now() / 1000),
           author: process.env.REACT_APP_EOSIO_ACCOUNT,
-          ...newPost
+          ...post
         }
       )
-      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, newPost) }));
+      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }));
     } catch (err) {
       console.error(err)
     }
@@ -69,6 +70,7 @@ class App extends Component {
         process.env.REACT_APP_EOSIO_ACCOUNT,
         'editpost',
         {
+          timestamp: Math.floor(Date.now() / 1000),
           ...post
         }
       )
@@ -85,8 +87,8 @@ class App extends Component {
         process.env.REACT_APP_EOSIO_ACCOUNT,
         'deletepost',
         {
-          contractPkey: post.contractPkey,
-          _id: post._id
+          timestamp: Math.floor(Date.now() / 1000),
+          author: post.author
         }
       )
       this.setState((prevState) => ({ posts: updatePostsForDelete(prevState, post) }));
@@ -101,8 +103,8 @@ class App extends Component {
       await this.eosio.transaction(
         process.env.REACT_APP_EOSIO_ACCOUNT,
         'likepost', {
-          contractPkey: post.contractPkey,
-          _id: post._id
+          timestamp: Math.floor(Date.now() / 1000),
+          author: post.author
         }
       )
       this.setState((prevState) => ({ posts: updatePostsForLike(prevState, post) }));

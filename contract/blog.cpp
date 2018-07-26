@@ -21,7 +21,7 @@ public:
     // and the transaction will by rolled back - any modifications will be reset
     require_auth(author);
 
-    uint128_t skey = static_cast<uint128_t>(N(author)) << 64 | timestamp; 
+    uint128_t skey = static_cast<uint128_t>(author) << 64 | timestamp; 
     // post_table is our multi_index
     // multi_index is how you store persistant data across actions in EOSIO
     // each action has a new action context which is a clean working memory with no prior working state from other action executions
@@ -43,7 +43,7 @@ public:
 
     // get object by secondary key
     auto posts = poststable.get_index<N(getbyskey)>();
-    uint128_t skey = static_cast<uint128_t>(N(author)) << 64 | timestamp; 
+    uint128_t skey = static_cast<uint128_t>(author) << 64 | timestamp; 
     auto post = posts.find(skey);
     eosio_assert(post != posts.end(), "Post for hash could not be found");
 
@@ -59,7 +59,7 @@ public:
     post_table poststable(_self, _self);
 
     auto posts = poststable.get_index<N(getbyskey)>();
-    uint128_t skey = static_cast<uint128_t>(N(author)) << 64 | timestamp; 
+    uint128_t skey = static_cast<uint128_t>(author) << 64 | timestamp; 
 
     // verify it already exists
     auto post = posts.find(skey);
@@ -72,7 +72,7 @@ public:
     post_table poststable(_self, _self);
 
     auto posts = poststable.get_index<N(getbyskey)>();
-    uint128_t skey = static_cast<uint128_t>(N(author)) << 64 | timestamp; 
+    uint128_t skey = static_cast<uint128_t>(author) << 64 | timestamp; 
 
     auto post = posts.find(skey);
     eosio_assert(post != posts.end(), "Post for hash could not be found");

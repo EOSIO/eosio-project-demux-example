@@ -10,6 +10,7 @@ try {
       timestamp: Number,
       author: String
     },
+    author: String,
     title: String,
     content: String,
     tag: String,

@@ -51,7 +51,8 @@ class App extends Component {
         _id: {
           timestamp: Math.floor(Date.now() / 1000),
           author: process.env.REACT_APP_EOSIO_ACCOUNT
-        }
+        },
+        author: process.env.REACT_APP_EOSIO_ACCOUNT
       }
 
       await this.eosio.transaction(

@@ -97,6 +97,7 @@ Post.propTypes = {
       timestamp: PropTypes.number.isRequired,
       author: PropTypes.string.isRequired
     }),
+    author: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     tag: PropTypes.string.isRequired,

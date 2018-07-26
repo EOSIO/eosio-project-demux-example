@@ -4,6 +4,7 @@ function createPost (state, payload, blockInfo, context) {
       timestamp: payload.data.timestamp,
       author: payload.data.author
     },
+    author: payload.data.author,
     title: payload.data.title,
     content: payload.data.content,
     tag: payload.data.tag

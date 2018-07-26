@@ -46,18 +46,23 @@ class App extends Component {
   // Create a post
   createPost = async (post) => {
     try {
-      //let newPost = await axios.get(`${process.env.REACT_APP_API_URL}/posts/newEmpty`)
-      //newPost = { ...newPost.data, ...post, author: process.env.REACT_APP_EOSIO_ACCOUNT }
+      const newPost = { 
+        ...post, 
+        _id: {
+          timestamp: Math.floor(Date.now() / 1000),
+          author: process.env.REACT_APP_EOSIO_ACCOUNT 
+        }
+      }
 
       await this.eosio.transaction(
         process.env.REACT_APP_EOSIO_ACCOUNT,
         'createpost', {
-          timestamp: Math.floor(Date.now() / 1000),
-          author: process.env.REACT_APP_EOSIO_ACCOUNT,
+          timestamp: newPost._id.timestamp,
+          author: newPost._id.author,
           ...post
         }
       )
-      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }));
+      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, newPost) }));
     } catch (err) {
       console.error(err)
     }
@@ -70,7 +75,8 @@ class App extends Component {
         process.env.REACT_APP_EOSIO_ACCOUNT,
         'editpost',
         {
-          timestamp: Math.floor(Date.now() / 1000),
+          timestamp: post._id.timestamp,
+          author: post._id.author,
           ...post
         }
       )
@@ -87,8 +93,8 @@ class App extends Component {
         process.env.REACT_APP_EOSIO_ACCOUNT,
         'deletepost',
         {
-          timestamp: Math.floor(Date.now() / 1000),
-          author: post.author
+          timestamp: post._id.timestamp,
+          author: post._id.author
         }
       )
       this.setState((prevState) => ({ posts: updatePostsForDelete(prevState, post) }));
@@ -103,8 +109,8 @@ class App extends Component {
       await this.eosio.transaction(
         process.env.REACT_APP_EOSIO_ACCOUNT,
         'likepost', {
-          timestamp: Math.floor(Date.now() / 1000),
-          author: post.author
+          timestamp: post._id.timestamp,
+          author: post._id.author
         }
       )
       this.setState((prevState) => ({ posts: updatePostsForLike(prevState, post) }));

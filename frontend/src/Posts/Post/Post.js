@@ -93,9 +93,10 @@ Post.displayName = 'Post' // Tell React Dev Tools the component name
 
 Post.propTypes = {
   post: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    contractPkey: PropTypes.number.isRequired,
-    author: PropTypes.string.isRequired,
+    _id: PropTypes.shape({
+      timestamp: PropTypes.number.isRequired,
+      author: PropTypes.string.isRequired,
+    }),
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     tag: PropTypes.string.isRequired,

@@ -1,5 +1,14 @@
 function createPost (state, payload, blockInfo, context) {
-  context.socket.emit('createpost', { ...payload.data })
+  const post = {
+    _id: {
+      timestamp: payload.data.timestamp,
+      author: payload.data.author
+    },
+    title: payload.data.title,
+    content: payload.data.content,
+    tag: payload.data.tag
+  }
+  context.socket.emit('createpost', post)
 }
 
 module.exports = createPost

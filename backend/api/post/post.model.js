@@ -7,8 +7,8 @@ let Post = null
 try {
   const PostSchema = new Schema({
     _id: {
-      author: String,
-      timestamp: Number
+      timestamp: Number,
+      author: String
     },
     title: String,
     content: String,

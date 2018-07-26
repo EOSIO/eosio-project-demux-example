@@ -1,5 +1,11 @@
 function deletePost (state, payload, blockInfo, context) {
-  context.socket.emit('deletepost', payload.data)
+  const post = {
+    _id: {
+      timestamp: payload.data.timestamp,
+      author: payload.data.author
+    }
+  }
+  context.socket.emit('deletepost', post)
 }
 
 module.exports = deletePost

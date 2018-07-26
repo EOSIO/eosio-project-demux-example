@@ -87,7 +87,7 @@ public:
 private:
   // mark with @abi table so that eosiocpp will add this as a multi_index to the ABI with an index of type i64
 
-  //@abi table post i64
+  //@abi table posts i64
   struct post_struct
   {
     uint64_t pkey;

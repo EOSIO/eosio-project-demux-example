@@ -4,14 +4,13 @@ async function createPost (state, payload, blockInfo, context) {
   const post = new Post(
     {
       _id: {
-        author: payload.data.author,
-        timestamp: payload.data.timestamp
+        timestamp: payload.data.timestamp,
+        author: payload.data.author
       },
       title: payload.data.title,
       content: payload.data.content,
       tag: payload.data.tag,
-      likes: payload.data.likes,
-      postConfirmed: payload.data.postConfirmed
+      postConfirmed: true
     }
   )
   try {

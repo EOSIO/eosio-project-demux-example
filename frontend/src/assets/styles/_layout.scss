@@ -1,13 +1,14 @@
 .layoutStandard {
   .createContainer{
-    height: 0;
+    transition: all .15s ease-out;
+    max-height: 0;
     overflow: hidden;
     padding: 0;
   }
   .toggleCreate {
     z-index: 99;
     position: fixed;
-    bottom: 30px;
+    top: 48px;
     right: 30px;
     height: 60px;
     width: 60px;
@@ -15,6 +16,9 @@
     background: #141C47;
     cursor: pointer;
     background: linear-gradient(135deg,#5fe2dc 0%,#0d5de4 100%);
+    &:hover {
+      background: linear-gradient(135deg,#0d5de4 0%,#5fe2dc 100%);
+    }
     &:before, &:after {
       display: block;
       background: #ffffff;
@@ -31,8 +35,11 @@
   }
   &.createOpen {
     .createContainer{
-      height: auto;
+      max-height: 471px;
       overflow: visible;
+      .card-item {
+        padding: 55px 30px;
+      }
     }
     .toggleCreate {
       &:after {
@@ -41,30 +48,17 @@
     }
   }
   .logo {
-    background: #141C47;
-    width: 100%;
-    float: left;
-    height: 70px;
+    background: #141C47 url(img/logo.svg);
+    background-position: 30px center;
+    background-repeat: no-repeat;
+    height: 80px;
     color: #ffffff;
-    z-index: 2;
-    position: relative;
-    a {
-      display: block;
-      margin: 25px auto;
-      text-align: center;
-      color: #ffffff;
-      text-decoration: none;
-      position: relative;
-      img {
-        margin: -14px 0 0 30px;
-      }
-    }
+    padding: 26px 20px 0 80px;
+    font-size: 1.6rem;
   }
   .main {
     min-height: 100vh;
     grid-area: main;
     background: #EEF2F9;
-    position: relative;
-    z-index: 1;
   }
 }

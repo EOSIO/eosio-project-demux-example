@@ -1,7 +1,7 @@
 async function createPost (state, payload, blockInfo, context) {
   const Post = state.post
   try {
-    let post = await Post.find( 
+    let post = await Post.find(
       {
         _id: {
           timestamp: payload.data.timestamp,
@@ -11,7 +11,7 @@ async function createPost (state, payload, blockInfo, context) {
     ).exec()
 
     // if post already exists do not insert it in again
-    if(post.length !== 0) return
+    if (post.length !== 0) return
 
     post = new Post(
       {

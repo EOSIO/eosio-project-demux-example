@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import EOSIOClient from './utils/eosio-client'
 import IOClient from './utils/io-client'
-import { updatePostsForCreateAndEdit, updatePostsForLike, updatePostsForDelete } from './utils/posts-updater';
+import { updatePostsForCreateAndEdit, updatePostsForLike, updatePostsForDelete } from './utils/posts-updater'
 import CreatePost from './CreatePost/CreatePost'
 import Posts from './Posts/Posts'
 import Logo from './assets/img/logo.svg'
@@ -27,13 +27,13 @@ class App extends Component {
   async componentDidMount () {
     this.loadPosts()
     this.io.onMessage('createpost', (post) => {
-      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }));
+      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }))
     })
     this.io.onMessage('editpost', (post) => {
-      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }));
+      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }))
     })
     this.io.onMessage('deletepost', (post) => {
-      this.setState((prevState) => ({ posts: updatePostsForDelete(prevState, post) }));
+      this.setState((prevState) => ({ posts: updatePostsForDelete(prevState, post) }))
     })
   }
 
@@ -46,11 +46,11 @@ class App extends Component {
   // Create a post
   createPost = async (post) => {
     try {
-      const newPost = { 
-        ...post, 
+      const newPost = {
+        ...post,
         _id: {
           timestamp: Math.floor(Date.now() / 1000),
-          author: process.env.REACT_APP_EOSIO_ACCOUNT 
+          author: process.env.REACT_APP_EOSIO_ACCOUNT
         }
       }
 
@@ -62,7 +62,7 @@ class App extends Component {
           ...post
         }
       )
-      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, newPost) }));
+      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, newPost) }))
     } catch (err) {
       console.error(err)
     }
@@ -80,7 +80,7 @@ class App extends Component {
           ...post
         }
       )
-      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }));
+      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }))
     } catch (err) {
       console.error(err)
     }
@@ -97,7 +97,7 @@ class App extends Component {
           author: post._id.author
         }
       )
-      this.setState((prevState) => ({ posts: updatePostsForDelete(prevState, post) }));
+      this.setState((prevState) => ({ posts: updatePostsForDelete(prevState, post) }))
     } catch (err) {
       console.error(err)
     }
@@ -113,7 +113,7 @@ class App extends Component {
           author: post._id.author
         }
       )
-      this.setState((prevState) => ({ posts: updatePostsForLike(prevState, post) }));
+      this.setState((prevState) => ({ posts: updatePostsForLike(prevState, post) }))
     } catch (err) {
       console.error(err)
     }

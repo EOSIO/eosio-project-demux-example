@@ -95,7 +95,7 @@ Post.propTypes = {
   post: PropTypes.shape({
     _id: PropTypes.shape({
       timestamp: PropTypes.number.isRequired,
-      author: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired
     }),
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,

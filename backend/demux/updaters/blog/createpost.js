@@ -1,6 +1,5 @@
 async function createPost (state, payload, blockInfo, context) {
-  console.log(payload.data)
-  const Post = state.post;
+  const Post = state.post
   const post = new Post(
     {
       _id: {

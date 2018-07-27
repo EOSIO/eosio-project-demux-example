@@ -29,6 +29,10 @@ docker rm --force eosio_blog_container
 rm -rf "./eosio_docker/data"
 mkdir -p "./eosio_docker/data"
 
+# download mongo:4.0 image
+echo "=== pull mongo image 4.0 from docker hub ==="
+docker pull mongo:4.0
+
 # force remove the previous mongodb container if it exists
 echo "=== setup/reset data for mongo_blog_container ==="
 docker rm --force mongo_blog_container

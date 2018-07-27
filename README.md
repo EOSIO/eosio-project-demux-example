@@ -74,7 +74,7 @@ npm start
 
 # Detailed guide
 
-In this section we will describe in detail each script used to run the NoteChain environment in details.
+In this section we will describe in detail each script used to run the blog DApp environment in details.
 
 ## Initial setup
 
@@ -82,31 +82,33 @@ In this section we will describe in detail each script used to run the NoteChain
 ./first_time_setup.sh
 ```
 
-Executing the above shell script verifies that docker and node.js are installed. It then downloads the `eosio/eos-dev` docker image (which contains a full version of the eosio blockchain), removes any previous instances of this docker container and installs node packages for the frontend react app.
+Executing the above shell script verifies that docker and node.js are installed. It then downloads the `eosio/eos-dev` docker image (which contains a full version of the eosio blockchain) and `mongo` docker image, removes any previous instances of these docker containers, and installs node packages for the frontend react app and backend nide app.
 
 ## Initialise and start blockchain and DApp
 
-After the initialisation, two terminal windows are required, both opened in the repository directory
+After the initialisation, three terminal windows are required, both opened in the repository directory
 
-- The **first terminal window** is for **blockchain** process.
+- The **first terminal window** is for **blockchain** and **mongodb** process.
 - The **second terminal window** is for **frontend** react app.
+- The **third terminal window** is for **backend** node app.
 
-**running the blockchain**
+**Running the blockchain**
 
-For the first (blockchain) terminal window, running
+For the first (blockchain) terminal window, running the following
 ```sh
 ./start_eosio_docker.sh
 ```
-will:
+This script will:
 
 - Start the eosio blockchain
-- Create smart contract owner account,
+- Create smart contract owner account
 - Deploy smart contract
-- Pre-create 7 user accounts with hard coded keys.
+- Pre-create 6 user accounts with hard coded keys
+- Create mock data by sending actions to the deployed contract
 
 The log of blockchain will be displayed on your screen. eosio is now running and starts producing blocks.
 
-**running the DApp**
+**Running the DApp**
 
 For the second (frontend) terminal window, running
 ```sh
@@ -116,7 +118,7 @@ will open a browser session connecting to http://localhost:3000/ showing the rea
 
 ## Stopping blockchain or DApp
 
-**stopping the blockchain**
+**Stopping the blockchain**
 
 In the first (blockchain) terminal window, press `ctrl+c` on your keyboard, the log will stop printing. And then execute:
 ```sh
@@ -131,7 +133,7 @@ In the second (frontend) terminal window, press `ctrl+c` on your keyboard. The f
 
 ## Restarting blockchain or DApp
 
-**restarting the blockchain**
+**Restarting the blockchain**
 
 In the first (blockchain) terminal window, execute this command:
 ```sh
@@ -140,7 +142,7 @@ In the first (blockchain) terminal window, execute this command:
 
 The blockchain will be resumed automatically. And the log will be output to the terminal.
 
-**restarting the DApp**
+**Restarting the DApp**
 
 In the second (frontend) terminal window, you can restart the frontend react app by executing:
 ```sh

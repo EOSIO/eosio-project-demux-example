@@ -35,5 +35,5 @@ jsconfig.json
 .history
 .vscode/settings.json
 
-# coverage
-coverage/
+# configuration
+**/.env

@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
 
 # make sure Docker and Node.js is installed
 if [ ! -x "$(command -v docker)" ] ||
-   [ ! -x "$(command -v node)" ] ||; then
+   [ ! -x "$(command -v node)" ]; then
     echo ""
     echo -e "\033[0;31m[Error with Exception]\033[0m"
     echo "Please make sure Docker and Node.js are installed"

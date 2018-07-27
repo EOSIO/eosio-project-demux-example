@@ -22,12 +22,16 @@ fi
 echo "=== pull eosio/eos-dev image v1.1.0 from docker hub ==="
 docker pull eosio/eos-dev:v1.1.0
 
-# force remove the previous container if it exists
+# force remove the previous eosio container if it exists
 # create a clean data folder in the eosio_docker to preserve block data
 echo "=== setup/reset data for eosio_docker ==="
 docker rm --force eosio_blog_container
 rm -rf "./eosio_docker/data"
 mkdir -p "./eosio_docker/data"
+
+# force remove the previous mongodb container if it exists
+echo "=== setup/reset data for mongo_blog_container ==="
+docker rm --force mongo_blog_container
 
 # set up node_modules for frontend
 echo "=== npm install packpage for frontend react app ==="

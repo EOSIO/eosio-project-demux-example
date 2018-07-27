@@ -14,12 +14,6 @@ class ActionHandler extends AbstractActionHandler {
     // Connection successful
     mongoose.connection.on('connected', () => {
       console.info(`Mongoose default connection open to ${uri}`)
-
-      // If using nodemon to restart the server on change - prevents duplicate records in the db
-      // Clear db on each restart
-      if (process.env.MONGODB_CLEAR_ON_RESTART === 'true') {
-        mongoose.connection.db.dropDatabase()
-      }
     })
 
     // Connection throws an error

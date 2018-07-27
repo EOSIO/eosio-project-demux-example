@@ -53,6 +53,7 @@ The above command will execute the following in sequence:
 **To stop**, press `ctrl+c` on your keyboard, and execute:
 ```sh
 docker stop eosio_blog_container
+docker stop mongo_blog_container
 ```
 
 ## Frontend & Backend
@@ -108,7 +109,7 @@ In this section we will describe in detail each script used to run the blog DApp
 ./first_time_setup.sh
 ```
 
-Executing the above shell script verifies that docker and node.js are installed. It then downloads the `eosio/eos-dev` docker image (which contains a full version of the eosio blockchain) and `mongo` docker image, removes any previous instances of these docker containers, and installs node packages for the frontend react app and backend nide app.
+Executing the above shell script verifies that docker and node.js are installed. It then downloads the `eosio/eos-dev` docker image (which contains a full version of the eosio blockchain) and `mongo` docker image, removes any previous instances of these docker containers, and installs node packages for the frontend react app and backend node app.
 
 ## Initialise and start blockchain and DApp
 
@@ -136,11 +137,11 @@ The log of blockchain will be displayed on your screen. eosio is now running and
 
 **Running the DApp**
 
-For the second (frontend) terminal window, running
+For the second (frontend) terminal window, run:
 ```sh
 ./start_frontend.sh
 ```
-will open a browser session connecting to http://localhost:3000/ showing the react app. You can try to add or remove notes using one of the pre-created accounts with its key on the website. This react app will interact with the smart contract, performing transactions, which are written to the blockchain, which stores note data in the multi index table of the smart contract running on your local nodeos.
+This script will open a browser session connecting to http://localhost:3000/ showing the react app. You can try to add or remove notes using one of the pre-created accounts with its key on the website. This react app will interact with the smart contract, performing transactions, which are written to the blockchain, which stores note data in the multi index table of the smart contract running on your local nodeos.
 
 ## Stopping blockchain or DApp
 

@@ -57,6 +57,32 @@ docker stop eosio_blog_container
 
 ## Frontend & Backend
 
+You will need to create a .env file under /backend and /frontend with the following configurations:
+
+**/frontend/.env**
+```
+REACT_APP_EOSIO_CONTRACT_ACCOUNT=blogaccount
+REACT_APP_EOSIO_ACCOUNT=bobross
+# Never store your private key in your frontend application, this is being stored here for demo purposes
+REACT_APP_EOSIO_PRIVATE_KEY=5K7mtrinTFrVTduSxizUc5hjXJEtTjVTsqSHeBHes1Viep86FP5
+REACT_APP_EOSIO_CHAIN_ID=cf057bbfb72640471fd910bcb67639c22df9f92470936cddc1ade0e2f2e7dc4f
+REACT_APP_EOSIO_HTTP_URL=http://0.0.0.0:8888
+
+REACT_APP_API_URL=http://localhost:4000
+REACT_APP_WS_URL=localhost:4000
+```
+
+**/backend/.env**
+```
+EOS_CONTRACT_ACCOUNT=blogaccount
+EOS_STARTING_BLOCK=0
+
+EOS_HTTP_URL=http://0.0.0.0:8888
+PORT=4000
+
+MONGODB_URL=mongodb://127.0.0.1/blog_platform
+```
+
 In separate terminals execute the following to start the React app and the Node.js server
 
 **To start frontend**

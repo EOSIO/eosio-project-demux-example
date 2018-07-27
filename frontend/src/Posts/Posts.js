@@ -8,7 +8,7 @@ const Posts = ({ posts, deletePost, editPost, likePost }) => posts.map(post => (
     deletePost={deletePost}
     editPost={editPost}
     likePost={likePost}
-    key={post._id}
+    key={JSON.stringify(post._id)}
   />
 ))
 Posts.displayName = 'Posts' // Tell React Dev Tools the component name

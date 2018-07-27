@@ -1,5 +1,11 @@
 function likepost (state, payload, blockInfo, context) {
-  context.socket.emit('likepost', payload.data)
+  const post = {
+    _id: {
+      timestamp: payload.data.timestamp,
+      author: payload.data.author
+    }
+  }
+  context.socket.emit('likepost', post)
 }
 
 module.exports = likepost

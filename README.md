@@ -114,6 +114,7 @@ docker exec --detach eosio keosd --wallet-dir=/opt/eosio/bin/data-dir --http-ser
     **Never store your private key in your frontend application, this is being stored here for demo purposes**
     ```bash
     REACT_APP_EOSIO_ACCOUNT=blog
+    REACT_APP_EOSIO_CONTRACT_ACCOUNT=blog
     REACT_APP_EOSIO_PRIVATE_KEY=
     REACT_APP_EOSIO_CHAIN_ID=
     REACT_APP_EOSIO_HTTP_URL=http://0.0.0.0:8888
@@ -125,6 +126,7 @@ docker exec --detach eosio keosd --wallet-dir=/opt/eosio/bin/data-dir --http-ser
     ```bash
     cleos get info
     ```
+    * For the purposes of the demo we will be using the same account to deploy (`REACT_APP_EOSIO_CONTRACT_ACCOUNT`) and interact with the contract (`REACT_APP_EOSIO_ACCOUNT`)
 2.  Start the react app
     ```bash
     cd frontend

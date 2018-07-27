@@ -49,6 +49,10 @@ echo "=== create user accounts ==="
 # script for creating data into blockchain
 ./scripts/create_accounts.sh
 
+echo "=== create mock data for contract ==="
+# script for calling actions on the smart contract to create mock data
+./scripts/create_mock_data.sh
+
 # * Replace the script with different form of data that you would pushed into the blockchain when you start your own project
 
 echo "=== end of setup blockchain accounts and smart contract ==="

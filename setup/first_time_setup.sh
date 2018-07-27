@@ -26,19 +26,19 @@ docker pull eosio/eos-dev:v1.1.0
 # create a clean data folder in eosio_docker to preserve block data
 echo "=== setup/reset data for eosio_docker ==="
 docker rm --force eosio_blog_container
-rm -rf "./eosio_docker/data"
-mkdir -p "./eosio_docker/data"
+rm -rf ".../eosio_docker/data"
+mkdir -p "../eosio_docker/data"
 
 # set up node_modules for frontend
 echo "=== npm install packpage for frontend react app ==="
 # change directory to ./frontend
-cd "./frontend"
+cd "../frontend"
 npm install
 cd "../"
 
 # set up node_modules for backend
 echo "=== npm install packpage for frontend react app ==="
 # change directory to ./backend
-cd "./backend"
+cd "../backend"
 npm install
 cd "../"

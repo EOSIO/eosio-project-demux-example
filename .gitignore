@@ -1,6 +1,39 @@
-ignore.txt
-*.wasm
-*.wast
-*.abi
+# dependencies
+node_modules/
+
+# database
+docker/volumes/postgresql/*
+docker/volumes/logchain/*
+docker/volumes/eosio/*
+docker/volumes/transactions_cache/*
+.idea
+
+# testing
+/coverage
+
+# compiled contract files
+**/*.abi
+**/*.wasm
+**/*.wast
+
+# blockchain data
+**/data/*
+
+# misc
 .DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# VS Code
+jsconfig.json
+.history
 .vscode/settings.json
+
+# configuration
+**/.env

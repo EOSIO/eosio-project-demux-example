@@ -3,7 +3,7 @@ const {
     eos: { NodeosActionReader }
   },
   watchers: { BaseActionWatcher }
-} = require('@blockone/demux-js')
+} = require('demux-js')
 
 const ActionHandler = require('./ActionHandler')
 

@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "cors": "^2.8.4",
-    "@blockone/demux-js": "^0.0.1",
+    "demux-js": "0.0.1-docs",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "mongodb": "^3.1.1",

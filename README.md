@@ -262,7 +262,7 @@ eosio-project-demux-example // project directory
 │   │   └── post
 │   │       ├── post.controller.js // defines the mongoose Post model to store blog posts
 │   │       ├── post.model.js // defines the controller for blog posts
-│   │       └── post.model.js // defines routes relates to blog posts
+│   │       └── post.route.js // defines routes relates to blog posts
 │   ├── demux // demux implementation
 │   │   ├── effects // demux effects implementations - side effects outside of the blockchain that should be triggered when blockchain events related to our smart contract are read 
 │   │   ├── updaters // demux updaters implementations - updates the mongodb database when blockchain events related to our smart contract are read
@@ -272,6 +272,7 @@ eosio-project-demux-example // project directory
 │   │   └── index.html // html skeleton for create react app
 │   ├── utils
 │   │   └── io.js // provider for Socket IO to allow websocket messages to be sent out to all connections
+│   ├── package-lock.json // generated after npm install
 │   ├── package.json // for npm packages
 │   └── server.js // starts the express.js server to listen to http requests and uses socket io to listen for websocket connections. Also initiates demux to start watching the blockchain for events
 ├── eosio_docker

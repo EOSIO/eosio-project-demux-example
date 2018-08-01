@@ -13,18 +13,4 @@ const listConfirmed = async (req, res) => {
   }
 }
 
-/**
- * Create a new empty post to generate a contractPkey and _id to add to the blockchain
- * @returns {Post}
- */
-const createEmpty = async (req, res) => {
-  const post = new Post()
-  try {
-    await post.save()
-    res.send(post)
-  } catch (err) {
-    console.error(err)
-  }
-}
-
-module.exports = { listConfirmed, createEmpty }
+module.exports = { listConfirmed }

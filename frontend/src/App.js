@@ -38,7 +38,7 @@ class App extends Component {
   // Load posts
   loadPosts = async () => {
     const response = await axios.get(`${process.env.REACT_APP_API_URL}/posts`)
-    this.setState({ posts: response.data })
+    this.setState({ posts: response.data.reverse() })
   }
 
   // Create a post
@@ -62,6 +62,7 @@ class App extends Component {
         }
       )
       this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, newPost) }))
+      this.toggleCreate()
     } catch (err) {
       console.error(err)
     }

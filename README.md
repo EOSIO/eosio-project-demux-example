@@ -86,12 +86,13 @@ REACT_APP_WS_URL=localhost:4000
 
 In separate terminals execute the following to start the React app and the Node.js server
 
-**To start frontend**
+**To start the backend**
 ```sh
-cd frontend
+cd backend
 npm start
 ```
-**To start backend**
+
+**To start the frontend**
 ```sh
 cd frontend
 npm start
@@ -117,8 +118,8 @@ After the initialization, four terminal windows are required, all opened in the 
 
 - The **first terminal window** is for the **blockchain** process.
 - The **second terminal window** is for the **MongoDB** process.
-- The **third terminal window** is for the **frontend** React app.
-- The **fourth terminal window** is for the **backend** Node app.
+- The **third terminal window** is for the **backend** Node app.
+- The **fourth terminal window** is for the **frontend** React app.
 
 **Running the blockchain**
 
@@ -172,21 +173,23 @@ REACT_APP_API_URL=http://localhost:4000
 REACT_APP_WS_URL=localhost:4000
 ```
 
-For the third (frontend) terminal window, run:
-```sh
-cd frontend
-npm start
-```
-This script will open a browser session connecting to http://localhost:3000/ showing the React app. You can try to add, remove, or edit the sample blog posts using one of the accounts in [accounts.json](https://github.com/EOSIO/eosio-project-demux-example/blob/master/eosio_docker/scripts/accounts.json) and modifying the **frontend/.env** for `REACT_APP_EOSIO_ACCOUNT` and `REACT_APP_EOSIO_PRIVATE_KEY` with the name and private key of the desired account. This React app will interact with the smart contract by broadcasting transactions, which are written to the blockchain by our locally running nodeos.
-
 **Running the Node.js Server**
 
-For the fourth (backend) terminal window, run:
+For the third (backend) terminal window, run:
 ```sh
 cd backend
 npm start
 ```
 This script will create an Express.js http server listening on port 4000 as well as a listen for websocket connections on port 4000
+
+**Running the React Frontend**
+
+For the fourth (frontend) terminal window, run:
+```sh
+cd frontend
+npm start
+```
+This script will open a browser session connecting to http://localhost:3000/ showing the React app. You can try to add, remove, or edit the sample blog posts using one of the accounts in [accounts.json](https://github.com/EOSIO/eosio-project-demux-example/blob/master/eosio_docker/scripts/accounts.json) and modifying the **frontend/.env** for `REACT_APP_EOSIO_ACCOUNT` and `REACT_APP_EOSIO_PRIVATE_KEY` with the name and private key of the desired account. This React app will interact with the smart contract by broadcasting transactions, which are written to the blockchain by our locally running nodeos.
 
 ## Stopping blockchain or DApp
 
@@ -208,9 +211,9 @@ docker stop mongo_blog_container
 
 This action will take a few seconds. The database will eventually be stopped.
 
-**stopping the frontend or backend**
+**stopping the backend or frontend**
 
-In the third (frontend) or fourth(backend) terminal window, press `ctrl+c` on your keyboard. The frontend React app or Node.js server will be stopped.
+In the third (backend) or fourth(frontend) terminal window, press `ctrl+c` on your keyboard. The backend Node.js server or frontend React app will be stopped.
 
 ## Restarting blockchain/MongoDB or frontend/backend
 
@@ -230,15 +233,15 @@ In the second (MongoDB) terminal window, execute this command:
 
 The MongoDB database will be resumed automatically. And the log will be output to the terminal.
 
-**Restarting the frontend / backend**
+**Restarting the backend / frontend**
 
-In the third (frontend) or fourth (backend) terminal window, you can restart the frontend React app or backend Node.js server by executing again:
+In the third (backend) or fourth (frontend) terminal window, you can restart the backend Node.js server or frontend React app by executing again:
 ```sh
-cd frontend
+cd backend
 npm start
 ```
 ```sh
-cd backend
+cd frontend
 npm start
 ```
 
@@ -310,7 +313,7 @@ eosio-project-demux-example // project directory
 
 ## DApp development
 
-The DApp consists of four parts. The eosio blockchain, MongoDB database, frontend React app, and backend Node.js app. These can be found in:
+The DApp consists of four parts. The eosio blockchain, MongoDB database, backend Node.js app, and frontend React app. These can be found in:
 
 - eosio_docker
     - eosio block producing node (local node) wrapped in a docker container
@@ -363,13 +366,13 @@ After running this script the modified smart contract will be deployed on the bl
 
 Remember to redeploy the blog contract each time you modify it using the steps above!
 
-## Frontend:
-
-When running the frontend code, when any changes are detected the frontend React app will automatically compile and the page on browser will be automatically refreshed. You can see the change on the browser once the browser finishes loading.
-
 ## Backend:
 
 When running the backend code, when any changes are detected nodemon will automatically update the node.js server code and restart the server.
+
+## Frontend:
+
+When running the frontend code, when any changes are detected the frontend React app will automatically compile and the page on browser will be automatically refreshed. You can see the change on the browser once the browser finishes loading.
 
 ## Docker commands
 

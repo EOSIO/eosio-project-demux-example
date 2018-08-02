@@ -13,7 +13,7 @@ This Blog DApp demonstrates the eosio platform running a blockchain as a local s
 - Implementing a web based UI using React bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
 - Connecting the UI to the blockchain using [eosjs](https://github.com/EOSIO/eosjs)
 
-The sample DApp demonstrates how to use [Demux](https://github.com/EOSIO/demux-js) to listen and read events from our locally running eosio node relevant to our smart contract actions. By doing so we can update our MongoDB database deterministicly with blog post data and reduce the amount of data stored in the contract's multi index table. The smart contract is being utilized to check authorization rather than storing data in the actual action implementations. For this example, several posts are created by default and can be interacted with in the UI.
+The sample DApp demonstrates how to use [Demux](https://github.com/EOSIO/demux-js) to listen and read events from our locally running eosio node relevant to our smart contract actions. By doing so we can update our MongoDB database deterministically with blog post data, reduce the amount of data stored in the contract's multi index table and write complex queries through MongoDB that are unavailable with the multi index table interface. The smart contract is being utilized to check authorization rather than storing data in the actual action implementations. For this example, several posts are created by default and can be interacted with in the UI.
 
 **Any private keys you see in this repository are for demo purposes only. For a real DApp NEVER expose the private keys.**
 

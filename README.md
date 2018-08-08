@@ -37,7 +37,7 @@ The following guide assumes you are using macOS.
 
 ## EOSIO & MongoDB
 
-In this section we provide a single command script to run all the commands needed to start the blockchain, deploy the smart contract, and run the MongoDB database. The React frontend and Node.js backend will be run with npm commands. 
+In this section we provide a single command script to run all the commands needed to start the blockchain, deploy the smart contract, and run the MongoDB database. The React frontend and Node.js backend will be run with npm commands.
 
 **To start**
 ```sh
@@ -58,31 +58,8 @@ docker stop mongo_blog_container
 
 ## Frontend & Backend
 
-You will need to create a .env file under /backend and /frontend with the following configurations:
-
-**/backend/.env**
-```
-EOSIO_CONTRACT_ACCOUNT=blogaccount
-EOSIO_STARTING_BLOCK=1
-
-EOSIO_HTTP_URL=http://localhost:8888
-PORT=4000
-
-MONGODB_URL=mongodb://127.0.0.1/blog_platform
-```
-
-**/frontend/.env**
-```
-REACT_APP_EOSIO_CONTRACT_ACCOUNT=blogaccount
-REACT_APP_EOSIO_ACCOUNT=bobross
-# Never store your private key in your frontend application, this is being stored here for demo purposes
-REACT_APP_EOSIO_PRIVATE_KEY=5K7mtrinTFrVTduSxizUc5hjXJEtTjVTsqSHeBHes1Viep86FP5
-REACT_APP_EOSIO_CHAIN_ID=cf057bbfb72640471fd910bcb67639c22df9f92470936cddc1ade0e2f2e7dc4f
-REACT_APP_EOSIO_HTTP_URL=http://localhost:8888
-
-REACT_APP_API_URL=http://localhost:4000
-REACT_APP_WS_URL=localhost:4000
-```
+The backend and frontend are configured via environment variables specified in /backend/.env
+and frontend/.env respectively.
 
 In separate terminals execute the following to start the React app and the Node.js server
 
@@ -135,7 +112,7 @@ This script will:
 - Pre-create 6 user accounts with hard coded keys from the [accounts.json](https://github.com/EOSIO/eosio-project-demux-example/blob/master/eosio_docker/scripts/accounts.json) file
 - Create mock data by sending actions to the deployed contract
 
-The log of blockchain will be displayed on your screen. Eosio is now running and will start to produce blocks. 
+The log of blockchain will be displayed on your screen. Eosio is now running and will start to produce blocks.
 
 **Running MongoDB**
 
@@ -147,31 +124,8 @@ This script will start the mongodb database at the url mongodb://127.0.0.1/blog_
 
 **Running the DApp**
 
-You will need to create a .env file under /backend and /frontend with the following configurations:
-
-**/backend/.env**
-```
-EOSIO_CONTRACT_ACCOUNT=blogaccount
-EOSIO_STARTING_BLOCK=1
-
-EOSIO_HTTP_URL=http://localhost:8888
-PORT=4000
-
-MONGODB_URL=mongodb://127.0.0.1/blog_platform
-```
-
-**/frontend/.env**
-```
-REACT_APP_EOSIO_CONTRACT_ACCOUNT=blogaccount
-REACT_APP_EOSIO_ACCOUNT=bobross
-# Never store your private key in your frontend application, this is being stored here for demo purposes
-REACT_APP_EOSIO_PRIVATE_KEY=5K7mtrinTFrVTduSxizUc5hjXJEtTjVTsqSHeBHes1Viep86FP5
-REACT_APP_EOSIO_CHAIN_ID=cf057bbfb72640471fd910bcb67639c22df9f92470936cddc1ade0e2f2e7dc4f
-REACT_APP_EOSIO_HTTP_URL=http://localhost:8888
-
-REACT_APP_API_URL=http://localhost:4000
-REACT_APP_WS_URL=localhost:4000
-```
+The backend and frontend are configured via environment variables specified in /backend/.env
+and frontend/.env respectively.
 
 **Running the Node.js Server**
 
@@ -252,7 +206,7 @@ First, you need to stop the blockchain (as above). And then execute:
 ./first_time_setup.sh
 ```
 
-This removes all data on the blockchain, including accounts, deployed smart contracts, etc... The block count will be reset when you start the blockchain again. This will also remove all of your MongoDB databases and collections, including the collections relevant to Demux and its processing. 
+This removes all data on the blockchain, including accounts, deployed smart contracts, etc... The block count will be reset when you start the blockchain again. This will also remove all of your MongoDB databases and collections, including the collections relevant to Demux and its processing.
 
 ## Project structure
 
@@ -261,13 +215,13 @@ eosio-project-demux-example // project directory
 ├── backend
 │   ├── api // folders organized by Mongoose (MongoDB object modeling library) model definitions and its controller and router file if applicable
 │   │   ├── block-index-state
-│   │   │   └── block-index-state.model.js // defines the mongoose BlockIndexState model to 
+│   │   │   └── block-index-state.model.js // defines the mongoose BlockIndexState model to
 │   │   └── post
 │   │       ├── post.controller.js // defines the mongoose Post model to store blog posts
 │   │       ├── post.model.js // defines the controller for blog posts
 │   │       └── post.route.js // defines routes relates to blog posts
 │   ├── demux // demux implementation
-│   │   ├── effects // demux effects implementations - side effects outside of the blockchain that should be triggered when blockchain events related to our smart contract are read 
+│   │   ├── effects // demux effects implementations - side effects outside of the blockchain that should be triggered when blockchain events related to our smart contract are read
 │   │   ├── updaters // demux updaters implementations - updates the mongodb database when blockchain events related to our smart contract are read
 │   │   ├── ActionHandler.js // implementation of the demux AbstractActionHandler that connects to the mongodb database and passes in the mongoose schemas to be used to update the database by the above updaters
 │   │   └── index.js // exports the demux action watcher to start watching the blockchain when .watch() is called
@@ -302,7 +256,7 @@ eosio-project-demux-example // project directory
     │   ├── CreatePost // react component with form to create new blog posts
     │   ├── Posts // react components related to a single post
     │   │   ├── EditPost // form to edit a post
-    │   │   └── Post // blog post display 
+    │   │   └── Post // blog post display
     │   ├── utils // utlities for the react app
     │   └── index.js // for react-dom to render the app
     ├── package-lock.json // generated after npm install
@@ -322,7 +276,7 @@ The DApp consists of four parts. The eosio blockchain, MongoDB database, backend
         - auto create 6 user accounts
         - auto create 8 sample blog posts
 - mongodb_docker
-    - mongodb database 
+    - mongodb database
         - mongodb://127.0.0.1/blog_platform
 - frontend
     - node.js development environment
@@ -330,7 +284,7 @@ The DApp consists of four parts. The eosio blockchain, MongoDB database, backend
 - backend
     - node.js development environment
         - Express.js server listening to port 4000 for http requests and websocket connections
-        - Writes to the MongoDB database using mongoose to create schemas and execute queries    
+        - Writes to the MongoDB database using mongoose to create schemas and execute queries
 
 Users interact with the UI in client and sign transactions in frontend. The signed transaction is sent to the blockchain directly with eosjs. After the transaction is accepted in blockchain, the action is read by Demux and the MongoDB database is updated with the transaction data.
 

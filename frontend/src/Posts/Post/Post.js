@@ -16,8 +16,10 @@ class Post extends Component {
   }
 
   likePost = (post) => {
-    this.setState(prevState => ({ liked: !prevState.liked }))
-    this.props.likePost(post)
+    if(!this.state.liked) { // dapp does not support unliking for now
+      this.setState(prevState => ({ liked: !prevState.liked }))
+      this.props.likePost(post)
+    }
   }
 
   savePost = (post) => {

@@ -1,5 +1,5 @@
-
-#!/bin/bash
+#!/usr/bin/env bash
+set -o errexit
 
 echo "=== start deploy data ==="
 

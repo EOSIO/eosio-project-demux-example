@@ -2,15 +2,15 @@
 
 ## Starting Front-End
 
-* yarn install
-* yarn start
+* npm install
+* npm start
 
 ## Running Tests
 
-* yarn tests
+* npm test
 
 ## Running Linting
 
-* yarn lint
+* npm lint
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

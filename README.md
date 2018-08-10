@@ -13,7 +13,7 @@ This Blog DApp demonstrates the eosio platform running a blockchain as a local s
 - Implementing a web based UI using React bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
 - Connecting the UI to the blockchain using [eosjs](https://github.com/EOSIO/eosjs)
 
-The sample DApp demonstrates how to use [Demux](https://github.com/EOSIO/demux-js) to listen and read events from our locally running eosio node relevant to our smart contract actions. By doing so we can update our MongoDB database deterministically with blog post data, reduce the amount of data stored in the contract's multi index table and write complex queries through MongoDB that are unavailable with the multi index table interface. The smart contract is being utilized to check authorization rather than storing data in the actual action implementations. For this example, several posts are created by default and can be interacted with in the UI.
+The sample DApp demonstrates how to use [Demux](https://github.com/EOSIO/demux-js) to listen and read events relevant to our smart contract actions from our locally running eosio node. By doing so we can update our MongoDB database deterministically with blog post data, reduce the amount of data stored in the contract's multi index table and write complex queries through MongoDB that are unavailable with the multi index table interface. The smart contract is being utilized to check authorization rather than storing state data in the actual action implementations. For this example, several posts are created by default and can be interacted with in the UI.
 
 **Any private keys you see in this repository are for demo purposes only. For a real DApp NEVER expose the private keys.**
 
@@ -50,7 +50,7 @@ The above command will execute the following in sequence:
 2. `start_eosio_docker.sh`
 3. `start_mongodb_docker.sh`
 
-**To stop**, press `ctrl+c` on your keyboard, and execute:
+**To stop**, execute:
 ```sh
 docker stop eosio_blog_container
 docker stop mongo_blog_container
@@ -79,7 +79,7 @@ npm start
 
 # Detailed guide
 
-In this section we will describe in detail each script used to run the blog DApp environment in details.
+In this section we will describe in detail each script used to run the blog DApp environment.
 
 ## Initial setup
 
@@ -87,7 +87,10 @@ In this section we will describe in detail each script used to run the blog DApp
 ./first_time_setup.sh
 ```
 
-Executing the above shell script verifies that Docker and Node.js are installed. It then downloads the `eosio/eos-dev` docker image (which contains a full version of the eosio blockchain) and the `mongo` docker image, removes any previous instances of these docker containers, and installs node packages for the frontend React app and backend Node app.
+This script will: 
+- Executing the above shell script and verify that Docker and Node.js are installed
+- Download the `eosio/eos-dev` docker image (which contains a full version of the eosio blockchain) and the `mongo` docker image, and removes any previous instances of these docker containers
+- Installs the node packages for the frontend React app and backend Node app
 
 ## Initialise and start blockchain and DApp
 
@@ -104,8 +107,8 @@ For the first (blockchain) terminal window, running the following
 ```sh
 ./start_eosio_docker.sh
 ```
-This script will:
 
+This script will:
 - Start the eosio blockchain
 - Create the smart contract owner account
 - Deploy the smart contract
@@ -185,7 +188,7 @@ In the second (MongoDB) terminal window, execute this command:
 ./start_mongodb_docker.sh
 ```
 
-The MongoDB database will be resumed automatically. And the log will be output to the terminal.
+The MongoDB database will be resumed automatically and the logs will be outputed to the terminal.
 
 **Restarting the backend / frontend**
 
@@ -350,14 +353,14 @@ Output and follow docker console logs:
 docker logs eosio_blog_container --follow
 ```
 
-Remove the container (will remove all wallets / contracts / data), useful if you want to re-init the whole DApp.
-```sh
-docker rm -f eosio_blog_container
-```
-
 Stop the container (see below troubleshoot section to see how to pause and continue the blockchain):
 ```sh
 docker stop eosio_blog_container
+```
+
+Remove the container (will remove all wallets / contracts / data), useful if you want to re-init the whole DApp.
+```sh
+docker rm -f eosio_blog_container
 ```
 
 # Troubleshooting

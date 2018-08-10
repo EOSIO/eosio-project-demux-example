@@ -26,9 +26,9 @@ Make sure Docker and Node.js are installed
 
 The DApp, eosio, and MongoDB will occupy the ports 3000, 4000, 8888, 9876, and 27017. Make sure nothing else is already running on these ports.
 
-Download the repository:
+Clone the repository:
 ```sh
-curl -sL https://github.com/EOSIO/eosio-project-demux-example/archive/master.tar.gz | tar xz
+git clone https://github.com/EOSIO/eosio-project-demux-example.git
 ```
 
 The following guide assumes you are using macOS.
@@ -330,7 +330,7 @@ When running the frontend code, when any changes are detected the frontend React
 
 ## Docker commands
 
-If you are more familiar with docker, you could use below docker command to have better control with the whole environment. Below are the explanations of each of the commands:
+If you are more familiar with docker, you could use the docker commands below to have better control with the whole environment. Below are the explanations of each of the commands:
 
 **Execute below command in `/eosio_docker`:**
 

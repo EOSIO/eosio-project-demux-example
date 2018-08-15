@@ -3,9 +3,8 @@ set -o errexit
 
 echo "=== start deploy data ==="
 
-cleos() {
-  /opt/eosio/bin/cleos "$@"
-}
+# set PATH
+PATH="$PATH:/opt/eosio/bin"
 
 # cd into script's folder
 cd "$(dirname "$0")"

@@ -43,10 +43,11 @@ class ActionHandler extends AbstractActionHandler {
   }
 
   async updateIndexState (state, block, isReplay) {
+    const { blockInfo } = block
     try {
       await state.blockIndexState.update({}, {
-        blockNumber: block.blockNumber,
-        blockHash: block.blockHash,
+        blockNumber: blockInfo.blockNumber,
+        blockHash: blockInfo.blockHash,
         isReplay
       }, { upsert: true }).exec()
     } catch (err) {

@@ -1,4 +1,4 @@
-const Post = require('./post.model')
+const { Post } = require('../../models')
 
 /**
  * Get list of all posts confirmed by the blockchain

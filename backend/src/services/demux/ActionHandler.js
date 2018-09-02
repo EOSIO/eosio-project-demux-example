@@ -1,8 +1,7 @@
 const { AbstractActionHandler } = require('demux')
 const mongoose = require('mongoose')
-const Post = require('../api/post/post.model')
-const BlockIndexState = require('../api/block-index-state/block-index-state.model')
-const io = require('../utils/io')
+const { Post, BlockIndexState } = require('../../models')
+const io = require('../../utils/io')
 
 class ActionHandler extends AbstractActionHandler {
   constructor (updaters, effects, uri) {

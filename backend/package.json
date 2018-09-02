@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon ./server.js",
+    "start": "nodemon --exec \"babel-node src\"",
+    "build": "babel src -s -D -d dist",
     "lint": "standard --fix --config .eslintrc | snazzy"
   },
   "dependencies": {
@@ -19,21 +20,12 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
     "nodemon": "^1.18.1",
     "snazzy": "^7.1.1",
     "standard": "^11.0.1"
-  },
-  "babel": {
-    "plugins": [
-      "transform-async-to-generator"
-    ],
-    "presets": [
-      "env"
-    ]
   },
   "standard": {
     "parser": "babel-eslint"

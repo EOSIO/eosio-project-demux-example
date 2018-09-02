@@ -1,6 +1,4 @@
-const {
-  handlers: { AbstractActionHandler }
-} = require('demux-js')
+const { AbstractActionHandler } = require('demux')
 const mongoose = require('mongoose')
 const Post = require('../api/post/post.model')
 const BlockIndexState = require('../api/block-index-state/block-index-state.model')

@@ -1,9 +1,5 @@
-const {
-  readers: {
-    eos: { NodeosActionReader }
-  },
-  watchers: { BaseActionWatcher }
-} = require('demux-js')
+const { BaseActionWatcher } = require('demux')
+const { NodeosActionReader } = require('demux-eos')
 
 const ActionHandler = require('./ActionHandler')
 

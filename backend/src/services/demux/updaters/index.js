@@ -1,5 +1,5 @@
-const blog = require('./blog')
+import blog from './blog'
 
-module.exports = [
+export default [
   ...blog
 ]

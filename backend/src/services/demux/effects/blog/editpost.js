@@ -12,4 +12,4 @@ function editPost (state, payload, blockInfo, context) {
   context.socket.emit('editpost', post)
 }
 
-module.exports = editPost
+export default editPost

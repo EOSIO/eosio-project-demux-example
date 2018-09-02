@@ -1,3 +1,4 @@
 {
+  "plugins": ["babel-plugin-add-module-exports"],
   "presets": [["env", { "targets": { "node": "current" } }]]
 }

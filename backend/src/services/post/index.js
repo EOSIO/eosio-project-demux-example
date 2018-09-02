@@ -1,4 +1,4 @@
-const { Post } = require('../../models')
+import { Post } from '../../models'
 
 /**
  * Get list of all posts confirmed by the blockchain
@@ -13,4 +13,4 @@ const listConfirmed = async (req, res) => {
   }
 }
 
-module.exports = { listConfirmed }
+export default { listConfirmed }

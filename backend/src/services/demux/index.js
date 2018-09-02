@@ -1,10 +1,10 @@
-const { BaseActionWatcher } = require('demux')
-const { NodeosActionReader } = require('demux-eos')
+import { BaseActionWatcher } from 'demux'
+import { NodeosActionReader } from 'demux-eos'
 
-const ActionHandler = require('./ActionHandler')
+import ActionHandler from './ActionHandler'
 
-const updaters = require('./updaters')
-const effects = require('./effects')
+import updaters from './updaters'
+import effects from './effects'
 
 const actionHandler = new ActionHandler(updaters, effects, process.env.MONGODB_URL)
 
@@ -19,4 +19,4 @@ const actionWatcher = new BaseActionWatcher(
   250 // Poll at twice the block interval for less latency
 )
 
-module.exports = actionWatcher
+export default actionWatcher

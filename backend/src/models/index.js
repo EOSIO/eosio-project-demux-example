@@ -1,7 +1,7 @@
 import BlockIndexState from './block-index-state.model';
 import Post from './post.model';
 
-export {
+export default {
     BlockIndexState,
     Post
 }

@@ -1,8 +1,10 @@
-const express = require('express')
-const { listConfirmed } = require('../services/post')
+import { Router } from 'express'
+import { listConfirmed } from '../services/post'
 
-const router = express.Router()
+export default () => {
+  let api = Router()
 
-router.route('/').get(listConfirmed)
+  api.get('/', listConfirmed)
 
-module.exports = router
+  return api
+}

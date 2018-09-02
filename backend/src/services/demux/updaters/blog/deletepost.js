@@ -6,4 +6,4 @@ async function deletePost (state, payload, blockInfo, context) {
   }
 }
 
-module.exports = deletePost
+export default deletePost

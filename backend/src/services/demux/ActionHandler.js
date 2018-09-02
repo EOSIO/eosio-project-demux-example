@@ -1,7 +1,7 @@
-const { AbstractActionHandler } = require('demux')
-const mongoose = require('mongoose')
-const { Post, BlockIndexState } = require('../../models')
-const io = require('../../utils/io')
+import { AbstractActionHandler } from 'demux'
+import mongoose from 'mongoose'
+import { Post, BlockIndexState } from '../../models'
+import io from '../../utils/io'
 
 class ActionHandler extends AbstractActionHandler {
   constructor (updaters, effects, uri) {
@@ -72,4 +72,4 @@ class ActionHandler extends AbstractActionHandler {
   }
 }
 
-module.exports = ActionHandler
+export default ActionHandler

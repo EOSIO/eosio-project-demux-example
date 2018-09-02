@@ -33,12 +33,12 @@ done
 sleep 2s
 echo "=== setup wallet: eosiomain ==="
 # First key import is for eosio system account
-cleos wallet create -n eosiomain | tail -1 | sed -e 's/^"//' -e 's/"$//' > eosiomain_wallet_password.txt
+cleos wallet create -n eosiomain --to-console | tail -1 | sed -e 's/^"//' -e 's/"$//' > eosiomain_wallet_password.txt
 cleos wallet import -n eosiomain --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
 
 echo "=== setup wallet: blogwallet ==="
 # key for eosio account and export the generated password to a file for unlocking wallet later
-cleos wallet create -n blogwallet | tail -1 | sed -e 's/^"//' -e 's/"$//' > blog_wallet_password.txt
+cleos wallet create -n blogwallet --to-console | tail -1 | sed -e 's/^"//' -e 's/"$//' > blog_wallet_password.txt
 # Owner key for blogwallet wallet
 cleos wallet import -n blogwallet --private-key 5JpWT4ehouB2FF9aCfdfnZ5AwbQbTtHBAwebRXt94FmjyhXwL4K
 # Active key for blogwallet wallet

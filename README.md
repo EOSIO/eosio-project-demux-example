@@ -87,7 +87,7 @@ In this section we will describe in detail each script used to run the blog DApp
 ./first_time_setup.sh
 ```
 
-This script will: 
+This script will:
 - Executing the above shell script and verify that Docker and Node.js are installed
 - Download the `eosio/eos-dev` docker image (which contains a full version of the eosio blockchain) and the `mongo` docker image, and removes any previous instances of these docker containers
 - Installs the node packages for the frontend React app and backend Node app
@@ -345,7 +345,7 @@ docker run --rm --name eosio_blog_container \
 --mount type=bind,src="$(pwd)"/contracts,dst=/opt/eosio/bin/contracts \
 --mount type=bind,src="$(pwd)"/scripts,dst=/opt/eosio/bin/scripts \
 --mount type=bind,src="$(pwd)"/data,dst=/mnt/dev/data \
--w "/opt/eosio/bin/" eosio/eos-dev:v1.2.3 /bin/bash -c "./scripts/init_blockchain.sh"
+-w "/opt/eosio/bin/" eosio/eos-dev:v1.2.5 /bin/bash -c "./scripts/init_blockchain.sh"
 ```
 
 Output and follow docker console logs:

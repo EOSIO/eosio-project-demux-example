@@ -14,8 +14,6 @@ export default class EOSIOClient {
     this.eosio = Eosjs(EOSIO_CONFIG)
   }
 
-  getTableRows = (scope, table) => this.eosio.getTableRows(true, this.contractAccount, scope, table);
-
   transaction = (actor, action, data) => this.eosio.transaction({
     actions: [
       {

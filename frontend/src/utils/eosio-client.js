@@ -1,4 +1,4 @@
-import eosjs from 'eosjs2'
+import eosjs from 'eosjs'
 
 export default class EOSIOClient {
   constructor (contractAccount) {

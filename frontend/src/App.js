@@ -33,6 +33,9 @@ class App extends Component {
     this.io.onMessage('deletepost', (post) => {
       this.setState((prevState) => ({ posts: updatePostsForDelete(prevState, post) }))
     })
+     this.io.onMessage('likepost', (post) => {
+      this.setState((prevState) => ({ posts: updatePostsForLike(prevState, post) }))
+    })
   }
 
   // Load posts
@@ -113,7 +116,7 @@ class App extends Component {
           author: post._id.author
         }
       )
-      this.setState((prevState) => ({ posts: updatePostsForLike(prevState, post) }))
+   
     } catch (err) {
       console.error(err)
     }

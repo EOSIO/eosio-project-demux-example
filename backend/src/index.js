@@ -2,7 +2,7 @@ import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import demux from './services/demux'
-import posts from './api/posts'
+import posts from './routes/posts'
 import io from './utils/io'
 
 let app = express()

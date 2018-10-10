@@ -5,6 +5,7 @@ import io from '../../utils/io'
 
 class ActionHandler extends AbstractActionHandler {
   constructor (updaters, effects, uri) {
+    super(updaters, effects)
     mongoose.connect(uri)
 
     // CONNECTION EVENTS
@@ -28,7 +29,6 @@ class ActionHandler extends AbstractActionHandler {
         process.exit(0)
       })
     })
-    super(updaters, effects)
   }
 
   async handleWithState (handle) {

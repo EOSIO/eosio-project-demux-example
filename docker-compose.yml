@@ -1,0 +1,46 @@
+version: '3.4'
+services:
+  eosio:
+    build:
+      context: ./eosio_docker
+      dockerfile: Dockerfile-dev
+      labels:
+        - "cleanup"
+    image: eosio
+    command: /opt/eosio/bin/nodeosd.sh --abi-serializer-max-time-ms 999915000 --data-dir /root/.local/share --hard-replay --http-validate-host=false --access-control-allow-origin=* --plugin eosio::history_api_plugin --plugin eosio::history_plugin --plugin eosio::http_plugin --plugin eosio::chain_api_plugin --plugin eosio::mongo_db_plugin --mongodb-uri mongodb://mongodb:27017/EOS -e
+    depends_on:
+      - mongodb
+    labels:
+      - "cleanup"
+    ports:
+      - "8888:8888"
+      - "9876:9876"
+    volumes:
+      - ./eosio_docker/contracts:/opt/eosio/bin/contracts
+      - ./eosio_docker/scripts:/opt/eosio/bin/scripts
+      - chaindata:/root/.local/share
+
+  mongodb:
+    image: mongo:4.0-xenial
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb:/data/db
+
+  mongodb-express:
+    image: mongo-express
+    ports:
+      - "9000:8081"
+    depends_on:
+      - mongodb
+    environment:
+      ME_CONFIG_MONGODB_SERVER: "mongodb"
+      ME_CONFIG_OPTIONS_EDITORTHEME: "monokai"
+
+volumes:
+  chaindata:
+    labels:
+      - "cleanup"
+  mongodb:
+    labels:
+      - "cleanup"

@@ -17,12 +17,18 @@ The sample DApp demonstrates how to use [Demux](https://github.com/EOSIO/demux-j
 
 **Any private keys you see in this repository are for demo purposes only. For a real DApp NEVER expose the private keys.**
 
+## Install Dependencies
+
+- [Node.js](https://nodejs.org/en/)
+- [Docker](https://docs.docker.com) Docker 17.05 or higher is required
+- [docker-compose](https://docs.docker.com/compose/) version >= 1.10.0
+
+## Docker Requirement
+
+- At least 7GB RAM (Docker -> Preferences -> Advanced -> Memory -> 7GB or above)
+- If the build below fails, make sure you've adjusted Docker Memory settings and try again.
+
 # Prerequisites
-
-Make sure Docker and Node.js are installed
-
-* Install Docker: https://docs.docker.com/docker-for-mac/install/
-* Install Node.js: https://nodejs.org/en/
 
 The DApp, eosio, and MongoDB will occupy the ports 3000, 4000, 8888, 9876, and 27017. Make sure nothing else is already running on these ports.
 

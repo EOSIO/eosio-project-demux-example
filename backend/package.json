@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "cors": "^2.8.4",
-    "demux": "^1.0.5",
-    "demux-eos": "^1.1.0",
+    "demux": "^2.0.0",
+    "demux-eos": "^2.0.0",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "mongodb": "^3.1.1",

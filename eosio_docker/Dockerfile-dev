@@ -1,0 +1,10 @@
+FROM eosio/eos-dev:v1.2.5
+
+RUN apt-get update && apt-get install curl -y
+
+COPY ./ /opt/eosio/bin
+
+RUN echo "DEPLOYING CONTRACTS"
+RUN /bin/bash /opt/eosio/bin/scripts/init_blockchain.sh
+
+WORKDIR /opt/eosio/bin

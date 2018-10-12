@@ -13,4 +13,4 @@ const server = app.listen(process.env.PORT, () => console.info(`Example app list
 
 io.connect(server)
 
-demux.watch()
+demux.start()

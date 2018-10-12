@@ -5,13 +5,13 @@ const BlockIndexState = require('../api/block-index-state/block-index-state.mode
 const io = require('../utils/io')
 
 class ActionHandler extends AbstractActionHandler {
-  constructor (updaters, effects, uri) {
-    mongoose.connect(uri)
+  constructor (updaters, effects, dbHost, dbName) {
+    mongoose.connect(dbHost, { dbName })
 
     // CONNECTION EVENTS
     // Connection successful
     mongoose.connection.on('connected', () => {
-      console.info(`Mongoose default connection open to ${uri}`)
+      console.info(`Mongoose default connection open to ${dbHost}/${dbName}`)
     })
 
     // Connection throws an error

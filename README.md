@@ -47,19 +47,12 @@ In this section we provide a single command script to run all the commands neede
 
 **To start**
 ```sh
-./quick_start.sh
+docker-compose up
 ```
-
-The above command will execute the following in sequence:
-
-1. `first_time_setup.sh`
-2. `start_eosio_docker.sh`
-3. `start_mongodb_docker.sh`
 
 **To stop**, execute:
 ```sh
-docker stop eosio_blog_container
-docker stop mongo_blog_container
+docker-compose down
 ```
 
 ## Frontend & Backend
@@ -72,12 +65,14 @@ In separate terminals execute the following to start the React app and the Node.
 **To start the backend**
 ```sh
 cd backend
+npm install
 npm start
 ```
 
 **To start the frontend**
 ```sh
 cd frontend
+npm install
 npm start
 ```
 
@@ -141,6 +136,7 @@ and frontend/.env respectively.
 For the third (backend) terminal window, run:
 ```sh
 cd backend
+npm install
 npm start
 ```
 This script will create an Express.js http server listening on port 4000 as well as a listen for websocket connections on port 4000
@@ -150,6 +146,7 @@ This script will create an Express.js http server listening on port 4000 as well
 For the fourth (frontend) terminal window, run:
 ```sh
 cd frontend
+npm install
 npm start
 ```
 This script will open a browser session connecting to http://localhost:3000/ showing the React app. You can try to add, remove, or edit the sample blog posts using one of the accounts in [accounts.json](https://github.com/EOSIO/eosio-project-demux-example/blob/master/eosio_docker/scripts/accounts.json) and modifying the **frontend/.env** for `REACT_APP_EOSIO_ACCOUNT` and `REACT_APP_EOSIO_PRIVATE_KEY` with the name and private key of the desired account. This React app will interact with the smart contract by broadcasting transactions, which are written to the blockchain by our locally running nodeos.
@@ -299,11 +296,11 @@ Users interact with the UI in client and sign transactions in frontend. The sign
 
 ## Docker usage
 
-Docker is used to wrap the eosio software and run a container (instance) from the image (eosio/eos-dev v1.1.0). To work with the blockchain directly, by running the scripts or using a cleos command line, you need to go into the container bash.
+Docker is used to wrap the eosio software and run a container (instance) from the image (eosio/eos-dev v2.5.0). To work with the blockchain directly, by running the scripts or using a cleos command line, you need to go into the container bash.
 
 Go into container bash:
 ```sh
-docker exec -it eosio_blog_container bash
+docker-compose exec eosio /bin/bash
 ```
 We have already set the container working directory to `/opt/eosio/bin/`, you could run cleos command in this directory directly. For documentation of cleos: https://developers.eos.io/eosio-nodeos/docs/cleos-overview
 

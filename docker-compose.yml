@@ -7,7 +7,7 @@ services:
       labels:
         - "cleanup"
     image: eosio
-    command: /opt/eosio/bin/nodeosd.sh --abi-serializer-max-time-ms 999915000 --data-dir /root/.local/share --hard-replay --http-validate-host=false --access-control-allow-origin=* --plugin eosio::history_api_plugin --plugin eosio::history_plugin --plugin eosio::http_plugin --plugin eosio::chain_api_plugin --plugin eosio::mongo_db_plugin --mongodb-uri mongodb://mongodb:27017/EOS -e
+    command: /opt/eosio/bin/nodeosd.sh --abi-serializer-max-time-ms 999915000 --data-dir /root/.local/share --hard-replay --http-validate-host=false --access-control-allow-origin=* --plugin eosio::http_plugin --plugin eosio::chain_api_plugin --plugin eosio::mongo_db_plugin --mongodb-uri mongodb://mongodb:27017/EOS -e
     depends_on:
       - mongodb
     labels:

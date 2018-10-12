@@ -87,7 +87,7 @@ In this section we will describe in detail each script used to run the blog DApp
 ./first_time_setup.sh
 ```
 
-This script will:
+This script will: 
 - Executing the above shell script and verify that Docker and Node.js are installed
 - Download the `eosio/eos-dev` docker image (which contains a full version of the eosio blockchain) and the `mongo` docker image, and removes any previous instances of these docker containers
 - Installs the node packages for the frontend React app and backend Node app
@@ -216,25 +216,27 @@ This removes all data on the blockchain, including accounts, deployed smart cont
 ```js
 eosio-project-demux-example // project directory
 ├── backend
-│   ├── api // folders organized by Mongoose (MongoDB object modeling library) model definitions and its controller and router file if applicable
-│   │   ├── block-index-state
-│   │   │   └── block-index-state.model.js // defines the mongoose BlockIndexState model to
-│   │   └── post
-│   │       ├── post.controller.js // defines the mongoose Post model to store blog posts
-│   │       ├── post.model.js // defines the controller for blog posts
-│   │       └── post.route.js // defines routes relates to blog posts
-│   ├── demux // demux implementation
-│   │   ├── effects // demux effects implementations - side effects outside of the blockchain that should be triggered when blockchain events related to our smart contract are read
-│   │   ├── updaters // demux updaters implementations - updates the mongodb database when blockchain events related to our smart contract are read
-│   │   ├── ActionHandler.js // implementation of the demux AbstractActionHandler that connects to the mongodb database and passes in the mongoose schemas to be used to update the database by the above updaters
-│   │   └── index.js // exports the demux action watcher to start watching the blockchain when .watch() is called
 │   ├── node_modules // generated after npm install
 │   │   └── index.html // html skeleton for create react app
-│   ├── utils
-│   │   └── io.js // provider for Socket IO to allow websocket messages to be sent out to all connections
+│   ├── src // generated after npm install
+│   │   ├── api // Express api routes
+│   │   │   └── posts.js // defines routes relates to blog posts
+│   │   ├── models // Mongoose (MongoDB object modeling library) model definitions
+│   │   │   ├── block-index-state.model.js // defines the mongoose BlockIndexState model to update the last processed blocks for Demux
+│   │   │   ├── index.js
+│   │   │   └── post.model.js // defines the mongoose Post model to store blog posts
+│   │   ├── services // services 
+│   │   │   ├── demux // demux implementation
+│   │   │   │   ├── effects // demux effects implementations - side effects outside of the blockchain that should be triggered when blockchain events related to our smart contract are read
+│   │   │   │   ├── updaters // demux updaters implementations - updates the mongodb database when blockchain events related to our smart contract are read
+│   │   │   │   ├── ActionHandler.js // implementation of the demux AbstractActionHandler that connects to the mongodb database and passes in the mongoose schemas to be used to update the database by the above updaters
+│   │   │   │   └── index.js // exports the demux action watcher to start watching the blockchain when .watch() is called
+│   │   │   └── post // blog post service
+│   │   ├── utils
+│   │   │   └── io.js // provider for Socket IO to allow websocket messages to be sent out to all connections
+│   │   └── index.js // starts the express.js server to listen to http requests and uses socket io to listen for websocket connections. Also initiates demux to start watching the blockchain for events
 │   ├── package-lock.json // generated after npm install
-│   ├── package.json // for npm packages
-│   └── server.js // starts the express.js server to listen to http requests and uses socket io to listen for websocket connections. Also initiates demux to start watching the blockchain for events
+│   └── package.json // for npm packages
 ├── eosio_docker
 │   ├── * contracts // this folder will be mounted into docker
 │   │   └── blog

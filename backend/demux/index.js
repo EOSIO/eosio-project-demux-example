@@ -24,7 +24,7 @@ const actionReader = new MongoActionReader(
 const actionWatcher = new BaseActionWatcher(
   actionReader,
   actionHandler,
-  250 // Poll at twice the block interval for less latency
+  500
 )
 
 const start = async () => {

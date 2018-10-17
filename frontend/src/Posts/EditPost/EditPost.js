@@ -30,7 +30,7 @@ class EditPost extends Component {
           <textarea
             className='margin-bottom-15'
             name='content'
-            rows="6"
+            rows='6'
             onChange={(e) => this.handleOnChange(e, 'content')}
             value={this.state.content}
             placeholder='Content'

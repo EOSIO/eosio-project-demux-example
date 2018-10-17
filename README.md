@@ -295,7 +295,7 @@ Users interact with the UI in client and sign transactions in frontend. The sign
 
 ## Docker usage
 
-Docker is used to wrap the eosio software and run a container (instance) from the image (eosio/eos-dev v1.1.0). To work with the blockchain directly, by running the scripts or using a cleos command line, you need to go into the container bash.
+Docker is used to wrap the eosio software and run a container (instance) from the image (eosio/eos-dev v1.3.2). To work with the blockchain directly, by running the scripts or using a cleos command line, you need to go into the container bash.
 
 Go into container bash:
 ```sh
@@ -347,7 +347,7 @@ docker run --rm --name eosio_blog_container \
 --mount type=bind,src="$(pwd)"/contracts,dst=/opt/eosio/bin/contracts \
 --mount type=bind,src="$(pwd)"/scripts,dst=/opt/eosio/bin/scripts \
 --mount type=bind,src="$(pwd)"/data,dst=/mnt/dev/data \
--w "/opt/eosio/bin/" eosio/eos-dev:v1.2.5 /bin/bash -c "./scripts/init_blockchain.sh"
+-w "/opt/eosio/bin/" eosio/eos-dev:v1.3.2 /bin/bash -c "./scripts/init_blockchain.sh"
 ```
 
 Output and follow docker console logs:

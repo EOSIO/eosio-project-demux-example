@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import EditPost from '../EditPost/EditPost'
+import EditPost from 'Posts/EditPost/EditPost'
 
 class Post extends Component {
   state = {
@@ -16,7 +16,7 @@ class Post extends Component {
   }
 
   likePost = (post) => {
-    if(!this.state.liked) { // dapp does not support unliking for now
+    if (!this.state.liked) { // dapp does not support unliking for now
       this.setState(prevState => ({ liked: !prevState.liked }))
       this.props.likePost(post)
     }
@@ -34,18 +34,18 @@ class Post extends Component {
       !this.state.editing ? (
         <div className={`card-item ${this.state.liked ? 'liked' : ''}`} key={this.props.post.pkey}>
           <div className='padding-30'>
-            <div className='heart' onClick={() => {this.likePost(this.props.post)}}></div>
-            <h2 className="margin-top-0">{this.props.post.title}</h2>
+            <div className='heart' onClick={() => { this.likePost(this.props.post) }} />
+            <h2 className='margin-top-0'>{this.props.post.title}</h2>
             <p>{this.props.post.content}</p>
           </div>
           <div className='padding-30 card-footer grid-3'>
             <div className='detailAvatar'>{this.props.post.author}</div>
             <div className='detailHeart'>{this.props.post.likes}</div>
-            <div className="detailTag">{this.props.post.tag}</div>
+            <div className='detailTag'>{this.props.post.tag}</div>
           </div>
           <div className='padding-30 grid-2'>
-            <div onClick={() => {this.props.deletePost(this.props.post)}} className='iconDelete'></div>
-            <div onClick={this.toggleEditing} className='iconEdit'></div>
+            <div onClick={() => { this.props.deletePost(this.props.post) }} className='iconDelete' />
+            <div onClick={this.toggleEditing} className='iconEdit' />
           </div>
         </div>
       ) : (

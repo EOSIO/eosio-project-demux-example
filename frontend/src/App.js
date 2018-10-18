@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-import EOSIOClient from './utils/eosio-client'
-import IOClient from './utils/io-client'
-import { updatePostsForCreateAndEdit, updatePostsForLike, updatePostsForDelete } from './utils/posts-updater'
-import CreatePost from './CreatePost/CreatePost'
-import Posts from './Posts/Posts'
+import EOSIOClient from 'utils/eosio-client'
+import IOClient from 'utils/io-client'
+import { updatePostsForCreateAndEdit, updatePostsForLike, updatePostsForDelete } from 'utils/posts-updater'
+import CreatePost from 'CreatePost/CreatePost'
+import Posts from 'Posts/Posts'
 
 class App extends Component {
   state = {
@@ -33,7 +33,7 @@ class App extends Component {
     this.io.onMessage('deletepost', (post) => {
       this.setState((prevState) => ({ posts: updatePostsForDelete(prevState, post) }))
     })
-     this.io.onMessage('likepost', (post) => {
+    this.io.onMessage('likepost', (post) => {
       this.setState((prevState) => ({ posts: updatePostsForLike(prevState, post) }))
     })
   }
@@ -116,7 +116,6 @@ class App extends Component {
           author: post._id.author
         }
       )
-   
     } catch (err) {
       console.error(err)
     }

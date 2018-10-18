@@ -8,4 +8,4 @@ function likepost (state, payload, blockInfo, context) {
   context.socket.emit('likepost', post)
 }
 
-module.exports = likepost
+export default likepost

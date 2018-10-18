@@ -5,5 +5,4 @@ async function editPost (state, payload, blockInfo, context) {
     console.error(err)
   }
 }
-
-module.exports = editPost
+export default editPost

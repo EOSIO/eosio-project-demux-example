@@ -6,4 +6,4 @@ async function likePost (state, payload, blockInfo, context) {
   }
 }
 
-module.exports = likePost
+export default likePost

@@ -12,4 +12,4 @@ function createPost (state, payload, blockInfo, context) {
   context.socket.emit('createpost', post)
 }
 
-module.exports = createPost
+export default createPost

@@ -8,4 +8,4 @@ function deletePost (state, payload, blockInfo, context) {
   context.socket.emit('deletepost', post)
 }
 
-module.exports = deletePost
+export default deletePost

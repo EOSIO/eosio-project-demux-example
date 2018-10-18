@@ -32,4 +32,4 @@ async function createPost (state, payload, blockInfo, context) {
   }
 }
 
-module.exports = createPost
+export default createPost

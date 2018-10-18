@@ -1,25 +1,25 @@
-const createPost = require('./createpost')
-const deletePost = require('./deletepost')
-const editPost = require('./editpost')
-const likePost = require('./likepost')
+import createPost from './createpost'
+import deletePost from './deletepost'
+import editPost from './editpost'
+import likePost from './likepost'
 
 const account = process.env.EOSIO_CONTRACT_ACCOUNT
 
-module.exports = [
+export default [
   {
     actionType: `${account}::createpost`, // account::action name
-    effect: createPost
+    updater: createPost
   },
   {
     actionType: `${account}::deletepost`,
-    effect: deletePost
+    updater: deletePost
   },
   {
     actionType: `${account}::editpost`,
-    effect: editPost
+    updater: editPost
   },
   {
     actionType: `${account}::likepost`,
-    effect: likePost
+    updater: likePost
   }
 ]

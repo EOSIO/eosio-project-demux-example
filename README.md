@@ -219,7 +219,7 @@ eosio-project-demux-example // project directory
 │   ├── node_modules // generated after npm install
 │   │   └── index.html // html skeleton for create react app
 │   ├── src // generated after npm install
-│   │   ├── api // Express api routes
+│   │   ├── routes // Express api routes
 │   │   │   └── posts.js // defines routes relates to blog posts
 │   │   ├── models // Mongoose (MongoDB object modeling library) model definitions
 │   │   │   ├── block-index-state.model.js // defines the mongoose BlockIndexState model to update the last processed blocks for Demux

@@ -1,4 +1,4 @@
-import { Api, JsonRpc, RpcError, JsSignatureProvider } from 'eosjs'
+import { Api, JsonRpc, JsSignatureProvider } from 'eosjs'
 
 export default class EOSIOClient {
   constructor (contractAccount) {
@@ -8,33 +8,26 @@ export default class EOSIOClient {
     this.eos = new Api({ rpc, signatureProvider })
   }
 
-  transaction = async (actor, action, data) => {
-    try {
-      await this.eos.transact({
-        actions: [
-          {
-            account: this.contractAccount,
-            name: action,
-            authorization: [
-              {
-                actor,
-                permission: 'active'
-              }
-            ],
-            data: {
-              ...data
+  transaction = (actor, action, data) => {
+    return this.eos.transact({
+      actions: [
+        {
+          account: this.contractAccount,
+          name: action,
+          authorization: [
+            {
+              actor,
+              permission: 'active'
             }
+          ],
+          data: {
+            ...data
           }
-        ]
-      }, {
-        blocksBehind: 3,
-        expireSeconds: 30
-      })
-    } catch (e) {
-      console.log('Caught exception: ' + e);
-      if (e instanceof RpcError) {
-        console.log(JSON.stringify(e.json, null, 2));
-      }
-    }
+        }
+      ]
+    }, {
+      blocksBehind: 3,
+      expireSeconds: 30
+    })
   }
 }

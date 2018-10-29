@@ -46,63 +46,79 @@ class App extends Component {
 
   // Create a post
   createPost = async (post) => {
-    const newPost = {
-      ...post,
-      _id: {
-        timestamp: Math.floor(Date.now() / 1000),
+    try {
+      const newPost = {
+        ...post,
+        _id: {
+          timestamp: Math.floor(Date.now() / 1000),
+          author: process.env.REACT_APP_EOSIO_ACCOUNT
+        },
         author: process.env.REACT_APP_EOSIO_ACCOUNT
-      },
-      author: process.env.REACT_APP_EOSIO_ACCOUNT
-    }
-
-    await this.eosio.transaction(
-      process.env.REACT_APP_EOSIO_ACCOUNT,
-      'createpost', {
-        timestamp: newPost._id.timestamp,
-        author: newPost._id.author,
-        ...post
       }
-    )
-    this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, newPost) }))
-    this.toggleCreate()
+
+      await this.eosio.transaction(
+        process.env.REACT_APP_EOSIO_ACCOUNT,
+        'createpost', {
+          timestamp: newPost._id.timestamp,
+          author: newPost._id.author,
+          ...post
+        }
+      )
+      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, newPost) }))
+      this.toggleCreate()
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   // Edit a post
   editPost = async (post) => {
-    await this.eosio.transaction(
-      process.env.REACT_APP_EOSIO_ACCOUNT,
-      'editpost',
-      {
-        timestamp: post._id.timestamp,
-        author: post._id.author,
-        ...post
-      }
-    )
-    this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }))
+    try {
+      await this.eosio.transaction(
+        process.env.REACT_APP_EOSIO_ACCOUNT,
+        'editpost',
+        {
+          timestamp: post._id.timestamp,
+          author: post._id.author,
+          ...post
+        }
+      )
+      this.setState((prevState) => ({ posts: updatePostsForCreateAndEdit(prevState, post) }))
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   // Delete a post
   deletePost = async (post) => {
-    await this.eosio.transaction(
-      process.env.REACT_APP_EOSIO_ACCOUNT,
-      'deletepost',
-      {
-        timestamp: post._id.timestamp,
-        author: post._id.author
-      }
-    )
-    this.setState((prevState) => ({ posts: updatePostsForDelete(prevState, post) }))
+    try {
+      await this.eosio.transaction(
+        process.env.REACT_APP_EOSIO_ACCOUNT,
+        'deletepost',
+        {
+          timestamp: post._id.timestamp,
+          author: post._id.author
+        }
+      )
+      this.setState((prevState) => ({ posts: updatePostsForDelete(prevState, post) }))
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   // Like a post
   likePost = async (post) => {
-    await this.eosio.transaction(
-      process.env.REACT_APP_EOSIO_ACCOUNT,
-      'likepost', {
-        timestamp: post._id.timestamp,
-        author: post._id.author
-      }
-    )
+    try {
+      await this.eosio.transaction(
+        process.env.REACT_APP_EOSIO_ACCOUNT,
+        'likepost', {
+          timestamp: post._id.timestamp,
+          author: post._id.author
+        }
+      )
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   // Toggle if create window is open

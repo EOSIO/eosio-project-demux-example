@@ -8,7 +8,7 @@ export default class EOSIOClient {
     this.eos = new Api({ rpc, signatureProvider })
   }
 
-  transaction = (actor, action, data) => {
+  transaction = async (actor, action, data) => {
     try {
       await this.eos.transact({
         actions: [

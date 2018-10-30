@@ -4,8 +4,7 @@ using namespace eosio;
 using std::string;
 
 // use CONTRACT macro to declare this as a contract class
-CONTRACT blog : public contract
-{
+CONTRACT blog : public contract {
   // blog class inherits the eosio “contract” smart contract and uses its constructor below
   using contract::contract;
 public:
@@ -16,8 +15,7 @@ public:
 
 
   // use ACTION macro so that eosio-cpp will add this as an action to the ABI
-  ACTION createpost(const uint64_t timestamp, const name author, const string &title, const string &content, const string &tag)
-  {
+  ACTION createpost(const uint64_t timestamp, const name author, const string &title, const string &content, const string &tag) {
     // check if authorized for author account
     // if you are not authorized then this action will be aborted
     // and the transaction will by rolled back - any modifications will be reset
@@ -62,8 +60,7 @@ public:
     eosio_assert(post != post_index.end(), "Post could not be found");
   }
 
-  ACTION deletepost(const uint64_t timestamp, const name author)
-  {
+  ACTION deletepost(const uint64_t timestamp, const name author) {
     auto post_index = _posts.get_index<name("getbyskey")>();
     uint128_t skey = static_cast<uint128_t>(author.value) << 64 | timestamp; 
 
@@ -79,8 +76,7 @@ public:
 
 private:
   // use TABLE macro so that eosio-cpp will add this as a multi_index to the ABI
-  TABLE poststruct
-  {
+  TABLE poststruct {
     uint64_t pkey;
     name author;
     uint128_t skey;

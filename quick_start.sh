@@ -6,7 +6,7 @@ echo "[quick_start.sh] First time setup"
 
 # start blockchain and put in background
 echo "[quick_start.sh] Starting eosio docker"
-./start_eosio_docker.sh
+./start_eosio_docker.sh --nolog
 
 # wait until eosio blockchain to be started
 until $(curl --output /dev/null \

@@ -3,7 +3,7 @@
 using namespace eosio;
 using std::string;
 
-// use CONTRACT macro to declare to this as a contract class
+// use CONTRACT macro to declare this as a contract class
 CONTRACT blog : public contract
 {
   // blog class inherits the eosio “contract” smart contract and uses its constructor below
@@ -23,12 +23,12 @@ public:
     // and the transaction will by rolled back - any modifications will be reset
     require_auth(author);
 
-    // generating secondary key (skey) value which is a composite key of the author and timestamp
-    // this allows Demux to be able to generate this key and store this key when persisting the record into the database
-    // since we cannot return the primary key (pkey), which is generated below, from this action
+    // generating secondary key (skey) value which is a composite key of the author and the timestamp
+    // this allows Demux to also be able to generate and store this key when persisting the record into the database
+    // since we cannot return the primary key (pkey), which is generated below (_posts.available_primary_key()), from this action
     uint128_t skey = static_cast<uint128_t>(author.value) << 64 | timestamp; 
 
-    // _posts is our multi_index
+    // _posts is our multi_index table
     // multi_index is how you store persistant data across actions in EOSIO
     // each action has a new action context which is a clean working memory with no prior working state from other action executions
     // we are adding a record to our table
@@ -52,7 +52,7 @@ public:
   }
 
   ACTION likepost(const uint64_t timestamp, const name author) {
-    // do not require_auth since want to allow anyone to call
+    // do not require_auth since we want to allow anyone to call
 
     auto post_index  = _posts.get_index<name("getbyskey")>();
     uint128_t skey = static_cast<uint128_t>(author.value) << 64 | timestamp; 
@@ -93,7 +93,7 @@ private:
     uint128_t get_by_skey() const { return skey; }
   };
 
-  // create a multi-index table and support secondary key
+  // create a multi-index table and support a secondary key
   // typedef multi_index<name(table_name), object_template_to_use, other_indices> multi_index_name;
   typedef eosio::multi_index< name("poststruct"), poststruct,
     indexed_by< name("getbyskey"), const_mem_fun<poststruct, uint128_t, &poststruct::get_by_skey> >

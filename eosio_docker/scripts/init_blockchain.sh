@@ -54,9 +54,9 @@ cleos wallet import -n blogwallet --private-key 5JD9AGTuTeD5BXZwGQ5AtwBqHK21aHmY
 # * Replace "blogwallet" with your own wallet name when you start your own project
 
 echo "=== deploy eosio.token smart contract ==="
-# Owner key for blogwallet wallet
+# import owner private key for eosio.token
 cleos wallet import -n blogwallet --private-key $EOSIO_TOKEN_PRIVATE_OWNER_KEY
-# Active key for blogwallet wallet
+# import active private key for eosio.token
 cleos wallet import -n blogwallet --private-key $EOSIO_TOKEN_PRIVATE_ACTIVE_KEY
 # create account for eosio.token
 cleos create account eosio eosio.token $EOSIO_TOKEN_PUBLIC_OWNER_KEY $EOSIO_TOKEN_PUBLIC_ACTIVE_KEY
@@ -66,6 +66,7 @@ cleos set contract eosio.token /contracts/eosio.token/
 echo "=== deploy dapp smart contract ==="
 # create account for blogaccount with above wallet's public keys
 cleos create account eosio blogaccount EOS6PUh9rs7eddJNzqgqDx1QrspSHLRxLMcRdwHZZRL4tpbtvia5B EOS8BCgapgYA2L4LJfCzekzeSr3rzgSTUXRXwNi8bNRoz31D14en9
+
 # * Replace "blogaccount" with your own account name when you start your own project
 
 # $1 smart contract name 

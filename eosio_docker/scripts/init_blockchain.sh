@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -o errexit
 
+EOSIO_TOKEN_PRIVATE_OWNER_KEY="5J5t5MuUmMgNcrFWiXyeBZEsCfHvgYE7Lec4W2wCaV5SiSoEqQr"
+EOSIO_TOKEN_PUBLIC_OWNER_KEY="EOS6P62N6D14ShhUnM7taEQHLTMmS7ohCyfikwAi46U7AT6jmUHyM"
+
+EOSIO_TOKEN_PRIVATE_ACTIVE_KEY="5JhTPDSe9ugHomFnhMgAdzzE2HniuR8rG3SyzzqvQrgJNPC4685"
+EOSIO_TOKEN_PUBLIC_ACTIVE_KEY="EOS5X6m7mxcKRsKvHDyCVp1DE5YAy5dEsb5TwFqG4F2xRvRYAAdZx"
+
 echo "=== setup blockchain accounts and smart contract ==="
 
 # set PATH
@@ -47,12 +53,21 @@ cleos wallet import -n blogwallet --private-key 5JD9AGTuTeD5BXZwGQ5AtwBqHK21aHmY
 
 # * Replace "blogwallet" with your own wallet name when you start your own project
 
+echo "=== deploy eosio.token smart contract ==="
+# Owner key for blogwallet wallet
+cleos wallet import -n blogwallet --private-key $EOSIO_TOKEN_PRIVATE_OWNER_KEY
+# Active key for blogwallet wallet
+cleos wallet import -n blogwallet --private-key $EOSIO_TOKEN_PRIVATE_ACTIVE_KEY
+# create account for eosio.token
+cleos create account eosio eosio.token $EOSIO_TOKEN_PUBLIC_OWNER_KEY $EOSIO_TOKEN_PUBLIC_ACTIVE_KEY
+# deploy contract for eosio.token
+cleos set contract eosio.token /contracts/eosio.token/
+
+echo "=== deploy dapp smart contract ==="
 # create account for blogaccount with above wallet's public keys
 cleos create account eosio blogaccount EOS6PUh9rs7eddJNzqgqDx1QrspSHLRxLMcRdwHZZRL4tpbtvia5B EOS8BCgapgYA2L4LJfCzekzeSr3rzgSTUXRXwNi8bNRoz31D14en9
-
 # * Replace "blogaccount" with your own account name when you start your own project
 
-echo "=== deploy smart contract ==="
 # $1 smart contract name 
 # $2 account holder name of the smart contract
 # $3 wallet that holds the keys for the account

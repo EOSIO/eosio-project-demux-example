@@ -7,6 +7,8 @@ EOSIO_TOKEN_PUBLIC_OWNER_KEY="EOS6P62N6D14ShhUnM7taEQHLTMmS7ohCyfikwAi46U7AT6jmU
 EOSIO_TOKEN_PRIVATE_ACTIVE_KEY="5JhTPDSe9ugHomFnhMgAdzzE2HniuR8rG3SyzzqvQrgJNPC4685"
 EOSIO_TOKEN_PUBLIC_ACTIVE_KEY="EOS5X6m7mxcKRsKvHDyCVp1DE5YAy5dEsb5TwFqG4F2xRvRYAAdZx"
 
+SYSTEM_CONTRACTS_DIR="/contracts/"
+
 echo "=== setup blockchain accounts and smart contract ==="
 
 # set PATH
@@ -53,16 +55,6 @@ cleos wallet import -n blogwallet --private-key 5JD9AGTuTeD5BXZwGQ5AtwBqHK21aHmY
 
 # * Replace "blogwallet" with your own wallet name when you start your own project
 
-echo "=== deploy eosio.token smart contract ==="
-# import owner private key for eosio.token
-cleos wallet import -n blogwallet --private-key $EOSIO_TOKEN_PRIVATE_OWNER_KEY
-# import active private key for eosio.token
-cleos wallet import -n blogwallet --private-key $EOSIO_TOKEN_PRIVATE_ACTIVE_KEY
-# create account for eosio.token
-cleos create account eosio eosio.token $EOSIO_TOKEN_PUBLIC_OWNER_KEY $EOSIO_TOKEN_PUBLIC_ACTIVE_KEY
-# deploy contract for eosio.token
-cleos set contract eosio.token /contracts/eosio.token/
-
 echo "=== deploy dapp smart contract ==="
 # create account for blogaccount with above wallet's public keys
 cleos create account eosio blogaccount EOS6PUh9rs7eddJNzqgqDx1QrspSHLRxLMcRdwHZZRL4tpbtvia5B EOS8BCgapgYA2L4LJfCzekzeSr3rzgSTUXRXwNi8bNRoz31D14en9
@@ -74,6 +66,21 @@ cleos create account eosio blogaccount EOS6PUh9rs7eddJNzqgqDx1QrspSHLRxLMcRdwHZZ
 # $3 wallet that holds the keys for the account
 # $4 password for unlocking the wallet
 deploy_contract.sh blog blogaccount blogwallet $(cat blog_wallet_password.txt)
+
+echo "=== deploy eosio.token smart contract ==="
+# deploying eosio.token contract to remove error in nodeos logs:
+#   FC Exception encountered while processing chain.get_currency_balance
+#   Exception Details: 3060002 account_query_exception: Account Query Exception
+#   Fail to retrieve account for eosio.token
+
+# import owner private key for eosio.token
+cleos wallet import -n blogwallet --private-key $EOSIO_TOKEN_PRIVATE_OWNER_KEY
+# import active private key for eosio.token
+cleos wallet import -n blogwallet --private-key $EOSIO_TOKEN_PRIVATE_ACTIVE_KEY
+# create account for eosio.token
+cleos create account eosio eosio.token $EOSIO_TOKEN_PUBLIC_OWNER_KEY $EOSIO_TOKEN_PUBLIC_ACTIVE_KEY
+# deploy contract for eosio.token
+cleos set contract eosio.token $SYSTEM_CONTRACTS_DIR/eosio.token/
 
 echo "=== create user accounts ==="
 # script for creating data into blockchain

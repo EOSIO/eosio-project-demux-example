@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -o errexit
 
+EOSIO_TOKEN_PRIVATE_OWNER_KEY="5J5t5MuUmMgNcrFWiXyeBZEsCfHvgYE7Lec4W2wCaV5SiSoEqQr"
+EOSIO_TOKEN_PUBLIC_OWNER_KEY="EOS6P62N6D14ShhUnM7taEQHLTMmS7ohCyfikwAi46U7AT6jmUHyM"
+
+EOSIO_TOKEN_PRIVATE_ACTIVE_KEY="5JhTPDSe9ugHomFnhMgAdzzE2HniuR8rG3SyzzqvQrgJNPC4685"
+EOSIO_TOKEN_PUBLIC_ACTIVE_KEY="EOS5X6m7mxcKRsKvHDyCVp1DE5YAy5dEsb5TwFqG4F2xRvRYAAdZx"
+
+SYSTEM_CONTRACTS_DIR="/contracts/"
+
 echo "=== setup blockchain accounts and smart contract ==="
 
 # set PATH
@@ -9,22 +17,23 @@ PATH="$PATH:/opt/eosio/bin:/opt/eosio/bin/scripts"
 
 set -m
 
+echo "=== install EOSIO.CDT (Contract Development Toolkit) ==="
+apt install /opt/eosio/bin/scripts/eosio.cdt-1.3.2.x86_64.deb
+
 # start nodeos ( local node of blockchain )
 # run it in a background job such that docker run could continue
 nodeos -e -p eosio -d /mnt/dev/data \
   --config-dir /mnt/dev/config \
   --http-validate-host=false \
   --plugin eosio::producer_plugin \
-  --plugin eosio::history_plugin \
   --plugin eosio::chain_api_plugin \
-  --plugin eosio::history_api_plugin \
   --plugin eosio::http_plugin \
   --http-server-address=0.0.0.0:8888 \
   --access-control-allow-origin=* \
   --contracts-console \
   --verbose-http-errors &
 sleep 1s
-  until curl localhost:8888/v1/chain/get_info
+until curl localhost:8888/v1/chain/get_info
 do
   sleep 1s
 done
@@ -46,17 +55,32 @@ cleos wallet import -n blogwallet --private-key 5JD9AGTuTeD5BXZwGQ5AtwBqHK21aHmY
 
 # * Replace "blogwallet" with your own wallet name when you start your own project
 
+echo "=== deploy dapp smart contract ==="
 # create account for blogaccount with above wallet's public keys
 cleos create account eosio blogaccount EOS6PUh9rs7eddJNzqgqDx1QrspSHLRxLMcRdwHZZRL4tpbtvia5B EOS8BCgapgYA2L4LJfCzekzeSr3rzgSTUXRXwNi8bNRoz31D14en9
 
 # * Replace "blogaccount" with your own account name when you start your own project
 
-echo "=== deploy smart contract ==="
 # $1 smart contract name 
 # $2 account holder name of the smart contract
 # $3 wallet that holds the keys for the account
 # $4 password for unlocking the wallet
 deploy_contract.sh blog blogaccount blogwallet $(cat blog_wallet_password.txt)
+
+echo "=== deploy eosio.token smart contract ==="
+# deploying eosio.token contract to remove error in nodeos logs:
+#   FC Exception encountered while processing chain.get_currency_balance
+#   Exception Details: 3060002 account_query_exception: Account Query Exception
+#   Fail to retrieve account for eosio.token
+
+# import owner private key for eosio.token
+cleos wallet import -n blogwallet --private-key $EOSIO_TOKEN_PRIVATE_OWNER_KEY
+# import active private key for eosio.token
+cleos wallet import -n blogwallet --private-key $EOSIO_TOKEN_PRIVATE_ACTIVE_KEY
+# create account for eosio.token
+cleos create account eosio eosio.token $EOSIO_TOKEN_PUBLIC_OWNER_KEY $EOSIO_TOKEN_PUBLIC_ACTIVE_KEY
+# deploy contract for eosio.token
+cleos set contract eosio.token $SYSTEM_CONTRACTS_DIR/eosio.token/
 
 echo "=== create user accounts ==="
 # script for creating data into blockchain

@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
 set -o errexit
 
-echo "=== start deploy data ==="
-
 # set PATH
 PATH="$PATH:/opt/eosio/bin"
 
 # cd into script's folder
 cd "$(dirname "$0")"
 
-echo "=== start create accounts in blockchain ==="
+echo "=== create mock posts ==="
 
 # import bobross account private key and create mock posts under bobross
 cleos wallet import -n blogwallet --private-key 5K7mtrinTFrVTduSxizUc5hjXJEtTjVTsqSHeBHes1Viep86FP5

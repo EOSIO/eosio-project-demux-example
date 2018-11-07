@@ -67,21 +67,6 @@ cleos create account eosio blogaccount EOS6PUh9rs7eddJNzqgqDx1QrspSHLRxLMcRdwHZZ
 # $4 password for unlocking the wallet
 deploy_contract.sh blog blogaccount blogwallet $(cat blog_wallet_password.txt)
 
-echo "=== deploy eosio.token smart contract ==="
-# deploying eosio.token contract to remove error in nodeos logs:
-#   FC Exception encountered while processing chain.get_currency_balance
-#   Exception Details: 3060002 account_query_exception: Account Query Exception
-#   Fail to retrieve account for eosio.token
-
-# import owner private key for eosio.token
-cleos wallet import -n blogwallet --private-key $EOSIO_TOKEN_PRIVATE_OWNER_KEY
-# import active private key for eosio.token
-cleos wallet import -n blogwallet --private-key $EOSIO_TOKEN_PRIVATE_ACTIVE_KEY
-# create account for eosio.token
-cleos create account eosio eosio.token $EOSIO_TOKEN_PUBLIC_OWNER_KEY $EOSIO_TOKEN_PUBLIC_ACTIVE_KEY
-# deploy contract for eosio.token
-cleos set contract eosio.token $SYSTEM_CONTRACTS_DIR/eosio.token/
-
 echo "=== create user accounts ==="
 # script for creating data into blockchain
 create_accounts.sh

@@ -39,14 +39,14 @@ echo "=== setup/reset data for mongo_blog_container ==="
 docker stop mongo_blog_container || true && docker rm --force mongo_blog_container || true
 
 # set up node_modules for frontend
-echo "=== npm install packpage for frontend react app ==="
+echo "=== npm install package for frontend react app ==="
 # change directory to ./frontend
 cd "./frontend"
 npm install
 cd "../"
 
 # set up node_modules for backend
-echo "=== npm install packpage for frontend react app ==="
+echo "=== npm install package for backend react app ==="
 # change directory to ./backend
 cd "./backend"
 npm install

@@ -46,7 +46,7 @@ npm install
 cd "../"
 
 # set up node_modules for backend
-echo "=== npm install packpage for frontend react app ==="
+echo "=== npm install packpage for backend react app ==="
 # change directory to ./backend
 cd "./backend"
 npm install

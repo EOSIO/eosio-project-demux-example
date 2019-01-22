@@ -31,7 +31,7 @@ fi
 # force remove the previous eosio container if it exists
 # create a clean data folder in the eosio_docker to preserve block data
 echo "=== setup/reset data for eosio_docker ==="
-docker rm --force eosio_blog_container
+docker stop eosio_blog_container || true && docker rm --force eosio_blog_container || true
 rm -rf "./eosio_docker/data"
 mkdir -p "./eosio_docker/data"
 
@@ -46,13 +46,13 @@ docker stop mongo_blog_container || true && docker rm --force mongo_blog_contain
 # set up node_modules for frontend
 echo "=== npm install package for frontend react app ==="
 # change directory to ./frontend
-cd "./frontend"
+cd "$SCRIPTPATH/frontend"
 npm install
-cd "../"
+cd "$SCRIPTPATH"
 
 # set up node_modules for backend
 echo "=== npm install package for backend react app ==="
 # change directory to ./backend
-cd "./backend"
+cd "$SCRIPTPATH/backend"
 npm install
-cd "../"
+cd "$SCRIPTPATH"

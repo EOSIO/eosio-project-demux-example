@@ -5,6 +5,7 @@ echo "=== start of first time setup ==="
 
 # change to script's directory
 cd "$(dirname "$0")"
+SCRIPTPATH="$( pwd -P )"
 
 # make sure Docker and Node.js is installed
 if [ ! -x "$(command -v docker)" ] ||
@@ -19,9 +20,13 @@ if [ ! -x "$(command -v docker)" ] ||
     exit
 fi
 
-# download eosio/eos-dev:v1.4.2 image
-echo "=== pull eosio/eos-dev image v1.4.2 from docker hub ==="
-docker pull eosio/eos-dev:v1.4.2
+# build the eosio docker image, if necessary
+if [[ "$(docker images -q eosio-blog:eos1.6.0-cdt1.5.0)" == "" ]]; then
+  echo "=== Build docker image eosio-blog version eos1.6.0-cdt1.5.0, this will take some time for the first time run ==="
+  docker build -t eosio-blog:eos1.6.0-cdt1.5.0 .
+else
+  echo "=== Docker image already exists, skip building ==="
+fi
 
 # force remove the previous eosio container if it exists
 # create a clean data folder in the eosio_docker to preserve block data
@@ -41,13 +46,13 @@ docker stop mongo_blog_container || true && docker rm --force mongo_blog_contain
 # set up node_modules for frontend
 echo "=== npm install package for frontend react app ==="
 # change directory to ./frontend
-cd "./frontend"
+cd "$SCRIPTPATH/frontend"
 npm install
-cd "../"
+cd "$SCRIPTPATH"
 
 # set up node_modules for backend
 echo "=== npm install package for backend react app ==="
 # change directory to ./backend
-cd "./backend"
+cd "$SCRIPTPATH/backend"
 npm install
-cd "../"
+cd "$SCRIPTPATH"

@@ -1,6 +1,6 @@
 - - -
 
-**_This project is deprecated. Please see the [Demux CLI](https://github.com/EOSIO/demux-cli) for a more up-to-date usage of Demux_**
+**_This project is no longer being maintained. Please see the [Demux CLI](https://github.com/EOSIO/demux-cli) for a more up-to-date usage of Demux_**
 
 - - -
 

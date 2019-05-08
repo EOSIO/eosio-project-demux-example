@@ -1,3 +1,9 @@
+- - -
+
+**_This project is deprecated. Please see the [Demux CLI](https://github.com/EOSIO/demux-cli) for a more up-to-date usage of Demux_**
+
+- - -
+
 # EOSIO Demux Example
 
 ⚠️ ***Important! Since Jan 1st 2019, eosio/eos-dev docker image in docker hub is deprecated. Starting from that time, eosio-project-boilerplate-simple is building its own docker image based on eos and eosio.cdt instead of pulling eosio/eos-dev.*** ⚠️
